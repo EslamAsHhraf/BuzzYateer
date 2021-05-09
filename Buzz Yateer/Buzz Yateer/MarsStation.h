@@ -1,5 +1,4 @@
 #pragma once
-#include<iostream>
 #include"Event.h"
 #include"PolarRover.h"
 #include"EmergencyRover.h"
@@ -8,23 +7,23 @@
 #include"PolarMission.h"
 #include"MountainousMission.h"
 #include"EmergencyMission.h"
-#include<bits/stdc++.h>
 #include"../DS/LinkedList.h"
 #include"../DS/priority_queue.h"
 #include"../DS/Queue.h"
+#include<bits/stdc++.h>
 using namespace std;
 class UI;
 class MarsStation
 {
 	ifstream InputFile;
 	ofstream OutputFile;
-	queue<Event*>events;
-	priority_queue<PolarRover*>PR;
-	priority_queue<EmergencyRover*>ER;
-	priority_queue<MountainousRover*>MR;
-	queue<PolarMission*>PM;
-	priority_queue<EmergencyMission*>EM;
-	queue<MountainousMission*>MM; 
+	Queue<Event*>events;
+	priority_Queue<PolarRover*>PR;
+	priority_Queue<EmergencyRover*>ER;
+	priority_Queue<MountainousRover*>MR;
+	Queue<PolarMission*>PM;
+	priority_Queue<EmergencyMission*>EM;
+	Queue<MountainousMission*>MM; 
 	UI* UI_PTR;
 public:
 	MarsStation(string input, string output);

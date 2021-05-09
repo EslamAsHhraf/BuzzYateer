@@ -86,12 +86,6 @@
     <ClInclude Include="..\DS\priortyQueueADT.h">
       <Filter>DS</Filter>
     </ClInclude>
-    <ClInclude Include="..\DS\Queue.h">
-      <Filter>DS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\DS\QueueADT.h">
-      <Filter>DS</Filter>
-    </ClInclude>
     <ClInclude Include="..\DS\LinkedList.h">
       <Filter>DS</Filter>
     </ClInclude>
@@ -99,6 +93,12 @@
       <Filter>DS</Filter>
     </ClInclude>
     <ClInclude Include="..\DS\priority_queue.h">
+      <Filter>DS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DS\Queue.h">
+      <Filter>DS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DS\QueueADT.h">
       <Filter>DS</Filter>
     </ClInclude>
   </ItemGroup>
