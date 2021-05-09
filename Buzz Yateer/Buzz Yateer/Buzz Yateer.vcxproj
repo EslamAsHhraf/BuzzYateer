@@ -139,7 +139,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="EmergencyMission.cpp" />
+    <ClCompile Include="EmergencyRover.cpp" />
+    <ClCompile Include="Event.cpp" />
+    <ClCompile Include="MarsStation.cpp" />
+    <ClCompile Include="MountainousMission.cpp" />
+    <ClCompile Include="MountainousRover.cpp" />
+    <ClCompile Include="PolarMission.cpp" />
+    <ClCompile Include="PolarRover.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="UI.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="EmergencyMission.h" />
+    <ClInclude Include="EmergencyRover.h" />
+    <ClInclude Include="Event.h" />
+    <ClInclude Include="MarsStation.h" />
+    <ClInclude Include="MountainousMission.h" />
+    <ClInclude Include="MountainousRover.h" />
+    <ClInclude Include="PolarMission.h" />
+    <ClInclude Include="PolarRover.h" />
+    <ClInclude Include="UI.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
