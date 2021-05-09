@@ -151,6 +151,14 @@
     <ClCompile Include="UI.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\DS\LinkedList.h" />
+    <ClInclude Include="..\DS\ListADT.h" />
+    <ClInclude Include="..\DS\Node.h" />
+    <ClInclude Include="..\DS\PriortyNode.h" />
+    <ClInclude Include="..\DS\priortyQueueADT.h" />
+    <ClInclude Include="..\DS\priority_queue.h" />
+    <ClInclude Include="..\DS\Queue.h" />
+    <ClInclude Include="..\DS\QueueADT.h" />
     <ClInclude Include="EmergencyMission.h" />
     <ClInclude Include="EmergencyRover.h" />
     <ClInclude Include="Event.h" />

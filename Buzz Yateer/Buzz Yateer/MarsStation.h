@@ -1,4 +1,5 @@
 #pragma once
+
 #include"Event.h"
 #include"PolarRover.h"
 #include"EmergencyRover.h"
@@ -8,6 +9,10 @@
 #include"PolarMission.h"
 #include"MountainousMission.h"
 #include"EmergencyMission.h"
+#include"../DS/LinkedList.h"
+#include"../DS/priority_queue.h"
+#include"../DS/Queue.h"
+using namespace std;
 class UI;
 class MarsStation
 {

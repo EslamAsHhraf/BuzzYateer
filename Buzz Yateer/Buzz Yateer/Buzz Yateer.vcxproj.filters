@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="DS">
+      <UniqueIdentifier>{36d654a8-c406-402b-b6b2-eee358447485}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -73,6 +76,30 @@
     </ClInclude>
     <ClInclude Include="MountainousMission.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DS\Node.h">
+      <Filter>DS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DS\PriortyNode.h">
+      <Filter>DS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DS\priortyQueueADT.h">
+      <Filter>DS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DS\Queue.h">
+      <Filter>DS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DS\QueueADT.h">
+      <Filter>DS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DS\LinkedList.h">
+      <Filter>DS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DS\ListADT.h">
+      <Filter>DS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DS\priority_queue.h">
+      <Filter>DS</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

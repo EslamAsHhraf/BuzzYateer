@@ -1,4 +1,5 @@
 #include "MarsStation.h"
+
 MarsStation::MarsStation(string input,string output)
 {
 	UI_PTR = new UI(this);
@@ -28,37 +29,37 @@ void MarsStation::GetOutput(ofstream& Outputfile)
 
 void MarsStation::AddEvent(int i)
 {
-	events.push(new Event());
+	events.enqueue(new Event());
 }
 
 void MarsStation::AddPolarRover(int i)
 {
-	PR.push(new PolarRover());
+	PR.enqueue(new PolarRover(),0);
 }
 
 void MarsStation::AddEmergencyRover(int i)
 {
-	ER.push(new EmergencyRover());
+	ER.enqueue(new EmergencyRover(),0);
 }
 
 void MarsStation::AddMountainousRover(int i)
 {
-	MR.push(new MountainousRover());
+	MR.enqueue(new MountainousRover(),0);
 }
 
 void MarsStation::AddPolarMission(int i)
 {
-	PM.push(new PolarMission());
+	PM.enqueue(new PolarMission());
 }
 
 void MarsStation::AddEmergencyMission(int i)
 {
-	EM.push(new EmergencyMission());
+	EM.enqueue(new EmergencyMission(),0);
 }
 
 void MarsStation::AddMountainousMission(int i)
 {
-	MM.push(new MountainousMission());
+	MM.enqueue(new MountainousMission());
 }
 
 MarsStation::~MarsStation()
