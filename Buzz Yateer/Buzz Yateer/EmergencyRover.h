@@ -1,6 +1,5 @@
 #pragma once
 #include "Rover.h"
-#include"EmergencyMission.h"
 class EmergencyRover:public Rover
 {
 	
