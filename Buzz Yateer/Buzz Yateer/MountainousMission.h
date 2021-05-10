@@ -1,8 +1,10 @@
 #pragma once
-class MountainousMission
+#include "Mission.h"
+class MountainousMission:public Mission
 {
-	int i;
+	int autoP;
 public:
 	MountainousMission() {};
+	MountainousMission(int F ,int D ,int S ,int TL ,int id ,char Status , int AP);
 };
 

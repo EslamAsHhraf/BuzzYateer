@@ -48,6 +48,9 @@
     <ClCompile Include="MountainousMission.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Mission.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MarsStation.h">
@@ -100,6 +103,9 @@
     </ClInclude>
     <ClInclude Include="..\DS\QueueADT.h">
       <Filter>DS</Filter>
+    </ClInclude>
+    <ClInclude Include="Mission.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

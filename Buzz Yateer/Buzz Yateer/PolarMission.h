@@ -1,7 +1,8 @@
 #pragma once
-class PolarMission
+#include "Mission.h"
+class PolarMission:public Mission
 {
-	int i;
 public:
 	PolarMission() {};
+	PolarMission(int F ,int D ,int S ,int TL ,int id ,char Status);
 };
