@@ -1,8 +1,11 @@
 #pragma once
-class EmergencyRover
+#include "Rover.h"
+#include"EmergencyMission.h"
+class EmergencyRover:public Rover
 {
-	int i;
+	
 public:
-	EmergencyRover() {};
+	EmergencyRover();
+	EmergencyRover(int s, int cd, int nom) ;
 };
 

@@ -1,9 +1,29 @@
 ﻿  EmergencyMission.cpp
+C:\Users\hp\Desktop\BuzzYateer-master\Buzz Yateer\Buzz Yateer\EmergencyMission.cpp(17,75): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+  EmergencyRover.cpp
+C:\Users\hp\Desktop\BuzzYateer-master\Buzz Yateer\Buzz Yateer\EmergencyMission.h(6,16): error C2143: syntax error: missing ';' before '*'
+C:\Users\hp\Desktop\BuzzYateer-master\Buzz Yateer\Buzz Yateer\EmergencyMission.h(6,16): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\hp\Desktop\BuzzYateer-master\Buzz Yateer\Buzz Yateer\EmergencyMission.h(6,18): error C2238: unexpected token(s) preceding ';'
+  Event.cpp
+C:\Users\hp\Desktop\BuzzYateer-master\Buzz Yateer\Buzz Yateer\Event.cpp(61,33): error C2061: syntax error: identifier 'Formulation'
+C:\Users\hp\Desktop\BuzzYateer-master\Buzz Yateer\Buzz Yateer\Event.cpp(65,36): error C2061: syntax error: identifier 'cancellation'
+C:\Users\hp\Desktop\BuzzYateer-master\Buzz Yateer\Buzz Yateer\Event.cpp(70,33): error C2061: syntax error: identifier 'Promotion'
+  Formulation.cpp
+C:\Users\hp\Desktop\BuzzYateer-master\Buzz Yateer\Buzz Yateer\Formulation.h(5,9): error C2143: syntax error: missing ';' before '*'
+C:\Users\hp\Desktop\BuzzYateer-master\Buzz Yateer\Buzz Yateer\Formulation.h(5,9): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\hp\Desktop\BuzzYateer-master\Buzz Yateer\Buzz Yateer\Formulation.h(5,12): error C2238: unexpected token(s) preceding ';'
+C:\Users\hp\Desktop\BuzzYateer-master\Buzz Yateer\Buzz Yateer\Formulation.cpp(21,3): error C2065: 'p': undeclared identifier
+C:\Users\hp\Desktop\BuzzYateer-master\Buzz Yateer\Buzz Yateer\Formulation.cpp(24,3): error C2065: 'p': undeclared identifier
+C:\Users\hp\Desktop\BuzzYateer-master\Buzz Yateer\Buzz Yateer\Formulation.cpp(27,3): error C2065: 'p': undeclared identifier
   MarsStation.cpp
-F:\Buzz\BuzzYateer-master\Buzz Yateer\Buzz Yateer\UI.h(3,9): fatal error C1083: Cannot open include file: 'bits/stdc++.h': No such file or directory
-  Mission.cpp
-  MountainousMission.cpp
-  PolarMission.cpp
+C:\Users\hp\Desktop\BuzzYateer-master\Buzz Yateer\Buzz Yateer\EmergencyMission.h(6,16): error C2143: syntax error: missing ';' before '*'
+C:\Users\hp\Desktop\BuzzYateer-master\Buzz Yateer\Buzz Yateer\EmergencyMission.h(6,16): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\hp\Desktop\BuzzYateer-master\Buzz Yateer\Buzz Yateer\EmergencyMission.h(6,18): error C2238: unexpected token(s) preceding ';'
+C:\Users\hp\Desktop\BuzzYateer-master\Buzz Yateer\Buzz Yateer\UI.h(3,9): fatal error C1083: Cannot open include file: 'bits/stdc++.h': No such file or directory
+  Promotion.cpp
   UI.cpp
-F:\Buzz\BuzzYateer-master\Buzz Yateer\Buzz Yateer\MarsStation.h(14,9): fatal error C1083: Cannot open include file: 'bits/stdc++.h': No such file or directory
+C:\Users\hp\Desktop\BuzzYateer-master\Buzz Yateer\Buzz Yateer\EmergencyMission.h(6,16): error C2143: syntax error: missing ';' before '*'
+C:\Users\hp\Desktop\BuzzYateer-master\Buzz Yateer\Buzz Yateer\EmergencyMission.h(6,16): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\hp\Desktop\BuzzYateer-master\Buzz Yateer\Buzz Yateer\EmergencyMission.h(6,18): error C2238: unexpected token(s) preceding ';'
+C:\Users\hp\Desktop\BuzzYateer-master\Buzz Yateer\Buzz Yateer\MarsStation.h(14,9): fatal error C1083: Cannot open include file: 'bits/stdc++.h': No such file or directory
   Generating Code...

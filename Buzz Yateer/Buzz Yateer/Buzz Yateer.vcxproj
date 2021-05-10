@@ -139,15 +139,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Cancellation.cpp" />
     <ClCompile Include="EmergencyMission.cpp" />
     <ClCompile Include="EmergencyRover.cpp" />
     <ClCompile Include="Event.cpp" />
+    <ClCompile Include="Formulation.cpp" />
     <ClCompile Include="MarsStation.cpp" />
     <ClCompile Include="Mission.cpp" />
     <ClCompile Include="MountainousMission.cpp" />
     <ClCompile Include="MountainousRover.cpp" />
     <ClCompile Include="PolarMission.cpp" />
     <ClCompile Include="PolarRover.cpp" />
+    <ClCompile Include="Promotion.cpp" />
+    <ClCompile Include="Rover.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="UI.cpp" />
   </ItemGroup>
@@ -160,15 +164,19 @@
     <ClInclude Include="..\DS\priority_queue.h" />
     <ClInclude Include="..\DS\Queue.h" />
     <ClInclude Include="..\DS\QueueADT.h" />
+    <ClInclude Include="Cancellation.h" />
     <ClInclude Include="EmergencyMission.h" />
     <ClInclude Include="EmergencyRover.h" />
     <ClInclude Include="Event.h" />
+    <ClInclude Include="Formulation.h" />
     <ClInclude Include="MarsStation.h" />
     <ClInclude Include="Mission.h" />
     <ClInclude Include="MountainousMission.h" />
     <ClInclude Include="MountainousRover.h" />
     <ClInclude Include="PolarMission.h" />
     <ClInclude Include="PolarRover.h" />
+    <ClInclude Include="Promotion.h" />
+    <ClInclude Include="Rover.h" />
     <ClInclude Include="UI.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

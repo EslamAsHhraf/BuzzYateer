@@ -1,5 +1,10 @@
 #include "Mission.h"
 
+Mission::Mission()
+{
+
+}
+
 Mission::Mission(int F ,int D ,int S ,int TL ,int id, char Status = 'W')
 {
 	setDuration(D);

@@ -7,7 +7,7 @@ private:
 	int ID;
 	char status;
 public:
-	Mission() {};
+	Mission();
 	Mission(int F ,int D ,int S ,int TL ,int id, char Status);
 	virtual void setFormulationDay(int fDay);
 	virtual void setDuration(int D);

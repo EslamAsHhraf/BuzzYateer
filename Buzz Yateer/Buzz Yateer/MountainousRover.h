@@ -1,8 +1,11 @@
 #pragma once
-class MountainousRover
+#include"Rover.h"
+class MountainousRover:public Rover
 {
-	int i;
+	
 public:
-	MountainousRover() {};
+	MountainousRover();
+	MountainousRover(int s, int cd, int nom);
+
 };
 

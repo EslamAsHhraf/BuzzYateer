@@ -1,8 +1,10 @@
 #pragma once
-class PolarRover
+#include"Rover.h"
+class PolarRover:public Rover
 {
-	int i;
+	
 public:
-	PolarRover() {};
+	PolarRover();
+	PolarRover(int s, int cd, int nom);
 };
 
