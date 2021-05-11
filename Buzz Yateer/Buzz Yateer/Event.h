@@ -15,7 +15,7 @@ public:
 	int geteventDay();
 	void setEventType(char  x);
 	char getEventType();
-	virtual void Execute() = 0;
+	virtual void Execute() ;
 	int getid();
 	char getTypeOfmission();
 

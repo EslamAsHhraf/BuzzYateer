@@ -1,5 +1,6 @@
 #pragma once
 #include"Event.h"
+#include"Mission.h"
 class Formulation:public Event {
 	char missionType;
 	Mission* p;

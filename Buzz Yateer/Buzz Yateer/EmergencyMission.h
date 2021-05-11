@@ -3,7 +3,8 @@
 #include"EmergencyRover.h"
 class EmergencyMission:public Mission
 {
-	EmergencyRover*p;
+	
+ EmergencyRover * p;
 public:
 	EmergencyMission() ;
 	EmergencyMission(int F ,int D ,int S ,int TL ,int id ,char Status);
