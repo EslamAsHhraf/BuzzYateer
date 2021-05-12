@@ -27,9 +27,19 @@ void MarsStation::GetOutput(ofstream& Outputfile)
 	UI_PTR->PrintinOutputFile(OutputFile);
 }
 
-void MarsStation::AddEvent(int i)
+void MarsStation::AddFormulationEvent(char MissionType, int ED, int ID, int TLOC, int MDUR, int SIG)
 {
-	events.enqueue(new Event());
+	Formulation* F = new Formulation(MissionType, ED, ID, TLOC, MDUR, SIG);
+	events.enqueue(F);
+	if (MissionType == 'M') {
+		MM.insert(0, dynamic_cast<MountainousMission*>(F->getFormulatedMission()));
+	}
+	else if (MissionType == 'P') {
+		PM.enqueue(dynamic_cast<PolarMission*>(F->getFormulatedMission())); 
+	}
+	else if (MissionType == 'E') {
+		EM.enqueue(dynamic_cast<EmergencyMission*>(F->getFormulatedMission()), 0);//tempporary
+	}
 }
 
 void MarsStation::AddPolarRover(int i)
@@ -59,7 +69,7 @@ void MarsStation::AddEmergencyMission(int i)
 
 void MarsStation::AddMountainousMission(int i)
 {
-	MM.enqueue(new MountainousMission());
+	MM.insert(0, new MountainousMission());
 }
 
 MarsStation::~MarsStation()

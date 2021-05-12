@@ -1,7 +1,5 @@
 #include "Event.h"
-#include "Formulation.h"
-#include "cancellation.h"
-#include "Promotion.h"
+
 Event::Event()
 {
 
@@ -44,10 +42,6 @@ void Event::setEventType(char x)
 char Event::getEventType()
 {
 	return eventType;
-}
-
-void Event::Execute()
-{
 }
 
 int Event::getid()

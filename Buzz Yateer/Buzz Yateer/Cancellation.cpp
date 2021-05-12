@@ -1,6 +1,6 @@
 #include "Cancellation.h"
 
-cancellation::cancellation()
+cancellation::cancellation() :ID(0)
 {
 }
 

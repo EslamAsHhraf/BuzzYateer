@@ -1,29 +1,48 @@
 #include"Formulation.h"
 #include"Event.h"
 #include"Mission.h"
-
 #include"EmergencyMission.h"
 #include"MountainousMission.h"
 #include"PolarMission.h"
+Formulation::Formulation() :missionType('0')
+{
+	Execute();
+	setFormulatedMission();
+}
+Formulation::Formulation(char MissionType, int ED, int ID, int TLOC, int MDUR, int SIG) : missionType(MissionType)
+{
+	Execute();
+	setFormulatedMission(ED, ID, TLOC, MDUR, SIG);
+}
+
 void Formulation::setmissionType(char x)
 {
 	missionType = x;
 }
 
-char Formulation::getmissionType()
+Mission*& Formulation::getFormulatedMission()
 {
-	return missionType;
+	return FormulatedMission;
+}
+
+void Formulation::setFormulatedMission(int ED, int ID, int TLOC, int MDUR, int SIG)
+{
+	FormulatedMission->setFormulationDay(ED);
+	FormulatedMission->setDuration(MDUR); //temporary 
+	FormulatedMission->setSignificance(SIG);
+	FormulatedMission->setTargetLocation(TLOC);
+	FormulatedMission->setID(ID);
 }
 
 void Formulation::Execute()
 {
-	if (getmissionType() == 'M') {
-		p = new MountainousMission;
+	if (missionType == 'M') {
+		FormulatedMission = new MountainousMission;
 	}
-	if (getmissionType() == 'P') {
-		p = new PolarMission;
+	else if (missionType == 'P') {
+		FormulatedMission = new PolarMission;
 	}
-	if (getmissionType() == 'E') {
-		p = new EmergencyMission;
+	else if (missionType == 'E') {
+		FormulatedMission = new EmergencyMission;
 	}
 }

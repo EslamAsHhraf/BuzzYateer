@@ -9,9 +9,28 @@ void UI::ReadInputFile(ifstream& InputFile)
 {
 	while (!InputFile.eof())
 	{
-		int i;
-		InputFile >> i;
-		Master->AddEvent(i);
+		int NumberOfEvents = 0;
+		InputFile >> NumberOfEvents;
+		while (NumberOfEvents--)
+		{
+			char Event;
+			InputFile >> Event;
+			if (Event == 'F')
+			{
+				char MissionType;
+				int ED, ID, TLOC, MDUR, SIG;
+				InputFile >> MissionType >> ED >> ID >> TLOC >> MDUR >> SIG;
+				Master->AddFormulationEvent(MissionType, ED, ID, TLOC, MDUR, SIG);
+			}
+			else if (Event == 'X')
+			{
+				int ED, ID;
+			}
+			else
+			{
+
+			}
+		}
 	}
 }
 

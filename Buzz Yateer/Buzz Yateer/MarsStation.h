@@ -1,7 +1,6 @@
 #pragma once
-//#include<iostream>
-
 #include"Event.h"
+#include "Formulation.h"
 #include"PolarRover.h"
 #include"EmergencyRover.h"
 #include"MountainousRover.h"
@@ -25,7 +24,7 @@ class MarsStation
 	priority_Queue<MountainousRover*>MR;
 	Queue<PolarMission*>PM;
 	priority_Queue<EmergencyMission*>EM;
-	Queue<MountainousMission*>MM; 
+	LinkedList<MountainousMission*>MM;
 	UI* UI_PTR;
 public:
 	MarsStation(string input, string output);
@@ -33,7 +32,7 @@ public:
 	void OpenOutputFile(string outputfile);
 	void GetInput(ifstream& Inputfile);
 	void GetOutput(ofstream& Outputfile);
-	void AddEvent(int i);
+	void AddFormulationEvent(char MissionType, int ED, int ID, int TLOC, int MDUR, int SIG);
 	void AddPolarRover(int i);
 	void AddEmergencyRover(int i);
 	void AddMountainousRover(int i);
