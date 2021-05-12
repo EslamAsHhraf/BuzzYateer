@@ -19,6 +19,6 @@ public:
 	int getid();
 	char getTypeOfmission();
 
-	void s();
+	//void s();
 };
 

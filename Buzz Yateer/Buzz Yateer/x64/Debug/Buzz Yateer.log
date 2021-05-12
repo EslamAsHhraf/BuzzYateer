@@ -1,16 +1,5 @@
-﻿  EmergencyMission.cpp
-d:\project data structure\git code\buzzyateer\buzz yateer\buzz yateer\emergencymission.cpp(17): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
-  EmergencyRover.cpp
-d:\project data structure\git code\buzzyateer\buzz yateer\buzz yateer\emergencymission.h(6): error C2143: syntax error: missing ';' before '*'
-d:\project data structure\git code\buzzyateer\buzz yateer\buzz yateer\emergencymission.h(6): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-d:\project data structure\git code\buzzyateer\buzz yateer\buzz yateer\emergencymission.h(6): error C2238: unexpected token(s) preceding ';'
+﻿  Event.cpp
   Formulation.cpp
-  MarsStation.cpp
-d:\project data structure\git code\buzzyateer\buzz yateer\buzz yateer\emergencymission.h(6): error C2143: syntax error: missing ';' before '*'
-d:\project data structure\git code\buzzyateer\buzz yateer\buzz yateer\emergencymission.h(6): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-d:\project data structure\git code\buzzyateer\buzz yateer\buzz yateer\emergencymission.h(6): error C2238: unexpected token(s) preceding ';'
   UI.cpp
-d:\project data structure\git code\buzzyateer\buzz yateer\buzz yateer\emergencymission.h(6): error C2143: syntax error: missing ';' before '*'
-d:\project data structure\git code\buzzyateer\buzz yateer\buzz yateer\emergencymission.h(6): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-d:\project data structure\git code\buzzyateer\buzz yateer\buzz yateer\emergencymission.h(6): error C2238: unexpected token(s) preceding ';'
   Generating Code...
+  Buzz Yateer.vcxproj -> D:\project data structure\git code\BuzzYateer\Buzz Yateer\x64\Debug\Buzz Yateer.exe

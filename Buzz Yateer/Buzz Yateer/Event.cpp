@@ -59,8 +59,8 @@ char Event::getTypeOfmission()
 {
 	return missionType;
 }
-
-void Event::s()
+// To be done 
+/*void Event::s()
 {
 	Event* currentPointer;
 	if (getEventType() == 'F') {
@@ -77,7 +77,7 @@ void Event::s()
 		currentPointer->Execute();
 
 	}
-}
+}*/
 
 
 
