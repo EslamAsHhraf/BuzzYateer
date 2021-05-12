@@ -7,7 +7,7 @@
 Formulation::Formulation() :missionType('0')
 {
 	Execute();
-	setFormulatedMission();
+	setFormulatedMission(0);
 }
 Formulation::Formulation(char MissionType, int ED, int ID, int TLOC, int MDUR, int SIG) : missionType(MissionType)
 {
