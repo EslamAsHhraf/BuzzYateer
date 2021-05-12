@@ -1,2 +1,7 @@
-﻿  Formulation.cpp
-  Buzz Yateer.vcxproj -> D:\CMP\CMP2\DataStructure\project\ProjectFiles\BuzzYateer\Buzz Yateer\x64\Debug\Buzz Yateer.exe
+﻿  MarsStation.cpp
+F:\New folder (2)\BuzzYateer\Buzz Yateer\Buzz Yateer\UI.h(3,9): fatal error C1083: Cannot open include file: 'bits/stdc++.h': No such file or directory
+  Promotion.cpp
+F:\New folder (2)\BuzzYateer\Buzz Yateer\Buzz Yateer\UI.h(3,9): fatal error C1083: Cannot open include file: 'bits/stdc++.h': No such file or directory
+  UI.cpp
+F:\New folder (2)\BuzzYateer\Buzz Yateer\Buzz Yateer\MarsStation.h(15,9): fatal error C1083: Cannot open include file: 'bits/stdc++.h': No such file or directory
+  Generating Code...

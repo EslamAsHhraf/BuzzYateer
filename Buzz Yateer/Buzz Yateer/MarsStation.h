@@ -1,6 +1,7 @@
 #pragma once
 #include"Event.h"
 #include "Formulation.h"
+#include "Promotion.h"
 #include"PolarRover.h"
 #include"EmergencyRover.h"
 #include"MountainousRover.h"
@@ -40,10 +41,13 @@ public:
 	void GetInput(ifstream& Inputfile);
 	void GetOutput(ofstream& Outputfile);
 	void AddFormulationEvent(char MissionType, int ED, int ID, int TLOC, int MDUR, int SIG);
+	void AddPromotionEvent(int ED ,int ID);
 	void AddPolarRover(int speed);
 	void AddEmergencyRover(int speed);
 	void AddMountainousRover(int speed);
 	bool CancelMission(int ID);
+	void Promote(int ID);
+	void AutoPromote(int AutoP);
 	~MarsStation();
 };
 

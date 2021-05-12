@@ -57,6 +57,12 @@ void MarsStation::AddFormulationEvent(char MissionType, int ED, int ID, int TLOC
 	}
 }
 
+void MarsStation::AddPromotionEvent(int ED ,int ID)
+{
+	Promotion *P = new Promotion(ED ,ID);
+	events.enqueue(P);
+}
+
 void MarsStation::AddPolarRover(int speed)
 {
 	PR.enqueue(new PolarRover(speed), speed);
@@ -86,6 +92,34 @@ bool MarsStation::CancelMission(int ID)
 	return 0;
 }
 
+void MarsStation::Promote(int ID)
+{
+	int N = MM.getLength();
+	for (int i = 1; i <= N; i++)
+	{
+		if (MM.getEntry(i)->getID() == ID)
+		{
+			MountainousMission *temp = MM.getEntry(i);
+			EM.enqueue(new EmergencyMission(temp->getFormulationDay() ,temp->getDuration() ,temp->getSignificance() ,temp->getTargetLocation() ,temp->getID()) ,0);
+			MM.remove(i);
+		}
+	}
+}
+
+void MarsStation::AutoPromote(int AutoP)
+{
+	int N = MM.getLength();
+	for (int currentDay = AutoP; currentDay < 100; currentDay++)
+	{
+		for (int j = 1; j <= N; j++)
+		{
+			if (MM.getEntry(j)->getFormulationDay() + AutoP == currentDay)
+			{
+				Promote(MM.getEntry(j)->getID());
+			}
+		}
+	}
+}
 MarsStation::~MarsStation()
 {
 }
