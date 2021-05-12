@@ -7,6 +7,19 @@ MarsStation::MarsStation(string input,string output)
 	OpenOutputFile(output);
 }
 
+void MarsStation::setCheckUpData(int MCheckUp, int PCheckUp, int ECheckUp, int NMission2CheckUp)
+{
+	this->MCheckUp = MCheckUp;
+	this->PCheckUp = PCheckUp;
+	this->ECheckUp = ECheckUp;
+	this->NMission2CheckUp = NMission2CheckUp;
+}
+
+void MarsStation::setAutoPromotion(int AutoP)
+{
+	this->AutoP = AutoP;
+}
+
 void MarsStation::OpenInputFile(string inputfile)
 {
 	InputFile.open(inputfile);
@@ -29,10 +42,12 @@ void MarsStation::GetOutput(ofstream& Outputfile)
 
 void MarsStation::AddFormulationEvent(char MissionType, int ED, int ID, int TLOC, int MDUR, int SIG)
 {
-	Formulation* F = new Formulation(MissionType, ED, ID, TLOC, MDUR, SIG);
+	Formulation* F = new Formulation(MissionType);
+	F->Execute();
+	F->setFormulatedMission(ED, ID, TLOC, MDUR, SIG);
 	events.enqueue(F);
 	if (MissionType == 'M') {
-		MM.insert(0, dynamic_cast<MountainousMission*>(F->getFormulatedMission()));
+		MM.insert(MM.getLength() + 1, dynamic_cast<MountainousMission*>(F->getFormulatedMission()));
 	}
 	else if (MissionType == 'P') {
 		PM.enqueue(dynamic_cast<PolarMission*>(F->getFormulatedMission())); 
@@ -42,34 +57,33 @@ void MarsStation::AddFormulationEvent(char MissionType, int ED, int ID, int TLOC
 	}
 }
 
-void MarsStation::AddPolarRover(int i)
+void MarsStation::AddPolarRover(int speed)
 {
-	PR.enqueue(new PolarRover(),0);
+	PR.enqueue(new PolarRover(speed), speed);
 }
 
-void MarsStation::AddEmergencyRover(int i)
+void MarsStation::AddEmergencyRover(int speed)
 {
-	ER.enqueue(new EmergencyRover(),0);
+	ER.enqueue(new EmergencyRover(speed),speed);
 }
 
-void MarsStation::AddMountainousRover(int i)
+void MarsStation::AddMountainousRover(int speed)
 {
-	MR.enqueue(new MountainousRover(),0);
+	MR.enqueue(new MountainousRover(speed), speed);
 }
 
-void MarsStation::AddPolarMission(int i)
+bool MarsStation::CancelMission(int ID)
 {
-	PM.enqueue(new PolarMission());
-}
-
-void MarsStation::AddEmergencyMission(int i)
-{
-	EM.enqueue(new EmergencyMission(),0);
-}
-
-void MarsStation::AddMountainousMission(int i)
-{
-	MM.insert(0, new MountainousMission());
+	int n = MM.getLength();
+	for (int i = 1; i <= n; i++)
+	{
+		if (MM.getEntry(i)->getID() == ID)
+		{
+			MM.remove(i);
+			return 1;
+		}
+	}
+	return 0;
 }
 
 MarsStation::~MarsStation()

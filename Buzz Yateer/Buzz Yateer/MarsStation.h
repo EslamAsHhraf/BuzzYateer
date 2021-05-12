@@ -25,20 +25,25 @@ class MarsStation
 	Queue<PolarMission*>PM;
 	priority_Queue<EmergencyMission*>EM;
 	LinkedList<MountainousMission*>MM;
+	int MCheckUp;
+	int PCheckUp;
+	int ECheckUp;
+	int NMission2CheckUp;
+	int AutoP;
 	UI* UI_PTR;
 public:
 	MarsStation(string input, string output);
+	void setCheckUpData(int MCheckUp, int PCheckUp, int ECheckUp, int NMission2CheckUp);
+	void setAutoPromotion(int AutoP);
 	void OpenInputFile(string inputfile);
 	void OpenOutputFile(string outputfile);
 	void GetInput(ifstream& Inputfile);
 	void GetOutput(ofstream& Outputfile);
 	void AddFormulationEvent(char MissionType, int ED, int ID, int TLOC, int MDUR, int SIG);
-	void AddPolarRover(int i);
-	void AddEmergencyRover(int i);
-	void AddMountainousRover(int i);
-	void AddPolarMission(int i);
-	void AddEmergencyMission(int i);
-	void AddMountainousMission(int i);
+	void AddPolarRover(int speed);
+	void AddEmergencyRover(int speed);
+	void AddMountainousRover(int speed);
+	bool CancelMission(int ID);
 	~MarsStation();
 };
 

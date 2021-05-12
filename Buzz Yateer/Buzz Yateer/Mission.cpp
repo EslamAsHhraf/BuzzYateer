@@ -1,18 +1,16 @@
 #include "Mission.h"
 
-Mission::Mission()
+Mission::Mission() :formulationDay(0), duration(0), significance(0), targetLocation(0), ID(0)
 {
-
 }
 
-Mission::Mission(int F ,int D ,int S ,int TL ,int id, char Status = 'W')
+Mission::Mission(int F ,int D ,int S ,int TL ,int id)
 {
 	setDuration(D);
 	setFormulationDay(F);
 	setSignificance(S);
 	setTargetLocation(TL);
 	setID(id);
-	setStatus(Status);
 }
 
 void Mission::setFormulationDay(int fDay)
@@ -40,12 +38,6 @@ void Mission::setID(int id)
 	ID = id;
 }
 
-void Mission::setStatus(char Status)
-{
-	status = Status;
-}
-
-
 int Mission::getFormulationDay() const
 {
 	return formulationDay;
@@ -71,8 +63,8 @@ int Mission::getID() const
 	return ID;
 }
 
-char Mission::getStatus() const
+Mission::~Mission()
 {
-	return status;
+	//Empty
 }
 

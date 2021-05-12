@@ -50,10 +50,7 @@ public:
 				ptr->setNext(newNode);
 			}
 		}
-		else
-			return false;
-
-
+		return false;
     }
 
 	T getEntry(int pos)const
@@ -67,6 +64,7 @@ public:
 			}
 			return ptr->getItem();
 		}
+		return 0;
 	}
 	bool remove(int pos)
 	{

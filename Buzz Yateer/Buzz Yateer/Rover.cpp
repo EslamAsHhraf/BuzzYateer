@@ -1,34 +1,12 @@
 #include"Rover.h"
 
-Rover::Rover()
+Rover::Rover(int speed) :noOfMissions(0), Speed(speed)
 {
 }
 
-Rover::Rover(int s, int cd, int nom)
+void Rover::operator++()
 {
-	setSpeed(s);
-	setCheckupDuration(cd);
-	setnoOfMissions(nom);
-}
-
-void Rover::setCheckupDuration(int cd)
-{
-	CheckupDuration = cd;
-}
-
-void Rover::setSpeed(int s)
-{
-	Speed = s;
-}
-
-void Rover::setnoOfMissions(int nom)
-{
-	noOfMissions = nom;
-}
-
-int Rover::getCheckupDuration()
-{
-	return CheckupDuration;
+	noOfMissions++;
 }
 
 int Rover::getSpeed()

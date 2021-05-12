@@ -3,6 +3,6 @@
 class PolarMission:public Mission
 {
 public:
-	PolarMission() {};
-	PolarMission(int F ,int D ,int S ,int TL ,int id ,char Status);
+	PolarMission();
+	PolarMission(int F ,int D ,int S ,int TL ,int id );
 };

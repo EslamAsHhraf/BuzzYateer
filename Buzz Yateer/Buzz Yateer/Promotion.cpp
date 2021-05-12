@@ -1,9 +1,4 @@
 #include "Promotion.h"
-
-Promotion::Promotion()
-{
-}
-
 Promotion::Promotion(int id)
 {
 	setId(id);

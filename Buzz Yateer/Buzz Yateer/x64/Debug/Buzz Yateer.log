@@ -1,23 +1,2 @@
-﻿  Cancellation.cpp
-  EmergencyMission.cpp
-D:\CMP\CMP2\DataStructure\project\ProjectFiles\BuzzYateer\Buzz Yateer\Buzz Yateer\EmergencyMission.cpp(17,75): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
-  EmergencyRover.cpp
-  Event.cpp
-  Formulation.cpp
-  MarsStation.cpp
-  Mission.cpp
-  MountainousMission.cpp
-  MountainousRover.cpp
-  PolarMission.cpp
-  PolarRover.cpp
-  Promotion.cpp
-  Rover.cpp
-  Source.cpp
-  UI.cpp
-D:\CMP\CMP2\DataStructure\project\ProjectFiles\BuzzYateer\Buzz Yateer\Buzz Yateer\UI.cpp(27,13): warning C4101: 'ID': unreferenced local variable
-D:\CMP\CMP2\DataStructure\project\ProjectFiles\BuzzYateer\Buzz Yateer\Buzz Yateer\UI.cpp(27,9): warning C4101: 'ED': unreferenced local variable
-  Generating Code...
-D:\CMP\CMP2\DataStructure\project\ProjectFiles\BuzzYateer\Buzz Yateer\DS\LinkedList.h(70): warning C4715: 'LinkedList<MountainousMission *>::getEntry': not all control paths return a value
-D:\CMP\CMP2\DataStructure\project\ProjectFiles\BuzzYateer\Buzz Yateer\DS\LinkedList.h(57): warning C4715: 'LinkedList<MountainousMission *>::insert': not all control paths return a value
-  LINK : D:\CMP\CMP2\DataStructure\project\ProjectFiles\BuzzYateer\Buzz Yateer\x64\Debug\Buzz Yateer.exe not found or not built by the last incremental link; performing full link
+﻿  Formulation.cpp
   Buzz Yateer.vcxproj -> D:\CMP\CMP2\DataStructure\project\ProjectFiles\BuzzYateer\Buzz Yateer\x64\Debug\Buzz Yateer.exe

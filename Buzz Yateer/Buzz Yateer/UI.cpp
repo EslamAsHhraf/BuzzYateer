@@ -7,6 +7,30 @@ UI::UI(MarsStation* Master):Master(Master)
 
 void UI::ReadInputFile(ifstream& InputFile)
 {
+	int NM, NP, NE, NOFM, MCD, PCD, ECD;
+	InputFile >> NM >> NP >> NE >> NOFM >> MCD >> PCD >> ECD;
+	Master->setCheckUpData(MCD, PCD, ECD, NOFM);
+	while (NM--)
+	{
+		int MS;
+		InputFile >> MS;
+		Master->AddMountainousRover(MS);
+	}
+	while (NP--)
+	{
+		int PS;
+		InputFile >> PS;
+		Master->AddPolarRover(PS);
+	}
+	while (NE--)
+	{
+		int ES;
+		InputFile >> ES;
+		Master->AddEmergencyRover(ES);
+	}
+	int AutoP;
+	InputFile >> AutoP;
+	//For Promotion
 	while (!InputFile.eof())
 	{
 		int NumberOfEvents = 0;
@@ -25,6 +49,8 @@ void UI::ReadInputFile(ifstream& InputFile)
 			else if (Event == 'X')
 			{
 				int ED, ID;
+				InputFile >> ED >> ID;
+				Master->CancelMission(ID);
 			}
 			else
 			{
