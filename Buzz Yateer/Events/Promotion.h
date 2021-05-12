@@ -1,6 +1,6 @@
 #pragma once
-#include "MarsStation.h"
-#include"Event.h"
+#include "../Buzz Yateer/MarsStation.h"
+#include"../Events/Event.h"
 class MarsStation;
 class Promotion:public Event {
 	int ID;

@@ -1,14 +1,15 @@
 #pragma once
-#include"Event.h"
-#include "Formulation.h"
-#include "Promotion.h"
-#include"PolarRover.h"
-#include"EmergencyRover.h"
-#include"MountainousRover.h"
+#include"../Events/Event.h"
+#include "../Events/Formulation.h"
+#include "../Events/Promotion.h"
+#include"../Rovers/PolarRover.h"
+#include"../Rovers/EmergencyRover.h"
+#include"../Rovers/MountainousRover.h"
 #include"UI.h"
-#include"PolarMission.h"
-#include"MountainousMission.h"
-#include"EmergencyMission.h"
+
+#include"../Missions/PolarMission.h"
+#include"../Missions/MountainousMission.h"
+#include"../Missions/EmergencyMission.h"
 #include"../DS/LinkedList.h"
 #include"../DS/priority_queue.h"
 #include"../DS/Queue.h"
@@ -26,6 +27,8 @@ class MarsStation
 	Queue<PolarMission*>PM;
 	priority_Queue<EmergencyMission*>EM;
 	LinkedList<MountainousMission*>MM;
+	priority_Queue<Mission*>ExM;
+	priority_Queue<Rover*>ExR;
 	int MCheckUp;
 	int PCheckUp;
 	int ECheckUp;
@@ -48,6 +51,13 @@ public:
 	bool CancelMission(int ID);
 	void Promote(int ID);
 	void AutoPromote(int AutoP);
+	void AddExPM();
+	void AddExEM();
+	void AddExMM();
+	void AddExPR(int days);
+	void AddExER(int days);
+	void AddExMR(int days);
+
 	~MarsStation();
 };
 

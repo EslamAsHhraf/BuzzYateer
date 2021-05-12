@@ -23,7 +23,7 @@
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{1c90e3eb-7eb9-4eca-90f9-f6a6b875c703}</ProjectGuid>
     <RootNamespace>BuzzYateer</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -42,7 +42,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -139,19 +139,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Cancellation.cpp" />
-    <ClCompile Include="EmergencyMission.cpp" />
-    <ClCompile Include="EmergencyRover.cpp" />
-    <ClCompile Include="Event.cpp" />
-    <ClCompile Include="Formulation.cpp" />
+    <ClCompile Include="..\Events\Cancellation.cpp" />
+    <ClCompile Include="..\Events\Event.cpp" />
+    <ClCompile Include="..\Events\Formulation.cpp" />
+    <ClCompile Include="..\Events\Promotion.cpp" />
+    <ClCompile Include="..\Missions\EmergencyMission.cpp" />
+    <ClCompile Include="..\Missions\Mission.cpp" />
+    <ClCompile Include="..\Missions\MountainousMission.cpp" />
+    <ClCompile Include="..\Missions\PolarMission.cpp" />
+    <ClCompile Include="..\Rovers\EmergencyRover.cpp" />
+    <ClCompile Include="..\Rovers\MountainousRover.cpp" />
+    <ClCompile Include="..\Rovers\PolarRover.cpp" />
+    <ClCompile Include="..\Rovers\Rover.cpp" />
     <ClCompile Include="MarsStation.cpp" />
-    <ClCompile Include="Mission.cpp" />
-    <ClCompile Include="MountainousMission.cpp" />
-    <ClCompile Include="MountainousRover.cpp" />
-    <ClCompile Include="PolarMission.cpp" />
-    <ClCompile Include="PolarRover.cpp" />
-    <ClCompile Include="Promotion.cpp" />
-    <ClCompile Include="Rover.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="UI.cpp" />
   </ItemGroup>
@@ -164,19 +164,19 @@
     <ClInclude Include="..\DS\priority_queue.h" />
     <ClInclude Include="..\DS\Queue.h" />
     <ClInclude Include="..\DS\QueueADT.h" />
-    <ClInclude Include="Cancellation.h" />
-    <ClInclude Include="EmergencyMission.h" />
-    <ClInclude Include="EmergencyRover.h" />
-    <ClInclude Include="Event.h" />
-    <ClInclude Include="Formulation.h" />
+    <ClInclude Include="..\Events\Cancellation.h" />
+    <ClInclude Include="..\Events\Event.h" />
+    <ClInclude Include="..\Events\Formulation.h" />
+    <ClInclude Include="..\Events\Promotion.h" />
+    <ClInclude Include="..\Missions\EmergencyMission.h" />
+    <ClInclude Include="..\Missions\Mission.h" />
+    <ClInclude Include="..\Missions\MountainousMission.h" />
+    <ClInclude Include="..\Missions\PolarMission.h" />
+    <ClInclude Include="..\Rovers\EmergencyRover.h" />
+    <ClInclude Include="..\Rovers\MountainousRover.h" />
+    <ClInclude Include="..\Rovers\PolarRover.h" />
+    <ClInclude Include="..\Rovers\Rover.h" />
     <ClInclude Include="MarsStation.h" />
-    <ClInclude Include="Mission.h" />
-    <ClInclude Include="MountainousMission.h" />
-    <ClInclude Include="MountainousRover.h" />
-    <ClInclude Include="PolarMission.h" />
-    <ClInclude Include="PolarRover.h" />
-    <ClInclude Include="Promotion.h" />
-    <ClInclude Include="Rover.h" />
     <ClInclude Include="UI.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

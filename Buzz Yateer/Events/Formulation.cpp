@@ -1,9 +1,9 @@
 #include"Formulation.h"
 #include"Event.h"
-#include"Mission.h"
-#include"EmergencyMission.h"
-#include"MountainousMission.h"
-#include"PolarMission.h"
+#include"../Missions/Mission.h"
+#include"../Missions/EmergencyMission.h"
+#include"../Missions/MountainousMission.h"
+#include"../Missions/PolarMission.h"
 Formulation::Formulation(char MissionType) : missionType(MissionType), FormulatedMission(0)
 {
 }

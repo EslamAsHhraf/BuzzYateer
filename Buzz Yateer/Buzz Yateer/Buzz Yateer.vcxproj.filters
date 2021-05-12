@@ -16,52 +16,61 @@
     <Filter Include="DS">
       <UniqueIdentifier>{36d654a8-c406-402b-b6b2-eee358447485}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Events">
+      <UniqueIdentifier>{8ccaf90f-d30b-4461-8691-ac083294847a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rovers">
+      <UniqueIdentifier>{c61a07ab-308e-4774-8b88-85e00ed08061}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Missions">
+      <UniqueIdentifier>{fd04adfc-2503-4c03-9869-2199cd9d51b1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source.cpp">
+    <ClCompile Include="MarsStation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MarsStation.cpp">
+    <ClCompile Include="..\Events\Formulation.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Events\Promotion.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Events\Cancellation.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Events\Event.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
+    <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="UI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Event.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\Rovers\PolarRover.cpp">
+      <Filter>Rovers</Filter>
     </ClCompile>
-    <ClCompile Include="EmergencyRover.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\Rovers\Rover.cpp">
+      <Filter>Rovers</Filter>
     </ClCompile>
-    <ClCompile Include="PolarRover.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\Rovers\EmergencyRover.cpp">
+      <Filter>Rovers</Filter>
     </ClCompile>
-    <ClCompile Include="MountainousRover.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\Rovers\MountainousRover.cpp">
+      <Filter>Rovers</Filter>
     </ClCompile>
-    <ClCompile Include="EmergencyMission.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\Missions\PolarMission.cpp">
+      <Filter>Missions</Filter>
     </ClCompile>
-    <ClCompile Include="PolarMission.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\Missions\MountainousMission.cpp">
+      <Filter>Missions</Filter>
     </ClCompile>
-    <ClCompile Include="MountainousMission.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\Missions\Mission.cpp">
+      <Filter>Missions</Filter>
     </ClCompile>
-    <ClCompile Include="Mission.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Rover.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Formulation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Cancellation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Promotion.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\Missions\EmergencyMission.cpp">
+      <Filter>Missions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -69,27 +78,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="UI.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Event.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="EmergencyRover.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PolarRover.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MountainousRover.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="EmergencyMission.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PolarMission.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MountainousMission.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\DS\Node.h">
@@ -116,20 +104,41 @@
     <ClInclude Include="..\DS\QueueADT.h">
       <Filter>DS</Filter>
     </ClInclude>
-    <ClInclude Include="Mission.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\Events\Formulation.h">
+      <Filter>Events</Filter>
     </ClInclude>
-    <ClInclude Include="Rover.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\Events\Promotion.h">
+      <Filter>Events</Filter>
     </ClInclude>
-    <ClInclude Include="Formulation.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\Events\Cancellation.h">
+      <Filter>Events</Filter>
     </ClInclude>
-    <ClInclude Include="Cancellation.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\Events\Event.h">
+      <Filter>Events</Filter>
     </ClInclude>
-    <ClInclude Include="Promotion.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\Rovers\MountainousRover.h">
+      <Filter>Rovers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Rovers\PolarRover.h">
+      <Filter>Rovers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Rovers\Rover.h">
+      <Filter>Rovers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Rovers\EmergencyRover.h">
+      <Filter>Rovers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Missions\PolarMission.h">
+      <Filter>Missions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Missions\MountainousMission.h">
+      <Filter>Missions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Missions\Mission.h">
+      <Filter>Missions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Missions\EmergencyMission.h">
+      <Filter>Missions</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

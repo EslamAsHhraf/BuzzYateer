@@ -120,6 +120,43 @@ void MarsStation::AutoPromote(int AutoP)
 		}
 	}
 }
+void MarsStation::AddExPM()
+{
+	PolarMission*M;
+	PM.dequeue(M);
+	ExM.enqueue(M, -(M->getDuration()));// not finish 
+}
+void MarsStation::AddExMM()
+{
+	MountainousMission *M;
+	M=MM.getEntry(1);
+	MM.remove(1);
+	ExM.enqueue(M,-(M->getDuration()));// not finish 
+}
+void MarsStation::AddExEM()
+{
+	EmergencyMission* M;
+	EM.dequeue(M);
+	ExM.enqueue(M, -(M->getDuration()));// not finish
+}
+void MarsStation::AddExPR(int days)
+{
+	PolarRover * R;
+	PR.dequeue(R);
+	ExR.enqueue(R, -days);
+}
+void MarsStation::AddExER(int days)
+{
+	EmergencyRover * R;
+	ER.dequeue(R);
+	ExR.enqueue(R, -days);
+}
+void MarsStation::AddExMR(int days)
+{
+	MountainousRover * R;
+	MR.dequeue(R);
+	ExR.enqueue(R, -days);
+}
 MarsStation::~MarsStation()
 {
 }

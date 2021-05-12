@@ -1,6 +1,6 @@
 #include "UI.h"
-#include"Event.h"
-#include"Formulation.h"
+#include"../Events/Event.h"
+#include"../Events/Formulation.h"
 UI::UI(MarsStation* Master):Master(Master)
 {
 }
