@@ -21,7 +21,7 @@ public:
   
    virtual bool peek(ItemType& FrontEntry) const = 0;
    
-  
+   virtual int GetLength()const = 0;
    virtual ~QueueADT() { }
 }; 
 #endif

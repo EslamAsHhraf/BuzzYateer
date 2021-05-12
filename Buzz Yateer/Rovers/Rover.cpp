@@ -9,6 +9,11 @@ void Rover::operator++()
 	noOfMissions++;
 }
 
+void Rover::resetnoOfMissions()
+{
+	noOfMissions = 0;
+}
+
 int Rover::getSpeed()
 {
 	return Speed;
@@ -17,4 +22,8 @@ int Rover::getSpeed()
 int Rover::getnoOfMissions()
 {
 	return noOfMissions;
+}
+
+Rover::~Rover()
+{
 }

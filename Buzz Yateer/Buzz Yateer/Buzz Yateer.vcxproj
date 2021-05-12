@@ -159,6 +159,7 @@
     <ClInclude Include="..\DS\LinkedList.h" />
     <ClInclude Include="..\DS\ListADT.h" />
     <ClInclude Include="..\DS\Node.h" />
+    <ClInclude Include="..\DS\Pair.h" />
     <ClInclude Include="..\DS\PriortyNode.h" />
     <ClInclude Include="..\DS\priortyQueueADT.h" />
     <ClInclude Include="..\DS\priority_queue.h" />

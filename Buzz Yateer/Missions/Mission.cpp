@@ -4,7 +4,7 @@ Mission::Mission() :formulationDay(0), duration(0), significance(0), targetLocat
 {
 }
 
-Mission::Mission(int F ,int D ,int S ,int TL ,int id)
+Mission::Mission(int F, int D, int S, int TL, int id)
 {
 	setDuration(D);
 	setFormulationDay(F);
@@ -63,8 +63,27 @@ int Mission::getID() const
 	return ID;
 }
 
+void Mission::setMDUR(int MDUR)
+{
+	this->MDUR = MDUR;
+}
+
+int Mission::getMDUR()
+{
+	return MDUR;
+}
+
+void Mission::setExPeriod(double period)
+{
+	ExPeriod = period;
+}
+
+double Mission::getExPeriod()
+{
+	return ExPeriod;
+}
+
 Mission::~Mission()
 {
 	//Empty
 }
-

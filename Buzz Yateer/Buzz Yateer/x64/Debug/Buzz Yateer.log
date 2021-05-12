@@ -1,5 +1,11 @@
 ﻿  Promotion.cpp
   MarsStation.cpp
+d:\project data structure\new\buzzyateer\buzz yateer\buzz yateer\marsstation.cpp(178): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+d:\project data structure\new\buzzyateer\buzz yateer\buzz yateer\marsstation.cpp(186): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+d:\project data structure\new\buzzyateer\buzz yateer\buzz yateer\marsstation.cpp(194): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+d:\project data structure\new\buzzyateer\buzz yateer\buzz yateer\marsstation.cpp(206): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+d:\project data structure\new\buzzyateer\buzz yateer\buzz yateer\marsstation.cpp(220): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+d:\project data structure\new\buzzyateer\buzz yateer\buzz yateer\marsstation.cpp(228): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
   UI.cpp
   Generating Code...
   Buzz Yateer.vcxproj -> D:\project data structure\new\BuzzYateer\Buzz Yateer\x64\Debug\Buzz Yateer.exe

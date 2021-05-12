@@ -10,7 +10,7 @@ private:
 	PriortyNode<T>* next;
 public:
 	PriortyNode();
-	PriortyNode(const T  r_Item, int  r_priorty);
+	PriortyNode( T  r_Item, int  r_priorty);
 	PriortyNode(const T & r_Item, int & r_priorty,PriortyNode<T>* nextNodePtr);
 	void setItem(const T & r_Item);
 	void setPriorty(const T &r_priorty);

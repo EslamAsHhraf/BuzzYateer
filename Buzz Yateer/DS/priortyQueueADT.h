@@ -10,7 +10,7 @@ public:
 	virtual bool isEmpty() const = 0;
 
 
-	virtual bool enqueue(const ItemType& newEntry, int r_priorty) = 0;
+	virtual bool enqueue( ItemType newEntry, int r_priorty) = 0;
 
 
 	virtual bool dequeue(ItemType& FrontEntry) = 0;

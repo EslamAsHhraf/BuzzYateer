@@ -6,13 +6,13 @@
 #include"../Rovers/EmergencyRover.h"
 #include"../Rovers/MountainousRover.h"
 #include"UI.h"
-
 #include"../Missions/PolarMission.h"
 #include"../Missions/MountainousMission.h"
 #include"../Missions/EmergencyMission.h"
 #include"../DS/LinkedList.h"
 #include"../DS/priority_queue.h"
 #include"../DS/Queue.h"
+#include"../DS/Pair.h"
 #include<bits/stdc++.h>
 using namespace std;
 class UI;
@@ -27,14 +27,19 @@ class MarsStation
 	Queue<PolarMission*>PM;
 	priority_Queue<EmergencyMission*>EM;
 	LinkedList<MountainousMission*>MM;
-	priority_Queue<Mission*>ExM;
-	priority_Queue<Rover*>ExR;
+	Queue<Mission*>CM;
+	priority_Queue<Rover*>CheukUp;
+	priority_Queue<pair<Mission*, Rover*>>Execution;
 	int MCheckUp;
 	int PCheckUp;
 	int ECheckUp;
 	int NMission2CheckUp;
 	int AutoP;
 	UI* UI_PTR;
+	int CountDays;
+	int Mnum;
+	int Enum;
+	int Pnum;
 public:
 	MarsStation(string input, string output);
 	void setCheckUpData(int MCheckUp, int PCheckUp, int ECheckUp, int NMission2CheckUp);
@@ -50,14 +55,14 @@ public:
 	void AddMountainousRover(int speed);
 	bool CancelMission(int ID);
 	void Promote(int ID);
-	void AutoPromote(int AutoP);
-	void AddExPM();
-	void AddExEM();
-	void AddExMM();
-	void AddExPR(int days);
-	void AddExER(int days);
-	void AddExMR(int days);
-
+	void AutoPromote();
+	/*PolarMission* AddExPM();
+	EmergencyRover* AddExEM();
+	void AddExMM(double days);*/
+	PolarRover * AddExPR();
+	EmergencyRover* AddExER();
+	MountainousRover* AddExMR();
+	void Simulate();
 	~MarsStation();
 };
 

@@ -140,5 +140,8 @@
     <ClInclude Include="..\Missions\EmergencyMission.h">
       <Filter>Missions</Filter>
     </ClInclude>
+    <ClInclude Include="..\DS\Pair.h">
+      <Filter>DS</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

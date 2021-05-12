@@ -5,15 +5,15 @@ template <typename T>
 class Queue :public QueueADT<T>
 {
 private:
-
+	int count ;
 	Node<T>* backPtr;
 	Node<T>* frontPtr;
 public:
 	Queue()
 	{
+		count = 0;
 		backPtr = nullptr;
 		frontPtr = nullptr;
-
 	}
 	bool isEmpty() const
 	{
@@ -21,6 +21,7 @@ public:
 	}
 	bool enqueue(const T& newEntry)
 	{
+		count++;
 		Node<T>* newNodePtr = new Node<T>(newEntry);
 
 		if (isEmpty())
@@ -87,5 +88,9 @@ public:
 			backPtr = ptr;
 			NodePtr = NodePtr->getNext();
 		}
+	}
+	int GetLength() const
+	{
+		return count;
 	}
 };

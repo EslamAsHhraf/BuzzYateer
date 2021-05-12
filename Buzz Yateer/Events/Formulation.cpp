@@ -21,7 +21,7 @@ Mission*& Formulation::getFormulatedMission()
 void Formulation::setFormulatedMission(int ED, int ID, int TLOC, int MDUR, int SIG)
 {
 	FormulatedMission->setFormulationDay(ED);
-	FormulatedMission->setDuration(MDUR); //temporary 
+	FormulatedMission->setMDUR(MDUR); //temporary 
 	FormulatedMission->setSignificance(SIG);
 	FormulatedMission->setTargetLocation(TLOC);
 	FormulatedMission->setID(ID);

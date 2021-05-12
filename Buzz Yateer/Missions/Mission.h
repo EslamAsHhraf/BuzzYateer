@@ -2,12 +2,14 @@
 class Mission
 {
 private:
-	int formulationDay ,duration;
-	int significance ,targetLocation;
+	int formulationDay, duration;
+	int significance, targetLocation;
 	int ID;
+	int MDUR;
+	double ExPeriod;
 public:
 	Mission();
-	Mission(int F ,int D ,int S ,int TL ,int id);
+	Mission(int F, int D, int S, int TL, int id);
 	void setFormulationDay(int fDay);
 	void setDuration(int D);
 	void setSignificance(int S);
@@ -18,5 +20,9 @@ public:
 	int getSignificance() const;
 	int getTargetLocation() const;
 	int getID() const;
+	void setMDUR(int MDUR);
+	int getMDUR();
+	void setExPeriod(double period);
+	double getExPeriod();
 	virtual ~Mission();
 };

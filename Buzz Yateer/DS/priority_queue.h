@@ -13,7 +13,7 @@ template <typename T>
 class priority_Queue :public priortyQueueADT<T>
 {
 private:
-
+	
 	PriortyNode<T>* backPtr;
 	PriortyNode<T>* frontPtr;
 public:
@@ -21,14 +21,13 @@ public:
 	{
 		backPtr = nullptr;
 		frontPtr = nullptr;
-
+		
 	}
-
 	bool isEmpty() const
 	{
 		return (frontPtr == nullptr);
 	}
-	bool enqueue(const T& newEntry, int r_priorty)
+	bool enqueue( T newEntry, int r_priorty)
 	{
 
 		PriortyNode<T>* newNodePtr = new PriortyNode<T>(newEntry, r_priorty);
