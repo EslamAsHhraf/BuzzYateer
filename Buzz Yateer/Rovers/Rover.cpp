@@ -1,6 +1,6 @@
 #include"Rover.h"
-
-Rover::Rover(int speed, bool status, bool underMaintenance, int NoOfCheckUps) :noOfMissions(0), Speed(speed)
+int Rover::COUNT = 0;
+Rover::Rover(int speed, bool status, bool underMaintenance, int NoOfCheckUps) :noOfMissions(0), Speed(speed), ID(++COUNT)
 {
 	setfree(status);
 }
@@ -37,6 +37,11 @@ void Rover::setCheukDuration(int days)
 int Rover::getCheukDuration()
 {
 	return CheukDuration;
+}
+
+int Rover::getID()
+{
+	return ID;
 }
 
 void Rover::setfree(bool s)

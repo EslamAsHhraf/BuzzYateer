@@ -398,6 +398,247 @@ void MarsStation::ExecutionSim()
 	}
 }
 
+Pair<int, string> MarsStation::PrintWaitingMission()
+{
+	Queue<PolarMission*> PMt = PM;
+	priority_Queue<EmergencyMission*> EMt = EM;
+	int num = 0;
+	string s1;
+	EmergencyMission* E;
+	if (!EMt.isEmpty())
+	{
+		s1 = "[";
+	}
+	while (EMt.dequeue(E))
+	{
+		num++;
+		s1 += (to_string(E->getID()));
+		s1.push_back(',');
+		if (EMt.isEmpty())
+		{
+			s1[s1.size() - 1] = ']';
+		}
+	}
+	string s2;
+	PolarMission* P;
+	if (!PMt.isEmpty())
+	{
+		s2 = "(";
+	}
+	while (PMt.dequeue(P))
+	{
+		num++;
+		s2 += (to_string(P->getID()));
+		s2.push_back(',');
+		if (PMt.isEmpty())
+		{
+			s2[s2.size() - 1] = ')';
+		}
+	}
+	string s3;
+	if (!MM.getLength())
+	{
+		s3 = "{";
+	}
+
+	for (int i = 1; i <= MM.getLength(); i++)
+	{
+		num++;
+		s3 += (MM.getEntry(i)->getID());
+		s3.push_back(',');
+		if (MM.getLength())
+		{
+			s3[s3.size() - 1] = '}';
+		}
+	}
+	return makepair(num, s1 + " " + s2 + " " + s3);
+	return Pair<int, string>();
+}
+
+
+Pair<int, string> MarsStation::PrintExecetion()
+{
+	priority_Queue<Pair<Mission*, Rover*>> Executiont = Execution;
+	int num = 0;
+	string s1 = "[";
+	string s2 = "(";
+	string s3 = "{";
+	Pair<Mission*, Rover*>E;
+	while (Executiont.dequeue(E))
+	{
+		num++;
+		if (dynamic_cast<EmergencyMission*>(E.first))
+		{
+			s1 += (to_string(E.first->getID()) + "/" + to_string(E.second->getID()));
+			s1.push_back(',');
+		}
+		else if (dynamic_cast<MountainousMission*>(E.first))
+		{
+			s3 += (to_string(E.first->getID()) + "/" + to_string(E.second->getID()));
+			s3.push_back(',');
+		}
+		else
+		{
+			s2 += (to_string(E.first->getID()) + "/" + to_string(E.second->getID()));
+			s2.push_back(',');
+		}
+	}
+	s1[s1.size() - 1] = ']';
+	s2[s2.size() - 1] = ')';
+	s3[s3.size() - 1] = '}';
+	if (s1.size() <= 2)
+	{
+		s1 = "";
+	}
+	if (s2.size() <= 2)
+	{
+		s2 = "";
+	}
+	if (s3.size() <= 2)
+	{
+		s3 = "";
+	}
+	return makepair(num, s1 + " " + s2 + " " + s3);
+}
+
+Pair<int, string> MarsStation::Printavailable()
+{
+	priority_Queue<PolarRover*> PRt = PR;
+	priority_Queue<EmergencyRover*> ERt = ER;
+	priority_Queue<MountainousRover*> MRt = MR;
+	string s1 = "[";
+	string s2 = "(";
+	string s3 = "{";
+	int num = 0;
+	EmergencyRover* E;
+	while (ERt.dequeue(E))
+	{
+		num++;
+		s1 += (to_string(E->getID()));
+		s1.push_back(',');
+	}
+	s1[s1.size() - 1] = ']';
+	PolarRover* P;
+	while (PRt.dequeue(P))
+	{
+		num++;
+		s2 += (to_string(P->getID()));
+		s2.push_back(',');
+	}
+	s2[s2.size() - 1] = ')';
+
+	MountainousRover* M;
+	while (MRt.dequeue(M))
+	{
+		num++;
+		s3 += (to_string(M->getID()));
+		s3.push_back(',');
+	}
+	s3[s3.size() - 1] = '}';
+	if (s1.size() <= 2)
+	{
+		s1 = "";
+	}
+	if (s2.size() <= 2)
+	{
+		s2 = "";
+	}
+	if (s3.size() <= 2)
+	{
+		s3 = "";
+	}
+	return Pair<int, string>(num, s1 + " " + s2 + " " + s3);
+}
+
+Pair<int, string> MarsStation::PrintCompleted()
+{
+	Queue<Mission*> CMt = CM;
+	int num = 0;
+	string s1 = "[";
+	string s2 = "(";
+	string s3 = "{";
+	Mission*E;
+	while (CMt.dequeue(E))
+	{
+		num++;
+		if (dynamic_cast<EmergencyMission*>(E))
+		{
+			s1 += (to_string(E->getID()));
+			s1.push_back(',');
+		}
+		else if (dynamic_cast<MountainousMission*>(E))
+		{
+			s3 += (to_string(E->getID()));
+			s3.push_back(',');
+		}
+		else
+		{
+			s2 += (to_string(E->getID()));
+			s2.push_back(',');
+		}
+	}
+	s1[s1.size() - 1] = ']';
+	s2[s2.size() - 1] = ')';
+	s3[s3.size() - 1] = '}';
+	if (s1.size() <= 2)
+	{
+		s1 = "";
+	}
+	if (s2.size() <= 2)
+	{
+		s2 = "";
+	}
+	if (s3.size() <= 2)
+	{
+		s3 = "";
+	}
+	return makepair(num, s1 + " " + s2 + " " + s3);
+}
+
+Pair<int, string> MarsStation::PrintCheukUp()
+{
+	priority_Queue<Rover*> CheukUpt = CheukUp;
+	int num = 0;
+	Rover* R;
+	string s1 = "[", s2 = "(", s3 = "{";
+	while (CheukUpt.dequeue(R))
+	{
+		num++;
+		if (dynamic_cast<EmergencyRover*>(R))
+		{
+			s1 += to_string(R->getID());
+			s1.push_back(',');
+
+		}
+		else if (dynamic_cast<PolarRover*>(R))
+		{
+			s2 += to_string(R->getID());
+			s2.push_back(',');
+		}
+		else if (dynamic_cast<MountainousRover*>(R))
+		{
+			s3 += to_string(R->getID());
+			s3.push_back(',');
+		}
+	}
+	s1[s1.size() - 1] = ']';
+	s2[s2.size() - 1] = ')';
+	s3[s3.size() - 1] = '}';
+	if (s1.size() <= 2)
+	{
+		s1 = "";
+	}
+	if (s2.size() <= 2)
+	{
+		s2 = "";
+	}
+	if (s3.size() <= 2)
+	{
+		s3 = "";
+	}
+	return makepair<int, string>(num, s1 + " " + s2 + " " + s3);
+}
+
 void MarsStation::failMission()
 {
 	Pair<Mission*, Rover*> Ex;

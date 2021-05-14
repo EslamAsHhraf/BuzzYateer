@@ -10,5 +10,6 @@ public:
 	UI(MarsStation* Master);
 	void ReadInputFile(ifstream& InputFile);
 	void PrintinOutputFile(ofstream& OutputFile);
+	void Interactive_Mode();
 };
 

@@ -70,5 +70,12 @@ public:
 	void assigPM();
 	void assigMM();
 	void ExecutionSim();
+	Pair<int, string> PrintWaitingMission();
+	Pair<int, string> PrintExecetion();
+	Pair<int, string>Printavailable();
+	Pair<int, string> PrintCompleted();
+	Pair<int, string> PrintCheukUp();
+
+
 };
 

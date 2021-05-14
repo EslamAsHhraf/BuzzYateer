@@ -1,11 +1,17 @@
-﻿  Promotion.cpp
+﻿  Formulation.cpp
+  Promotion.cpp
+  EmergencyMission.cpp
+  EmergencyRover.cpp
+  MountainousRover.cpp
+  PolarRover.cpp
+  Rover.cpp
   MarsStation.cpp
-d:\project data structure\git code\buzzyateer\buzz yateer\buzz yateer\marsstation.cpp(212): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-d:\project data structure\git code\buzzyateer\buzz yateer\buzz yateer\marsstation.cpp(230): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-d:\project data structure\git code\buzzyateer\buzz yateer\buzz yateer\marsstation.cpp(248): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-d:\project data structure\git code\buzzyateer\buzz yateer\buzz yateer\marsstation.cpp(278): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-d:\project data structure\git code\buzzyateer\buzz yateer\buzz yateer\marsstation.cpp(310): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-d:\project data structure\git code\buzzyateer\buzz yateer\buzz yateer\marsstation.cpp(328): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+D:\CMP\CMP2\DataStructure\project\ProjectFiles\BuzzYateer\Buzz Yateer\Buzz Yateer\MarsStation.cpp(212,61): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+D:\CMP\CMP2\DataStructure\project\ProjectFiles\BuzzYateer\Buzz Yateer\Buzz Yateer\MarsStation.cpp(230,61): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+D:\CMP\CMP2\DataStructure\project\ProjectFiles\BuzzYateer\Buzz Yateer\Buzz Yateer\MarsStation.cpp(248,61): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+D:\CMP\CMP2\DataStructure\project\ProjectFiles\BuzzYateer\Buzz Yateer\Buzz Yateer\MarsStation.cpp(278,61): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+D:\CMP\CMP2\DataStructure\project\ProjectFiles\BuzzYateer\Buzz Yateer\Buzz Yateer\MarsStation.cpp(310,61): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+D:\CMP\CMP2\DataStructure\project\ProjectFiles\BuzzYateer\Buzz Yateer\Buzz Yateer\MarsStation.cpp(328,61): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
   UI.cpp
   Generating Code...
-  Buzz Yateer.vcxproj -> D:\project data structure\git code\BuzzYateer\Buzz Yateer\x64\Debug\Buzz Yateer.exe
+  Buzz Yateer.vcxproj -> D:\CMP\CMP2\DataStructure\project\ProjectFiles\BuzzYateer\Buzz Yateer\x64\Debug\Buzz Yateer.exe

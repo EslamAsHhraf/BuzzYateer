@@ -67,3 +67,8 @@ void UI::PrintinOutputFile(ofstream& OutputFile)
 {
 
 }
+
+void UI::Interactive_Mode()
+{
+	Pair<int, string> p1 = Master->PrintWaitingMission();
+}
