@@ -1,6 +1,6 @@
 #include "Mission.h"
 
-Mission::Mission() :formulationDay(0), duration(0), significance(0), targetLocation(0), ID(0)
+Mission::Mission() :formulationDay(0), duration(0), significance(0), targetLocation(0), ID(0), MDUR(0)
 {
 }
 

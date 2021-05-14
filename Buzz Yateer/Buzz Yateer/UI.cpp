@@ -28,8 +28,9 @@ void UI::ReadInputFile(ifstream& InputFile)
 		InputFile >> ES;
 		Master->AddEmergencyRover(ES);
 	}
-	int AutoP;
-	InputFile >> AutoP;
+	int AutoP, MaxDistance;
+	InputFile >> AutoP >> MaxDistance;
+	Master->setMaxDistance(MaxDistance);
 	//For Promotion
 	while (!InputFile.eof())
 	{
@@ -52,9 +53,11 @@ void UI::ReadInputFile(ifstream& InputFile)
 				InputFile >> ED >> ID;
 				Master->CancelMission(ID);
 			}
-			else
+			else if ((Event == 'P'))
 			{
-
+				int ED, ID;
+				InputFile >> ED >> ID;
+				Master->AddPromotionEvent(ED, ID);
 			}
 		}
 	}

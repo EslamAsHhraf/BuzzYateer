@@ -1,7 +1,8 @@
 #include"Rover.h"
 
-Rover::Rover(int speed) :noOfMissions(0), Speed(speed)
+Rover::Rover(int speed, bool status, bool underMaintenance, int NoOfCheckUps) :noOfMissions(0), Speed(speed)
 {
+	setfree(status);
 }
 
 void Rover::operator++()
@@ -26,4 +27,34 @@ int Rover::getnoOfMissions()
 
 Rover::~Rover()
 {
+}
+
+void Rover::setfree(bool s)
+{
+	status = s;
+}
+
+bool Rover::getfree()
+{
+	return status;
+}
+
+void Rover::incrementCheckup()
+{
+	NoOfCheckUps++;
+}
+
+int Rover::getNoOfCheckUps()
+{
+	return NoOfCheckUps;
+}
+
+void Rover::setMaintenance(bool x)
+{
+	underMaintenance = x;
+}
+
+bool Rover::geMaintenance()
+{
+	return underMaintenance;
 }

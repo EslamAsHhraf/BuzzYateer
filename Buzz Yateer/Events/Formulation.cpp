@@ -4,7 +4,8 @@
 #include"../Missions/EmergencyMission.h"
 #include"../Missions/MountainousMission.h"
 #include"../Missions/PolarMission.h"
-Formulation::Formulation(char MissionType) : missionType(MissionType), FormulatedMission(0)
+
+Formulation::Formulation(char MissionType, int ED) : missionType(MissionType), FormulatedMission(0), Event(ED)
 {
 }
 
@@ -16,6 +17,11 @@ void Formulation::setmissionType(char x)
 Mission*& Formulation::getFormulatedMission()
 {
 	return FormulatedMission;
+}
+
+char Formulation::getmissiontype()
+{
+	return missionType;
 }
 
 void Formulation::setFormulatedMission(int ED, int ID, int TLOC, int MDUR, int SIG)

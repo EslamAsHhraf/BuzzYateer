@@ -1,10 +1,10 @@
 #include "Cancellation.h"
 
-cancellation::cancellation() :ID(0)
+cancellation::cancellation() :ID(0), Event(0)
 {
 }
 
-cancellation::cancellation(int id)
+cancellation::cancellation(int id,int ED): Event(ED)
 {
 	setId(id);
 }

@@ -13,7 +13,7 @@ EmergencyMission::EmergencyMission(int F ,int D ,int S ,int TL ,int id )
 
 int EmergencyMission::calcPriority()
 {
-	return 0;
+	return 4 * getSignificance() - 3 * getFormulationDay() + 2 * getTargetLocation() - getMDUR();
 }
 
 int EmergencyMission::calcduration()

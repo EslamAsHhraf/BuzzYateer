@@ -13,6 +13,7 @@
 #include"../DS/priority_queue.h"
 #include"../DS/Queue.h"
 #include"../DS/Pair.h"
+#include"../Events/Cancellation.h"
 #include<bits/stdc++.h>
 using namespace std;
 class UI;
@@ -29,7 +30,7 @@ class MarsStation
 	LinkedList<MountainousMission*>MM;
 	Queue<Mission*>CM;
 	priority_Queue<Rover*>CheukUp;
-	priority_Queue<pair<Mission*, Rover*>>Execution;
+	priority_Queue<Pair<Mission*, Rover*>>Execution;
 	int MCheckUp;
 	int PCheckUp;
 	int ECheckUp;
@@ -40,6 +41,8 @@ class MarsStation
 	int Mnum;
 	int Enum;
 	int Pnum;
+	int EventCount;
+	int MaxDistance;
 public:
 	MarsStation(string input, string output);
 	void setCheckUpData(int MCheckUp, int PCheckUp, int ECheckUp, int NMission2CheckUp);
@@ -54,15 +57,16 @@ public:
 	void AddEmergencyRover(int speed);
 	void AddMountainousRover(int speed);
 	bool CancelMission(int ID);
+	void AddCancellation(int ID, int ED);
 	void Promote(int ID);
 	void AutoPromote();
-	/*PolarMission* AddExPM();
-	EmergencyRover* AddExEM();
-	void AddExMM(double days);*/
 	PolarRover * AddExPR();
 	EmergencyRover* AddExER();
 	MountainousRover* AddExMR();
+	void failMission();
+	void roverMaintance(Rover* r);
 	void Simulate();
 	~MarsStation();
+	void setMaxDistance(int MaxDistance);
 };
 
