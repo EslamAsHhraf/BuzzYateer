@@ -60,13 +60,15 @@ public:
 	void AddCancellation(int ID, int ED);
 	void Promote(int ID);
 	void AutoPromote();
-	PolarRover * AddExPR();
-	EmergencyRover* AddExER();
-	MountainousRover* AddExMR();
 	void failMission();
 	void roverMaintance(Rover* r);
 	void Simulate();
 	~MarsStation();
 	void setMaxDistance(int MaxDistance);
+	void CheukupSim();
+	void assigEM();
+	void assigPM();
+	void assigMM();
+	void ExecutionSim();
 };
 

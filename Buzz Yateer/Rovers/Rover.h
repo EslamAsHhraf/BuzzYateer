@@ -6,6 +6,7 @@ class Rover {
 	bool underMaintenance;
 	int NoOfCheckUps;
 	bool status;
+	int CheukDuration;
 public:
 	Rover(int speed, bool status = 1, bool underMaintenance = 0, int NoOfCheckUps = 0);
 	void operator ++();
@@ -19,5 +20,7 @@ public:
 	void setMaintenance(bool x);
 	bool geMaintenance();
 	virtual ~Rover();
+	void setCheukDuration(int days);
+	int getCheukDuration();
 };	
 

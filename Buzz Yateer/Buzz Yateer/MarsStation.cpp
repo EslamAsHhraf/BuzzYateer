@@ -117,43 +117,15 @@ void MarsStation::AutoPromote()
 		}
 }
 
-PolarRover * MarsStation::AddExPR()
-{
-	PolarRover* R;
-	if (PR.dequeue(R))
-	{
-		R++;
-		return R;
-	}
-	return nullptr;
-}
-EmergencyRover* MarsStation::AddExER()
-{
-	EmergencyRover* R;
-	if (ER.dequeue(R))
-	{
-		R++;
-		return R;
-	}
-	return nullptr;
-}
-MountainousRover* MarsStation::AddExMR()
-{
-	MountainousRover* R;
-	if (MR.dequeue(R))
-	{
-		R++;
-		return R;
-	}
-	return nullptr;
-}
+
 void MarsStation::Simulate()
 {
 	while (!events.isEmpty() || !Execution.isEmpty() || !EM.isEmpty() || !PM.isEmpty() || !MM.isEmpty())
 	{
 		CountDays++;
+		// Read Events 
 		Event* Ev;
-		if (events.peek(Ev) && Ev->getEventDay() == CountDays)
+		while(events.peek(Ev) && Ev->getEventDay() == CountDays)
 		{
 			events.dequeue(Ev);
 			if (dynamic_cast<Formulation*>(Ev))
@@ -186,208 +158,246 @@ void MarsStation::Simulate()
 				Promote(ID);
 			}
 		}
-		// assign missions to rovers
-		EmergencyMission* E;
-		while (EM.peek(E) && E->getFormulationDay() <= CountDays)
-		{
-			double duration;
-			if (!ER.isEmpty())
-			{
-				EM.dequeue(E);
-				EmergencyRover * R=AddExER();
-				duration = ceil(CountDays + E->getMDUR() +E->getTargetLocation()/ ((double)R->getSpeed()));
-				E->setExPeriod(duration);
-				if (E->getTargetLocation() > MaxDistance)
-				{
-					Execution.enqueue(makepair((Mission*)(E), (Rover*)(R)), INT_MAX + E->getTargetLocation() - MaxDistance);
-				}
-				else
-				{
-					Execution.enqueue(makepair((Mission*)(E), (Rover*)(R)), -duration);
-				}
-				
-				R->operator++();
-			}
-			else if (!MR.isEmpty())
-			{
-				EM.dequeue(E);
-				MountainousRover * R=AddExMR();
-				duration = ceil(CountDays + E->getMDUR() + (E->getTargetLocation() / ((double)R->getSpeed())) );
-				E->setExPeriod(duration);
-				if (E->getTargetLocation() > MaxDistance)
-				{
-					Execution.enqueue(makepair((Mission*)(E), (Rover*)(R)), INT_MAX + E->getTargetLocation() - MaxDistance);
-				}
-				else
-				{
-					Execution.enqueue(makepair((Mission*)(E), (Rover*)(R)), -duration);
-				}
-
-				R->operator++();
-			}
-			else if (!PR.isEmpty())
-			{
-				EM.dequeue(E);
-				PolarRover * R= AddExPR();
-				duration =ceil( CountDays + E->getMDUR() + (E->getTargetLocation() / ((double)R->getSpeed())));
-				E->setExPeriod(duration);
-				if (E->getTargetLocation() > MaxDistance)
-				{
-					Execution.enqueue(makepair((Mission*)(E), (Rover*)(R)), INT_MAX + E->getTargetLocation() - MaxDistance);
-				}
-				else
-				{
-					Execution.enqueue(makepair((Mission*)(E), (Rover*)(R)), -duration);
-				}
-
-				R->operator++();
-			}
-			else
-			{
-				break;
-			}
-		}
-		PolarMission* p;
-		while (PM.peek(p) && p->getFormulationDay() <= CountDays)
-		{
-			double duration;
-			if (!PR.isEmpty())
-			{
-				PolarRover * R= AddExPR();
-				duration = ceil(CountDays + p->getMDUR() + (p->getTargetLocation() / ((double)R->getSpeed())));
-				p->setExPeriod(duration);
-				if (E->getTargetLocation() > MaxDistance)
-				{
-					Execution.enqueue(makepair((Mission*)(E), (Rover*)(R)), INT_MAX + E->getTargetLocation() - MaxDistance);
-				}
-				else
-				{
-					Execution.enqueue(makepair((Mission*)(E), (Rover*)(R)), -duration);
-				}
-
-				R->operator++();
-			}
-			else
-			{
-				break;
-			}
-		}
-		MountainousMission* m;
-		while (!MM.isEmpty() &&MM.getEntry(1)->getFormulationDay() <= CountDays)
-		{
-			double duration;
-			m = MM.getEntry(1);
-			if (!MR.isEmpty())
-			{
-				MM.remove(1);
-				MountainousRover * R = AddExMR();
-				duration =ceil( CountDays + m->getMDUR() + (m->getTargetLocation() / ((double)R->getSpeed())));
-				m->setExPeriod(duration);
-				if (E->getTargetLocation() > MaxDistance)
-				{
-					Execution.enqueue(makepair((Mission*)(E), (Rover*)(R)), INT_MAX + E->getTargetLocation() - MaxDistance);
-				}
-				else
-				{
-					Execution.enqueue(makepair((Mission*)(E), (Rover*)(R)), -duration);
-				}
-
-				R->operator++();
-		    }
-			else if (!ER.isEmpty())
-			{
-				MM.remove(1);
-				EmergencyRover * R = AddExER();
-				duration = ceil(CountDays + m->getMDUR() + m->getTargetLocation() / ((double)R->getSpeed()));
-				m->setExPeriod(duration);
-				if (E->getTargetLocation() > MaxDistance)
-				{
-					Execution.enqueue(makepair((Mission*)(E), (Rover*)(R)), INT_MAX + E->getTargetLocation() - MaxDistance);
-				}
-				else
-				{
-					Execution.enqueue(makepair((Mission*)(E), (Rover*)(R)), -duration);
-				}
-				R->operator++();
-			}
-			else
-			{
-				break;
-			}
-		}
-		failMission();
-		//simulate Execution
-		Pair<Mission*, Rover*> Ex;
-		while (Execution.peek(Ex)&& Ex.first->getExPeriod()<= CountDays)
-		{
-			 Execution.dequeue(Ex);
-			 if (dynamic_cast<EmergencyMission*>(Ex.first))
-			 {
-				 CM.enqueue(dynamic_cast<EmergencyMission*>(Ex.first));
-			 }
-			 else if (dynamic_cast<MountainousMission*>(Ex.first))
-			 {
-				 CM.enqueue(dynamic_cast<MountainousMission*>(Ex.first));
-			 }
-			 else if (dynamic_cast<PolarMission*>(Ex.first))
-			 {
-				 CM.enqueue(dynamic_cast<PolarMission*>(Ex.first));
-			 }
-			 /////////////////////
-			 if (dynamic_cast<EmergencyRover*>(Ex.second))
-			 {
-				 EmergencyRover*E = dynamic_cast<EmergencyRover*>(Ex.second);
-				 if (E->getnoOfMissions() == NMission2CheckUp)
-				 {
-					 CheukUp.enqueue(E, -(CountDays + ECheckUp));
-					 E->resetnoOfMissions();
-				 }
-				 else
-				 {
-					 ER.enqueue(E, E->getSpeed());
-				 }
-		     }
-			 else if (dynamic_cast<MountainousRover*>(Ex.second))
-			 {
-				 MountainousRover*M= dynamic_cast<MountainousRover*>(Ex.second);
-				 if (M->getnoOfMissions() == NMission2CheckUp)
-				 {
-					 CheukUp.enqueue(M, -(CountDays + MCheckUp));
-					 M->resetnoOfMissions();
-				 }
-				 else
-				 {
-					 MR.enqueue(M, M->getSpeed());
-				 }
-			 }
-			 else if (dynamic_cast<PolarRover*>(Ex.second))
-			 {
-				 PolarRover* p = dynamic_cast<PolarRover*>(Ex.second);
-				 if (p->getnoOfMissions() == NMission2CheckUp)
-				 {
-					 CheukUp.enqueue(p, -(CountDays + PCheckUp));
-					 p->resetnoOfMissions();
-				 }
-				 else
-				 {
-					 PR.enqueue(p, p->getSpeed());
-				 }
-			 }
-		}
-		//Auto promotion
-		AutoPromote();
-		//if all mission are complete
-		if (CM.GetLength() == Mnum + Pnum + Enum)
-		{
-			break;
-
-		}
+		/////// assign missions to rovers
+		assigEM();//assign Emergncy Missions
+		assigPM();//assign Polar Missions
+		assigMM();//assign Mountainous Missions
+		failMission();// re-formulted Mission failed
+		ExecutionSim();//simulate Execution
+		AutoPromote();//Auto promotion
+		CheukupSim();//Cheukup Simulate
 	}
 }
 void MarsStation::setMaxDistance(int MaxDistance)
 {
 	this->MaxDistance = MaxDistance;
 }
+
+void MarsStation::CheukupSim()
+{
+	Rover*R;
+	while (CheukUp.peek(R) && R->getCheukDuration() == CountDays)
+	{
+		if (dynamic_cast<MountainousRover*>(R)) {
+			MR.enqueue(dynamic_cast<MountainousRover*>(R), R->getSpeed());
+		}
+		else if (dynamic_cast<PolarRover*>(R)) {
+			PR.enqueue(dynamic_cast<PolarRover*>(R), R->getSpeed());
+		}
+		else if (dynamic_cast<EmergencyRover*>(R)) {
+			ER.enqueue(dynamic_cast<EmergencyRover*>(R), R->getSpeed());
+		}
+	}
+}
+
+void MarsStation::assigEM()
+{
+	EmergencyMission* E;
+	while (EM.peek(E) && E->getFormulationDay() <= CountDays)
+	{
+		double duration;
+		if (!ER.isEmpty())
+		{
+			EM.dequeue(E);
+			EmergencyRover * R;
+			ER.dequeue(R);
+			duration = ceil(CountDays + E->getMDUR() + E->getTargetLocation() / ((double)R->getSpeed()));
+			E->setExPeriod(duration);
+			if (E->getTargetLocation() > MaxDistance)
+			{
+				Execution.enqueue(makepair((Mission*)(E), (Rover*)(R)), INT_MAX + E->getTargetLocation() - MaxDistance);
+			}
+			else
+			{
+				Execution.enqueue(makepair((Mission*)(E), (Rover*)(R)), -duration);
+			}
+
+			R->operator++();
+		}
+		else if (!MR.isEmpty())
+		{
+			EM.dequeue(E);
+			MountainousRover * R;
+			MR.dequeue(R);
+			duration = ceil(CountDays + E->getMDUR() + (E->getTargetLocation() / ((double)R->getSpeed())));
+			E->setExPeriod(duration);
+			if (E->getTargetLocation() > MaxDistance)
+			{
+				Execution.enqueue(makepair((Mission*)(E), (Rover*)(R)), INT_MAX + E->getTargetLocation() - MaxDistance);
+			}
+			else
+			{
+				Execution.enqueue(makepair((Mission*)(E), (Rover*)(R)), -duration);
+			}
+
+			R->operator++();
+		}
+		else if (!PR.isEmpty())
+		{
+			EM.dequeue(E);
+			PolarRover * R;
+			PR.dequeue(R);
+			duration = ceil(CountDays + E->getMDUR() + (E->getTargetLocation() / ((double)R->getSpeed())));
+			E->setExPeriod(duration);
+			if (E->getTargetLocation() > MaxDistance)
+			{
+				Execution.enqueue(makepair((Mission*)(E), (Rover*)(R)), INT_MAX + E->getTargetLocation() - MaxDistance);
+			}
+			else
+			{
+				Execution.enqueue(makepair((Mission*)(E), (Rover*)(R)), -duration);
+			}
+
+			R->operator++();
+		}
+		else
+		{
+			break;
+		}
+	}
+}
+
+void MarsStation::assigPM()
+{
+	PolarMission* p;
+	while (PM.peek(p) && p->getFormulationDay() <= CountDays)
+	{
+		double duration;
+		if (!PR.isEmpty())
+		{
+			PolarRover * R;
+			PR.dequeue(R);
+			duration = ceil(CountDays + p->getMDUR() + (p->getTargetLocation() / ((double)R->getSpeed())));
+			p->setExPeriod(duration);
+			if (p->getTargetLocation() > MaxDistance)
+			{
+				Execution.enqueue(makepair((Mission*)(p), (Rover*)(R)), INT_MAX + p->getTargetLocation() - MaxDistance);
+			}
+			else
+			{
+				Execution.enqueue(makepair((Mission*)(p), (Rover*)(R)), -duration);
+			}
+
+			R->operator++();
+		}
+		else
+		{
+			break;
+		}
+	}
+}
+
+void MarsStation::assigMM()
+{
+	MountainousMission* m;
+	while (!MM.isEmpty() && MM.getEntry(1)->getFormulationDay() <= CountDays)
+	{
+		double duration;
+		m = MM.getEntry(1);
+		if (!MR.isEmpty())
+		{
+			MM.remove(1);
+			MountainousRover * R;
+			MR.dequeue(R);
+			duration = ceil(CountDays + m->getMDUR() + (m->getTargetLocation() / ((double)R->getSpeed())));
+			m->setExPeriod(duration);
+			if (m->getTargetLocation() > MaxDistance)
+			{
+				Execution.enqueue(makepair((Mission*)(m), (Rover*)(R)), INT_MAX + m->getTargetLocation() - MaxDistance);
+			}
+			else
+			{
+				Execution.enqueue(makepair((Mission*)(m), (Rover*)(R)), -duration);
+			}
+
+			R->operator++();
+		}
+		else if (!ER.isEmpty())
+		{
+			MM.remove(1);
+			EmergencyRover * R;
+			ER.dequeue(R);
+			duration = ceil(CountDays + m->getMDUR() + m->getTargetLocation() / ((double)R->getSpeed()));
+			m->setExPeriod(duration);
+			if (m->getTargetLocation() > MaxDistance)
+			{
+				Execution.enqueue(makepair((Mission*)(m), (Rover*)(R)), INT_MAX + m->getTargetLocation() - MaxDistance);
+			}
+			else
+			{
+				Execution.enqueue(makepair((Mission*)(m), (Rover*)(R)), -duration);
+			}
+			R->operator++();
+		}
+		else
+		{
+			break;
+		}
+	}
+}
+
+void MarsStation::ExecutionSim()
+{
+	Pair<Mission*, Rover*> Ex;
+	while (Execution.peek(Ex) && Ex.first->getExPeriod() <= CountDays)
+	{
+		Execution.dequeue(Ex);
+		// re-formulated Missions 
+		if (dynamic_cast<EmergencyMission*>(Ex.first))
+		{
+			CM.enqueue(dynamic_cast<EmergencyMission*>(Ex.first));
+		}
+		else if (dynamic_cast<MountainousMission*>(Ex.first))
+		{
+			CM.enqueue(dynamic_cast<MountainousMission*>(Ex.first));
+		}
+		else if (dynamic_cast<PolarMission*>(Ex.first))
+		{
+			CM.enqueue(dynamic_cast<PolarMission*>(Ex.first));
+		}
+		// re-formulated Rovers
+		if (dynamic_cast<EmergencyRover*>(Ex.second))
+		{
+			EmergencyRover*E = dynamic_cast<EmergencyRover*>(Ex.second);
+			if (E->getnoOfMissions() == NMission2CheckUp)
+			{
+				CheukUp.enqueue(E, -(CountDays + ECheckUp));
+				E->resetnoOfMissions();
+			}
+			else
+			{
+				ER.enqueue(E, E->getSpeed());
+			}
+		}
+		else if (dynamic_cast<MountainousRover*>(Ex.second))
+		{
+			MountainousRover*M = dynamic_cast<MountainousRover*>(Ex.second);
+			if (M->getnoOfMissions() == NMission2CheckUp)
+			{
+				CheukUp.enqueue(M, -(CountDays + MCheckUp));
+				M->resetnoOfMissions();
+			}
+			else
+			{
+				MR.enqueue(M, M->getSpeed());
+			}
+		}
+		else if (dynamic_cast<PolarRover*>(Ex.second))
+		{
+			PolarRover* p = dynamic_cast<PolarRover*>(Ex.second);
+			if (p->getnoOfMissions() == NMission2CheckUp)
+			{
+				CheukUp.enqueue(p, -(CountDays + PCheckUp));
+				p->resetnoOfMissions();
+			}
+			else
+			{
+				PR.enqueue(p, p->getSpeed());
+			}
+		}
+	}
+}
+
 void MarsStation::failMission()
 {
 	Pair<Mission*, Rover*> Ex;

@@ -29,6 +29,16 @@ Rover::~Rover()
 {
 }
 
+void Rover::setCheukDuration(int days)
+{
+	CheukDuration = days;
+}
+
+int Rover::getCheukDuration()
+{
+	return CheukDuration;
+}
+
 void Rover::setfree(bool s)
 {
 	status = s;
