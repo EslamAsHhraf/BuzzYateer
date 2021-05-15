@@ -9,6 +9,7 @@ public:
 	Promotion(int ED ,int id);
 	void setId(int id);
 	int  getID();
+	void setMaster(MarsStation* MS);
 	void Execute();
 
 

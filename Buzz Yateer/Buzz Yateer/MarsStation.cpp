@@ -1,10 +1,10 @@
 #include "MarsStation.h"
 
-MarsStation::MarsStation(string input, string output) :CountDays(0), Enum(0), Pnum(0), Mnum(0), EventCount(0)
+MarsStation::MarsStation(string input, string output) :CountDays(0), Enum(0), Pnum(0), Mnum(0), EventCount(0), InputFile(input), OutputFile(output)
 {
 	UI_PTR = new UI(this);
-	OpenInputFile(input);
-	OpenOutputFile(output);
+	//OpenInputFile(input);
+	//OpenOutputFile(output);
 }
 
 void MarsStation::setCheckUpData(int MCheckUp, int PCheckUp, int ECheckUp, int NMission2CheckUp)
@@ -30,12 +30,12 @@ void MarsStation::OpenOutputFile(string outputfile)
 	InputFile.open(outputfile);
 }
 
-void MarsStation::GetInput(ifstream& Inputfile)
+void MarsStation::GetInput()
 {
 	UI_PTR->ReadInputFile(InputFile);
 }
 
-void MarsStation::GetOutput(ofstream& Outputfile)
+void MarsStation::GetOutput()
 {
 	UI_PTR->PrintinOutputFile(OutputFile);
 }
@@ -51,7 +51,13 @@ void MarsStation::AddFormulationEvent(char MissionType, int ED, int ID, int TLOC
 void MarsStation::AddPromotionEvent(int ED ,int ID)
 {
 	Promotion *P = new Promotion(ED ,ID);
+	P->setMaster(this);
 	events.enqueue(P);
+}
+
+void MarsStation::AddCanellationEvent(int ED, int ID)
+{
+	cancellation* C = new cancellation(ED, ID);
 }
 
 void MarsStation::AddPolarRover(int speed)
@@ -166,7 +172,62 @@ void MarsStation::Simulate()
 		failMission();// re-formulted Mission failed
 		ExecutionSim();//simulate Execution
 		AutoPromote();//Auto promotion
-		
+		UI_PTR->Interactive_Mode();
+	}
+}
+MarsStation::~MarsStation()
+{
+	delete UI_PTR;
+	Event* E;
+	while (events.dequeue(E))
+	{
+		delete E;
+	}
+	PolarRover* P;
+	while (PR.dequeue(P))
+	{
+		delete P;
+	}
+	MountainousRover* M;
+	while (MR.dequeue(M))
+	{
+		delete M;
+	}
+	EmergencyRover* Er;
+	while (ER.dequeue(Er))
+	{
+		delete Er;
+	}
+	Mission* cm;
+	while (CM.dequeue(cm))
+	{
+		delete cm;
+	}
+	Rover* r;
+	while (CheukUp.dequeue(r))
+	{
+		delete r;
+	}
+	Pair<Mission*, Rover*>p;
+	while (Execution.dequeue(p))
+	{
+		delete p.first;
+		delete p.second;
+	}
+	PolarMission* pm;
+	while (PM.dequeue(pm))
+	{
+		delete pm;
+	}
+	EmergencyMission* em;
+	while (EM.dequeue(em))
+	{
+		delete em;
+	}
+	MountainousMission* mm;
+	for (int i = 1; i <= MM.getLength(); i++)
+	{
+		delete MM.getEntry(i);
 	}
 }
 void MarsStation::setMaxDistance(int MaxDistance)
@@ -441,7 +502,7 @@ Pair<int, string> MarsStation::PrintWaitingMission()
 		}
 	}
 	string s3;
-	if (!MM.getLength())
+	if (MM.getLength())
 	{
 		s3 = "{";
 	}
@@ -644,6 +705,11 @@ Pair<int, string> MarsStation::PrintCheukUp()
 	return makepair<int, string>(num, s1 + " " + s2 + " " + s3);
 }
 
+int MarsStation::getDay()
+{
+	return CountDays;
+}
+
 void MarsStation::failMission()
 {
 	Pair<Mission*, Rover*> Ex;
@@ -681,7 +747,4 @@ void MarsStation::roverMaintance(Rover* r)
 		r->setMaintenance(1);
 	}
 
-}
-MarsStation::~MarsStation()
-{
 }

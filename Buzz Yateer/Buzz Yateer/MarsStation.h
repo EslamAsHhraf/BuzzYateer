@@ -49,10 +49,11 @@ public:
 	void setAutoPromotion(int AutoP);
 	void OpenInputFile(string inputfile);
 	void OpenOutputFile(string outputfile);
-	void GetInput(ifstream& Inputfile);
-	void GetOutput(ofstream& Outputfile);
+	void GetInput();
+	void GetOutput();
 	void AddFormulationEvent(char MissionType, int ED, int ID, int TLOC, int MDUR, int SIG);
 	void AddPromotionEvent(int ED ,int ID);
+	void AddCanellationEvent(int ED, int ID);
 	void AddPolarRover(int speed);
 	void AddEmergencyRover(int speed);
 	void AddMountainousRover(int speed);
@@ -75,7 +76,7 @@ public:
 	Pair<int, string>Printavailable();
 	Pair<int, string> PrintCompleted();
 	Pair<int, string> PrintCheukUp();
-
+	int getDay();
 
 };
 

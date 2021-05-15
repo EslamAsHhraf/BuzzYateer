@@ -15,6 +15,11 @@ int Promotion::getID()
 	return ID;
 }
 
+void Promotion::setMaster(MarsStation* MS)
+{
+	this->MS = MS;
+}
+
 void Promotion::Execute()
 {
 	MS->Promote(ID);

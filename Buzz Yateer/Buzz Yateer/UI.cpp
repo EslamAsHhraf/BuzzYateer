@@ -31,6 +31,7 @@ void UI::ReadInputFile(ifstream& InputFile)
 	int AutoP, MaxDistance;
 	InputFile >> AutoP >> MaxDistance;
 	Master->setMaxDistance(MaxDistance);
+	Master->setAutoPromotion(AutoP);
 	//For Promotion
 	while (!InputFile.eof())
 	{
@@ -51,7 +52,7 @@ void UI::ReadInputFile(ifstream& InputFile)
 			{
 				int ED, ID;
 				InputFile >> ED >> ID;
-				Master->CancelMission(ID);
+				Master->AddCancellation(ED, ID);
 			}
 			else if ((Event == 'P'))
 			{
@@ -65,10 +66,21 @@ void UI::ReadInputFile(ifstream& InputFile)
 
 void UI::PrintinOutputFile(ofstream& OutputFile)
 {
-
+	OutputFile << "END\n";
 }
 
 void UI::Interactive_Mode()
 {
-	Pair<int, string> p1 = Master->PrintWaitingMission();
+	cout << "Current Day: " << Master->getDay() << endl;
+	Pair<int, string>p = Master->PrintWaitingMission();
+	cout << p.first << " Waiting Missions: " << p.second << endl;
+	p = Master->PrintExecetion();
+	cout << p.first << " In-Execution Missions/Rovers: " << p.second << endl;
+	p = Master->Printavailable();
+	cout << p.first << " Available Rovers: " << p.second << endl;
+	p = Master->PrintCheukUp();
+	cout << p.first << " In-Checkup Rovers: " << p.second << endl;
+	p = Master->PrintCompleted();
+	cout << p.first << " Completed Missions: " << p.second << endl;
+	cout << "==========================================\n";
 }
