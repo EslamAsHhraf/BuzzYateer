@@ -1,7 +1,8 @@
 #pragma once
-#include"../Events/Event.h"
+#include "../Events/Event.h"
 #include "../Events/Formulation.h"
 #include "../Events/Promotion.h"
+#include"../Events/Cancellation.h"
 #include"../Rovers/PolarRover.h"
 #include"../Rovers/EmergencyRover.h"
 #include"../Rovers/MountainousRover.h"
@@ -13,9 +14,9 @@
 #include"../DS/priority_queue.h"
 #include"../DS/Queue.h"
 #include"../DS/Pair.h"
-#include"../Events/Cancellation.h"
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
+class Event;
 class UI;
 class MarsStation
 {
@@ -46,6 +47,9 @@ class MarsStation
 public:
 	MarsStation(string input, string output);
 	void setCheckUpData(int MCheckUp, int PCheckUp, int ECheckUp, int NMission2CheckUp);
+	void Add2MM(MountainousMission* M);
+	void Add2PM(PolarMission* P);
+	void Add2EM(EmergencyMission* E);
 	void setAutoPromotion(int AutoP);
 	void OpenInputFile(string inputfile);
 	void OpenOutputFile(string outputfile);
@@ -64,8 +68,8 @@ public:
 	void failMission();
 	void roverMaintance(Rover* r);
 	void Simulate();
-	~MarsStation();
 	void setMaxDistance(int MaxDistance);
+	void DailyEvent();
 	void CheukupSim();
 	void assigEM();
 	void assigPM();
@@ -77,6 +81,7 @@ public:
 	Pair<int, string> PrintCompleted();
 	Pair<int, string> PrintCheukUp();
 	int getDay();
+	~MarsStation();
 
 };
 

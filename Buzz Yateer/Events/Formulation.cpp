@@ -5,8 +5,9 @@
 #include"../Missions/MountainousMission.h"
 #include"../Missions/PolarMission.h"
 
-Formulation::Formulation(char MissionType, int ED) : missionType(MissionType), FormulatedMission(0), Event(ED)
+Formulation::Formulation(char MissionType, int ED) : missionType(MissionType), Event(ED)
 {
+	FormulatedMission = new Mission();
 }
 
 void Formulation::setmissionType(char x)
@@ -33,15 +34,20 @@ void Formulation::setFormulatedMission(int ED, int ID, int TLOC, int MDUR, int S
 	FormulatedMission->setID(ID);
 }
 
-void Formulation::Execute()
+void Formulation::Execute(MarsStation* Master)
 {
+	Mission* M = FormulatedMission;
 	if (missionType == 'M') {
-		FormulatedMission = new MountainousMission();
+		FormulatedMission = new MountainousMission(*(MountainousMission*)M);
+		Master->Add2MM(dynamic_cast<MountainousMission*>(FormulatedMission));
 	}
 	else if (missionType == 'P') {
-		FormulatedMission = new PolarMission();
+		FormulatedMission = new PolarMission(*(PolarMission*)M);
+		Master->Add2PM(dynamic_cast<PolarMission*>(FormulatedMission));
 	}
 	else if (missionType == 'E') {
-		FormulatedMission = new EmergencyMission();
+		FormulatedMission = new EmergencyMission(*(EmergencyMission*)(M));
+		Master->Add2EM(dynamic_cast<EmergencyMission*>(FormulatedMission));
 	}
+	delete M;
 }

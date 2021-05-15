@@ -1,5 +1,5 @@
 #include "MarsStation.h"
-
+#include <string>
 MarsStation::MarsStation(string input, string output) :CountDays(0), Enum(0), Pnum(0), Mnum(0), EventCount(0), InputFile(input), OutputFile(output)
 {
 	UI_PTR = new UI(this);
@@ -7,12 +7,31 @@ MarsStation::MarsStation(string input, string output) :CountDays(0), Enum(0), Pn
 	//OpenOutputFile(output);
 }
 
+
 void MarsStation::setCheckUpData(int MCheckUp, int PCheckUp, int ECheckUp, int NMission2CheckUp)
 {
 	this->MCheckUp = MCheckUp;
 	this->PCheckUp = PCheckUp;
 	this->ECheckUp = ECheckUp;
 	this->NMission2CheckUp = NMission2CheckUp;
+}
+
+void MarsStation::Add2MM(MountainousMission* M)
+{
+	MM.insert(MM.getLength() + 1, M);
+	Mnum++;
+}
+
+void MarsStation::Add2PM(PolarMission* P)
+{
+	PM.enqueue(P);
+	Pnum++;
+}
+
+void MarsStation::Add2EM(EmergencyMission* E)
+{
+	EM.enqueue(E, E->calcPriority());
+	Enum++;
 }
 
 void MarsStation::setAutoPromotion(int AutoP)
@@ -43,7 +62,6 @@ void MarsStation::GetOutput()
 void MarsStation::AddFormulationEvent(char MissionType, int ED, int ID, int TLOC, int MDUR, int SIG)
 {
 	Formulation* F = new Formulation(MissionType, ED);
-	F->Execute();
 	F->setFormulatedMission(ED, ID, TLOC, MDUR, SIG);
 	events.enqueue(F);
 }
@@ -51,13 +69,13 @@ void MarsStation::AddFormulationEvent(char MissionType, int ED, int ID, int TLOC
 void MarsStation::AddPromotionEvent(int ED ,int ID)
 {
 	Promotion *P = new Promotion(ED ,ID);
-	P->setMaster(this);
 	events.enqueue(P);
 }
 
 void MarsStation::AddCanellationEvent(int ED, int ID)
 {
 	cancellation* C = new cancellation(ED, ID);
+	events.enqueue(C);
 }
 
 void MarsStation::AddPolarRover(int speed)
@@ -128,42 +146,8 @@ void MarsStation::Simulate()
 {
 	while (!events.isEmpty() || !Execution.isEmpty() || !EM.isEmpty() || !PM.isEmpty() || !MM.isEmpty())
 	{
-		CountDays++;
-		// Read Events 
-		Event* Ev;
-		while(events.peek(Ev) && Ev->getEventDay() == CountDays)
-		{
-			events.dequeue(Ev);
-			if (dynamic_cast<Formulation*>(Ev))
-			{
-				Formulation* F = dynamic_cast<Formulation*>(Ev);
-				if (F->getmissiontype() == 'M') {
-					Mnum++;
-					MM.insert(MM.getLength() + 1, dynamic_cast<MountainousMission*>(F->getFormulatedMission()));
-				}
-				else if (F->getmissiontype() == 'P') {
-					Pnum++;
-					PM.enqueue(dynamic_cast<PolarMission*>(F->getFormulatedMission()));
-				}
-				else if (F->getmissiontype() == 'E') {
-					Enum++;
-					EmergencyMission* EMER = dynamic_cast<EmergencyMission*>(F->getFormulatedMission());
-					EM.enqueue(EMER, EMER->calcPriority());
-				}
-			}
-			else if (dynamic_cast<cancellation*>(Ev))
-			{
-				cancellation* C = dynamic_cast<cancellation*>(Ev);
-				int ID = C->getID();
-				CancelMission(ID);
-			}
-			else if (dynamic_cast<Promotion*>(Ev))
-			{
-				Promotion* C = dynamic_cast<Promotion*>(Ev);
-				int ID = C->getID();
-				Promote(ID);
-			}
-		}
+		CountDays++;// Read Events
+		DailyEvent();//making mission , cancel or promote 
 		CheukupSim();//Cheukup Simulate
 		/////// assign missions to rovers
 		ExecutionSim();//simulate Execution
@@ -233,6 +217,16 @@ MarsStation::~MarsStation()
 void MarsStation::setMaxDistance(int MaxDistance)
 {
 	this->MaxDistance = MaxDistance;
+}
+
+void MarsStation::DailyEvent()
+{
+	Event* Ev;
+	while (events.peek(Ev) && Ev->getEventDay() == CountDays)
+	{
+		events.dequeue(Ev);
+		Ev->Execute(this);
+	}
 }
 
 void MarsStation::CheukupSim()

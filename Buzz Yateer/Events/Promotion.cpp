@@ -2,7 +2,7 @@
 Promotion::Promotion(int ED, int id) :Event(ED)
 {
 	setId(id);
-	Execute();
+	//Execute();
 }
 
 void Promotion::setId(int id)
@@ -15,12 +15,7 @@ int Promotion::getID()
 	return ID;
 }
 
-void Promotion::setMaster(MarsStation* MS)
+void Promotion::Execute(MarsStation* Master)
 {
-	this->MS = MS;
-}
-
-void Promotion::Execute()
-{
-	MS->Promote(ID);
+	Master->Promote(ID);
 }

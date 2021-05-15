@@ -19,7 +19,7 @@ int cancellation::getID()
 	return ID;
 }
 
-void cancellation::Execute()
+void cancellation::Execute(MarsStation* Master)
 {
-
+	Master->CancelMission(ID);
 }
