@@ -166,11 +166,11 @@ void MarsStation::Simulate()
 		}
 		CheukupSim();//Cheukup Simulate
 		/////// assign missions to rovers
+		ExecutionSim();//simulate Execution
 		assigEM();//assign Emergncy Missions
 		assigPM();//assign Polar Missions
 		assigMM();//assign Mountainous Missions
 		failMission();// re-formulted Mission failed
-		ExecutionSim();//simulate Execution
 		AutoPromote();//Auto promotion
 		UI_PTR->Interactive_Mode();
 	}
@@ -330,6 +330,7 @@ void MarsStation::assigPM()
 		{
 			PolarRover * R;
 			PR.dequeue(R);
+			PM.dequeue(p);
 			duration = ceil(CountDays + p->getMDUR() + (p->getTargetLocation() / ((double)R->getSpeed())));
 			p->setExPeriod(duration);
 			if (p->getTargetLocation() > MaxDistance)
@@ -510,7 +511,7 @@ Pair<int, string> MarsStation::PrintWaitingMission()
 	for (int i = 1; i <= MM.getLength(); i++)
 	{
 		num++;
-		s3 += (MM.getEntry(i)->getID());
+		s3 += (to_string(MM.getEntry(i)->getID()));
 		s3.push_back(',');
 		if (MM.getLength())
 		{

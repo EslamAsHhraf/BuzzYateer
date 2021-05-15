@@ -52,7 +52,7 @@ void UI::ReadInputFile(ifstream& InputFile)
 			{
 				int ED, ID;
 				InputFile >> ED >> ID;
-				Master->AddCancellation(ED, ID);
+				Master->AddCancellation(ID, ED);
 			}
 			else if ((Event == 'P'))
 			{
