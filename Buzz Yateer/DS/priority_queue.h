@@ -27,7 +27,7 @@ public:
 	{
 		return (frontPtr == nullptr);
 	}
-	bool enqueue( T newEntry, int r_priorty)
+	bool enqueue( T newEntry, double r_priorty)
 	{
 
 		PriortyNode<T>* newNodePtr = new PriortyNode<T>(newEntry, r_priorty);

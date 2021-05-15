@@ -5,16 +5,16 @@ template < class T>
 class PriortyNode
 {
 private:
-	int priorty;
+	double priorty;
 	T item;
 	PriortyNode<T>* next;
 public:
 	PriortyNode();
-	PriortyNode( T  r_Item, int  r_priorty);
-	PriortyNode(const T & r_Item, int & r_priorty,PriortyNode<T>* nextNodePtr);
+	PriortyNode( T  r_Item, double  r_priorty);
+	PriortyNode(const T & r_Item, double  r_priorty,PriortyNode<T>* nextNodePtr);
 	void setItem(const T & r_Item);
 	void setPriorty(const T &r_priorty);
-	int getPriorty()const;
+	double getPriorty()const;
 	void setNext(PriortyNode<T>* nextNodePtr);
 	T getItem() const;
 	PriortyNode<T>* getNext() const;
@@ -28,7 +28,7 @@ PriortyNode<T>::PriortyNode()
 }
 
 template < class T>
-PriortyNode<T>::PriortyNode(const T  r_Item, int  r_priorty)
+PriortyNode<T>::PriortyNode(const T  r_Item, double  r_priorty)
 {
 	item = r_Item;
 	priorty = r_priorty;
@@ -36,7 +36,7 @@ PriortyNode<T>::PriortyNode(const T  r_Item, int  r_priorty)
 }
 
 template < class T>
-PriortyNode<T>::PriortyNode(const T& r_Item, int & r_priorty,PriortyNode<T>* nextNodePtr)
+PriortyNode<T>::PriortyNode(const T& r_Item, double  r_priorty,PriortyNode<T>* nextNodePtr)
 {
 	item = r_Item;
 	priorty = r_priorty;
@@ -65,7 +65,7 @@ T PriortyNode<T>::getItem() const
 }
 
 template < class T>
-int  PriortyNode<T>::getPriorty() const
+double  PriortyNode<T>::getPriorty() const
 {
 	return priorty;
 }

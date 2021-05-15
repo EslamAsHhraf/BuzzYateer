@@ -158,6 +158,7 @@ void MarsStation::Simulate()
 				Promote(ID);
 			}
 		}
+		CheukupSim();//Cheukup Simulate
 		/////// assign missions to rovers
 		assigEM();//assign Emergncy Missions
 		assigPM();//assign Polar Missions
@@ -165,7 +166,7 @@ void MarsStation::Simulate()
 		failMission();// re-formulted Mission failed
 		ExecutionSim();//simulate Execution
 		AutoPromote();//Auto promotion
-		CheukupSim();//Cheukup Simulate
+		
 	}
 }
 void MarsStation::setMaxDistance(int MaxDistance)
@@ -178,6 +179,7 @@ void MarsStation::CheukupSim()
 	Rover*R;
 	while (CheukUp.peek(R) && R->getCheukDuration() == CountDays)
 	{
+		CheukUp.dequeue(R);
 		if (dynamic_cast<MountainousRover*>(R)) {
 			MR.enqueue(dynamic_cast<MountainousRover*>(R), R->getSpeed());
 		}
@@ -362,6 +364,7 @@ void MarsStation::ExecutionSim()
 			if (E->getnoOfMissions() == NMission2CheckUp)
 			{
 				CheukUp.enqueue(E, -(CountDays + ECheckUp));
+				E->setCheukDuration(CountDays + ECheckUp);
 				E->resetnoOfMissions();
 			}
 			else
@@ -375,6 +378,7 @@ void MarsStation::ExecutionSim()
 			if (M->getnoOfMissions() == NMission2CheckUp)
 			{
 				CheukUp.enqueue(M, -(CountDays + MCheckUp));
+				M->setCheukDuration(CountDays + ECheckUp);
 				M->resetnoOfMissions();
 			}
 			else
@@ -388,6 +392,7 @@ void MarsStation::ExecutionSim()
 			if (p->getnoOfMissions() == NMission2CheckUp)
 			{
 				CheukUp.enqueue(p, -(CountDays + PCheckUp));
+				p->setCheukDuration(CountDays + ECheckUp);
 				p->resetnoOfMissions();
 			}
 			else
