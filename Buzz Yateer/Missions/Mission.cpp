@@ -6,10 +6,10 @@ Mission::Mission() :formulationDay(0), duration(0), significance(0), targetLocat
 
 Mission::Mission(int F, int D, int S, int TL, int id)
 {
-	setDuration(D);
 	setFormulationDay(F);
 	setSignificance(S);
 	setTargetLocation(TL);
+	setMDUR(D);
 	setID(id);
 }
 

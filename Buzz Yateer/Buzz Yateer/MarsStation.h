@@ -32,6 +32,7 @@ class MarsStation
 	Queue<Mission*>CM;
 	priority_Queue<Rover*>CheukUp;
 	priority_Queue<Pair<Mission*, Rover*>>Execution;
+	priority_Queue<Rover*>Maintenence;
 	int MCheckUp;
 	int PCheckUp;
 	int ECheckUp;
@@ -44,9 +45,15 @@ class MarsStation
 	int Pnum;
 	int EventCount;
 	int MaxDistance;
+	int nOfCheckUp2Maintenence;
+	int nOfdays2LeaveMaintenence;
+
 public:
 	MarsStation(string input, string output);
 	void setCheckUpData(int MCheckUp, int PCheckUp, int ECheckUp, int NMission2CheckUp);
+	void Add2Maintenence(Rover* R);
+	void RemoveFromMaintenence();
+	void setMaintenenceData(int nOfCheckUp2Maintenence, int nOfdays2LeaveMaintenence);
 	void Add2MM(MountainousMission* M);
 	void Add2PM(PolarMission* P);
 	void Add2EM(EmergencyMission* E);
@@ -80,6 +87,7 @@ public:
 	Pair<int, string>Printavailable();
 	Pair<int, string> PrintCompleted();
 	Pair<int, string> PrintCheukUp();
+	Pair<int, string> PrintMaintenece();
 	int getDay();
 	~MarsStation();
 

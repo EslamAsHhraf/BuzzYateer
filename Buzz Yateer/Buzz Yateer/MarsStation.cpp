@@ -1,6 +1,7 @@
 #include "MarsStation.h"
 #include <string>
 MarsStation::MarsStation(string input, string output) :CountDays(0), Enum(0), Pnum(0), Mnum(0), EventCount(0), InputFile(input), OutputFile(output)
+, nOfCheckUp2Maintenence(0), nOfdays2LeaveMaintenence(0)
 {
 	UI_PTR = new UI(this);
 	//OpenInputFile(input);
@@ -14,6 +15,46 @@ void MarsStation::setCheckUpData(int MCheckUp, int PCheckUp, int ECheckUp, int N
 	this->PCheckUp = PCheckUp;
 	this->ECheckUp = ECheckUp;
 	this->NMission2CheckUp = NMission2CheckUp;
+}
+
+void MarsStation::Add2Maintenence(Rover* R)
+{
+	if (R->getNoOfCheckUps() < nOfCheckUp2Maintenence)
+	{
+		return;
+	}
+	if (dynamic_cast<EmergencyRover*>(R))
+	{
+		ER.enqueue(dynamic_cast<EmergencyRover*>(R), INT_MIN + CountDays + nOfdays2LeaveMaintenence);
+	}
+	else if (dynamic_cast<MountainousRover*>(R))
+	{
+		MR.enqueue(dynamic_cast<MountainousRover*>(R), INT_MIN + CountDays + nOfdays2LeaveMaintenence);
+	}
+	else
+	{
+		PR.enqueue(dynamic_cast<PolarRover*>(R), INT_MIN + CountDays + nOfdays2LeaveMaintenence);
+	}
+	Maintenence.enqueue(R, CountDays + nOfdays2LeaveMaintenence);
+	R->setMaintenance(1);
+	R->setMaintenenceDuration(CountDays + nOfdays2LeaveMaintenence);
+	R->resetnoOfCheckUps();
+}
+
+void MarsStation::RemoveFromMaintenence()
+{
+	Rover* R;
+	while (Maintenence.peek(R) && R->getMaintenenceDuration() <= CountDays)
+	{
+		Maintenence.dequeue(R);
+		R->setMaintenance(0);
+	}
+}
+
+void MarsStation::setMaintenenceData(int nOfCheckUp2Maintenence, int nOfdays2LeaveMaintenence)
+{
+	this->nOfCheckUp2Maintenence = nOfCheckUp2Maintenence;
+	this->nOfdays2LeaveMaintenence = nOfdays2LeaveMaintenence;
 }
 
 void MarsStation::Add2MM(MountainousMission* M)
@@ -147,6 +188,7 @@ void MarsStation::Simulate()
 	while (!events.isEmpty() || !Execution.isEmpty() || !EM.isEmpty() || !PM.isEmpty() || !MM.isEmpty())
 	{
 		CountDays++;// Read Events
+		RemoveFromMaintenence();
 		DailyEvent();//making mission , cancel or promote 
 		CheukupSim();//Cheukup Simulate
 		/////// assign missions to rovers
@@ -262,7 +304,7 @@ void MarsStation::assigEM()
 			E->setExPeriod(duration);
 			if (E->getTargetLocation() > MaxDistance)
 			{
-				Execution.enqueue(makepair((Mission*)(E), (Rover*)(R)), INT_MAX + E->getTargetLocation() - MaxDistance);
+				Execution.enqueue(makepair((Mission*)(E), (Rover*)(R)), E->getTargetLocation() - MaxDistance);
 			}
 			else
 			{
@@ -280,7 +322,7 @@ void MarsStation::assigEM()
 			E->setExPeriod(duration);
 			if (E->getTargetLocation() > MaxDistance)
 			{
-				Execution.enqueue(makepair((Mission*)(E), (Rover*)(R)), INT_MAX + E->getTargetLocation() - MaxDistance);
+				Execution.enqueue(makepair((Mission*)(E), (Rover*)(R)), E->getTargetLocation() - MaxDistance);
 			}
 			else
 			{
@@ -298,7 +340,7 @@ void MarsStation::assigEM()
 			E->setExPeriod(duration);
 			if (E->getTargetLocation() > MaxDistance)
 			{
-				Execution.enqueue(makepair((Mission*)(E), (Rover*)(R)), INT_MAX + E->getTargetLocation() - MaxDistance);
+				Execution.enqueue(makepair((Mission*)(E), (Rover*)(R)), E->getTargetLocation() - MaxDistance);
 			}
 			else
 			{
@@ -414,6 +456,7 @@ void MarsStation::ExecutionSim()
 			CM.enqueue(dynamic_cast<PolarMission*>(Ex.first));
 		}
 		// re-formulated Rovers
+		Add2Maintenence(Ex.second);
 		if (dynamic_cast<EmergencyRover*>(Ex.second))
 		{
 			EmergencyRover*E = dynamic_cast<EmergencyRover*>(Ex.second);
@@ -422,6 +465,7 @@ void MarsStation::ExecutionSim()
 				CheukUp.enqueue(E, -(CountDays + ECheckUp));
 				E->setCheukDuration(CountDays + ECheckUp);
 				E->resetnoOfMissions();
+				E->NoOfCheckUpsIncrement();
 			}
 			else
 			{
@@ -436,6 +480,7 @@ void MarsStation::ExecutionSim()
 				CheukUp.enqueue(M, -(CountDays + MCheckUp));
 				M->setCheukDuration(CountDays + ECheckUp);
 				M->resetnoOfMissions();
+				M->NoOfCheckUpsIncrement();
 			}
 			else
 			{
@@ -450,6 +495,7 @@ void MarsStation::ExecutionSim()
 				CheukUp.enqueue(p, -(CountDays + PCheckUp));
 				p->setCheukDuration(CountDays + ECheckUp);
 				p->resetnoOfMissions();
+				p->NoOfCheckUpsIncrement();
 			}
 			else
 			{
@@ -700,6 +746,52 @@ Pair<int, string> MarsStation::PrintCheukUp()
 	return makepair<int, string>(num, s1 + " " + s2 + " " + s3);
 }
 
+Pair<int, string> MarsStation::PrintMaintenece()
+{
+	priority_Queue<Rover*>Maintenencet = Maintenence;
+	int num = 0;
+	Rover* R;
+	string s1 = "[";
+	string s2 = "(";
+	string s3 = "{";
+	while (Maintenencet.dequeue(R))
+	{
+		num++;
+		if (dynamic_cast<EmergencyRover*>(R))
+		{
+			s1 += to_string(R->getID());
+			s1.push_back(',');
+
+		}
+		else if (dynamic_cast<PolarRover*>(R))
+		{
+			s2 += to_string(R->getID());
+			s2.push_back(',');
+		}
+		else if (dynamic_cast<MountainousRover*>(R))
+		{
+			s3 += to_string(R->getID());
+			s3.push_back(',');
+		}
+	}
+	s1[s1.size() - 1] = ']';
+	s2[s2.size() - 1] = ')';
+	s3[s3.size() - 1] = '}';
+	if (s1.size() <= 2)
+	{
+		s1 = "";
+	}
+	if (s2.size() <= 2)
+	{
+		s2 = "";
+	}
+	if (s3.size() <= 2)
+	{
+		s3 = "";
+	}
+	return makepair<int, string>(num, s1 + " " + s2 + " " + s3);
+}
+
 int MarsStation::getDay()
 {
 	return CountDays;
@@ -720,6 +812,7 @@ void MarsStation::failMission()
 		else if (dynamic_cast<EmergencyRover*>(Ex.second)) {
 			CheukUp.enqueue(Ex.second, -(CountDays + ECheckUp));
 		}
+		Ex.second->resetnoOfMissions();
 
 		Ex.first->setFormulationDay(CountDays);
 		if (dynamic_cast<MountainousMission*>(Ex.first)) {
