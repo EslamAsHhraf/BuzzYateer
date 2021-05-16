@@ -121,8 +121,10 @@ void MarsStation::Promote(int ID)
 		if (MM.getEntry(i)->getID() == ID)
 		{
 			MountainousMission *temp = MM.getEntry(i);
-			EM.enqueue(new EmergencyMission(temp->getFormulationDay() ,temp->getDuration() ,temp->getSignificance() ,temp->getTargetLocation() ,temp->getID()) ,0);
+			EmergencyMission *EMEr = new EmergencyMission(temp->getFormulationDay(), temp->getMDUR(), temp->getSignificance(), temp->getTargetLocation(), temp->getID());
+			EM.enqueue(EMEr, EMEr->calcPriority());
 			MM.remove(i);
+			break;
 		}
 	}
 }
@@ -134,7 +136,8 @@ void MarsStation::AutoPromote()
 			if (MM.getEntry(j)->getFormulationDay() + AutoP == CountDays)
 			{
 				MountainousMission* temp = MM.getEntry(j);
-				EM.enqueue(new EmergencyMission(temp->getFormulationDay(), temp->getDuration(), temp->getSignificance(), temp->getTargetLocation(), temp->getID()), 0);
+				EmergencyMission *EMEr = new EmergencyMission(temp->getFormulationDay(), temp->getMDUR(), temp->getSignificance(), temp->getTargetLocation(), temp->getID());
+				EM.enqueue(EMEr, EMEr->calcPriority());
 				MM.remove(j);
 				j--;
 			}
@@ -147,10 +150,10 @@ void MarsStation::Simulate()
 	while (!events.isEmpty() || !Execution.isEmpty() || !EM.isEmpty() || !PM.isEmpty() || !MM.isEmpty())
 	{
 		CountDays++;// Read Events
-		DailyEvent();//making mission , cancel or promote 
+		DailyEvent();//making mission , cancel or promote
+		ExecutionSim();//simulate Execution
 		CheukupSim();//Cheukup Simulate
 		/////// assign missions to rovers
-		ExecutionSim();//simulate Execution
 		assigEM();//assign Emergncy Missions
 		assigPM();//assign Polar Missions
 		assigMM();//assign Mountainous Missions
@@ -434,7 +437,7 @@ void MarsStation::ExecutionSim()
 			if (M->getnoOfMissions() == NMission2CheckUp)
 			{
 				CheukUp.enqueue(M, -(CountDays + MCheckUp));
-				M->setCheukDuration(CountDays + ECheckUp);
+				M->setCheukDuration(CountDays + MCheckUp);
 				M->resetnoOfMissions();
 			}
 			else
@@ -448,7 +451,7 @@ void MarsStation::ExecutionSim()
 			if (p->getnoOfMissions() == NMission2CheckUp)
 			{
 				CheukUp.enqueue(p, -(CountDays + PCheckUp));
-				p->setCheukDuration(CountDays + ECheckUp);
+				p->setCheukDuration(CountDays + PCheckUp);
 				p->resetnoOfMissions();
 			}
 			else
