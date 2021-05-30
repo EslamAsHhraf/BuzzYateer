@@ -6,6 +6,7 @@ Mission::Mission() :formulationDay(0), duration(0), significance(0), targetLocat
 
 Mission::Mission(int F, int D, int S, int TL, int id)
 {
+	setPromoted(false);
 	setFormulationDay(F);
 	setSignificance(S);
 	setTargetLocation(TL);
@@ -36,6 +37,16 @@ void Mission::setTargetLocation(int TL)
 void Mission::setID(int id)
 {
 	ID = id;
+}
+
+void Mission::setPromoted(bool P)
+{
+	Promoted = P;
+}
+
+bool Mission::getPromoted()
+{
+	return Promoted;
 }
 
 void Mission::setCD(int cd)

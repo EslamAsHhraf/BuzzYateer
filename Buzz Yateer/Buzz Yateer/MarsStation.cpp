@@ -107,9 +107,9 @@ void MarsStation::AddFormulationEvent(char MissionType, int ED, int ID, int TLOC
 	events.enqueue(F);
 }
 
-void MarsStation::AddPromotionEvent(int ED ,int ID)
+void MarsStation::AddPromotionEvent(int ED, int ID)
 {
-	Promotion *P = new Promotion(ED ,ID);
+	Promotion* P = new Promotion(ED, ID);
 	events.enqueue(P);
 }
 
@@ -126,7 +126,7 @@ void MarsStation::AddPolarRover(int speed)
 
 void MarsStation::AddEmergencyRover(int speed)
 {
-	ER.enqueue(new EmergencyRover(speed),speed);
+	ER.enqueue(new EmergencyRover(speed), speed);
 }
 
 void MarsStation::AddMountainousRover(int speed)
@@ -161,8 +161,10 @@ void MarsStation::Promote(int ID)
 	{
 		if (MM.getEntry(i)->getID() == ID)
 		{
-			MountainousMission *temp = MM.getEntry(i);
-			EmergencyMission *EMEr = new EmergencyMission(temp->getFormulationDay(), temp->getMDUR(), temp->getSignificance(), temp->getTargetLocation(), temp->getID());
+			MountainousMission* temp = MM.getEntry(i);
+
+			EmergencyMission* EMEr = new EmergencyMission(temp->getFormulationDay(), temp->getMDUR(), temp->getSignificance(), temp->getTargetLocation(), temp->getID());
+			//EMEr->setPromoted(true);
 			EM.enqueue(EMEr, EMEr->calcPriority());
 			MM.remove(i);
 			break;
@@ -172,17 +174,37 @@ void MarsStation::Promote(int ID)
 
 void MarsStation::AutoPromote()
 {
-		for (int j = 1; j <= MM.getLength(); j++)
+	for (int j = 1; j <= MM.getLength(); j++)
+	{
+		if (MM.getEntry(j)->getFormulationDay() + AutoP == CountDays)
 		{
-			if (MM.getEntry(j)->getFormulationDay() + AutoP == CountDays)
-			{
-				MountainousMission* temp = MM.getEntry(j);
-				EmergencyMission *EMEr = new EmergencyMission(temp->getFormulationDay(), temp->getMDUR(), temp->getSignificance(), temp->getTargetLocation(), temp->getID());
-				EM.enqueue(EMEr, EMEr->calcPriority());
-				MM.remove(j);
-				j--;
-			}
+			MountainousMission* temp = MM.getEntry(j);
+			EmergencyMission* EMEr = new EmergencyMission(temp->getFormulationDay(), temp->getMDUR(), temp->getSignificance(), temp->getTargetLocation(), temp->getID());
+			EMEr->setPromoted(1);
+			EM.enqueue(EMEr, EMEr->calcPriority());
+			MM.remove(j);
+			j--;
 		}
+	}
+}
+
+int MarsStation::CountRovers(int& Er, int& Mr, int& Pr)
+{
+	MountainousRover* M;
+	PolarRover* P;
+	EmergencyRover* E;
+	while (ER.dequeue(E)) {
+		Er++;
+	}
+	while (PR.dequeue(P)) {
+		Pr++;
+	}
+	while (MR.dequeue(M)) {
+		Mr++;
+	}
+	
+
+	return Er + Mr + Pr;
 }
 
 
@@ -277,7 +299,7 @@ void MarsStation::DailyEvent()
 
 void MarsStation::CheukupSim()
 {
-	Rover*R;
+	Rover* R;
 	while (CheukUp.peek(R) && R->getCheukDuration() == CountDays)
 	{
 		CheukUp.dequeue(R);
@@ -302,7 +324,7 @@ void MarsStation::assigEM()
 		if (!ER.isEmpty())
 		{
 			EM.dequeue(E);
-			EmergencyRover * R;
+			EmergencyRover* R;
 			ER.dequeue(R);
 			E->setAssignmentDay(CountDays);
 			duration = ceil(CountDays + E->getMDUR() + E->getTargetLocation() / ((double)R->getSpeed()));
@@ -321,7 +343,7 @@ void MarsStation::assigEM()
 		else if (!MR.isEmpty())
 		{
 			EM.dequeue(E);
-			MountainousRover * R;
+			MountainousRover* R;
 			MR.dequeue(R);
 			E->setAssignmentDay(CountDays);
 			duration = ceil(CountDays + E->getMDUR() + (E->getTargetLocation() / ((double)R->getSpeed())));
@@ -340,7 +362,7 @@ void MarsStation::assigEM()
 		else if (!PR.isEmpty())
 		{
 			EM.dequeue(E);
-			PolarRover * R;
+			PolarRover* R;
 			PR.dequeue(R);
 			E->setAssignmentDay(CountDays);
 			duration = ceil(CountDays + E->getMDUR() + (E->getTargetLocation() / ((double)R->getSpeed())));
@@ -371,7 +393,7 @@ void MarsStation::assigPM()
 		double duration;
 		if (!PR.isEmpty())
 		{
-			PolarRover * R;
+			PolarRover* R;
 			PR.dequeue(R);
 			PM.dequeue(p);
 			p->setAssignmentDay(CountDays);
@@ -405,7 +427,7 @@ void MarsStation::assigMM()
 		if (!MR.isEmpty())
 		{
 			MM.remove(1);
-			MountainousRover * R;
+			MountainousRover* R;
 			MR.dequeue(R);
 			m->setAssignmentDay(CountDays);
 			duration = ceil(CountDays + m->getMDUR() + (m->getTargetLocation() / ((double)R->getSpeed())));
@@ -424,7 +446,7 @@ void MarsStation::assigMM()
 		else if (!ER.isEmpty())
 		{
 			MM.remove(1);
-			EmergencyRover * R;
+			EmergencyRover* R;
 			ER.dequeue(R);
 			m->setAssignmentDay(CountDays);
 			duration = ceil(CountDays + m->getMDUR() + m->getTargetLocation() / ((double)R->getSpeed()));
@@ -472,7 +494,7 @@ void MarsStation::ExecutionSim()
 		Add2Maintenence(Ex.second);
 		if (dynamic_cast<EmergencyRover*>(Ex.second))
 		{
-			EmergencyRover*E = dynamic_cast<EmergencyRover*>(Ex.second);
+			EmergencyRover* E = dynamic_cast<EmergencyRover*>(Ex.second);
 			if (E->getnoOfMissions() == NMission2CheckUp)
 			{
 				CheukUp.enqueue(E, -(CountDays + ECheckUp));
@@ -487,7 +509,7 @@ void MarsStation::ExecutionSim()
 		}
 		else if (dynamic_cast<MountainousRover*>(Ex.second))
 		{
-			MountainousRover*M = dynamic_cast<MountainousRover*>(Ex.second);
+			MountainousRover* M = dynamic_cast<MountainousRover*>(Ex.second);
 			if (M->getnoOfMissions() == NMission2CheckUp)
 			{
 				CheukUp.enqueue(M, -(CountDays + MCheckUp));
@@ -677,7 +699,7 @@ Pair<int, string> MarsStation::PrintCompleted()
 	string s1 = "[";
 	string s2 = "(";
 	string s3 = "{";
-	Mission*E;
+	Mission* E;
 	while (CMt.dequeue(E))
 	{
 		num++;
@@ -805,22 +827,48 @@ Pair<int, string> MarsStation::PrintMaintenece()
 	return makepair<int, string>(num, s1 + " " + s2 + " " + s3);
 }
 
-void MarsStation::PrintCompletedInfo(int &CD, int &ID, int &FD, int &ED, int &WD)
+void MarsStation::PrintCompletedInfo(int& CD, int& ID, int& FD, int& ED, int& WD, int& em, int& pm, int& mm, double& Ap)
 {
+	//pm = mm = em = 0;
 	Mission* entry;
-	for (int i = 0; i < CM.GetLength(); i++)
-	{
-		CM.dequeue(entry);
-		ID = entry->getID();
-		FD = entry->getFormulationDay();
-		ED = entry->getExPeriod();
 
+	CM.dequeue(entry);
+	if (entry->getPromoted()) {
+		Ap++;
 	}
+
+	if (dynamic_cast<EmergencyMission*>(entry)) {
+		em++;
+	}
+	else if (dynamic_cast<MountainousMission*>(entry)) {
+		mm++;
+	}
+	else if (dynamic_cast<PolarMission*>(entry)) {
+		pm++;
+	}
+
+	CD = entry->getCD();
+	ID = entry->getID();
+	FD = entry->getFormulationDay();
+	ED = entry->getExPeriod();
+	WD = entry->getWaitingDays();
+
 }
 
 int MarsStation::getDay()
 {
 	return CountDays;
+}
+
+
+
+
+
+int MarsStation::getCompletedLength()
+{
+
+	//return CM.GetLength();
+	return CM.GetLength();
 }
 
 void MarsStation::failMission()

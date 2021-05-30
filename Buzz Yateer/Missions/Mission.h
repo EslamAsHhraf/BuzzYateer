@@ -5,6 +5,7 @@ private:
 	int formulationDay, duration, completionDay, waitingDays;
 	int significance, targetLocation;
 	int ID;
+	bool Promoted;
 	int MDUR;
 	int assignmentDay;
 	double ExPeriod;
@@ -16,6 +17,8 @@ public:
 	void setSignificance(int S);
 	void setTargetLocation(int TL);
 	void setID(int id);
+	void setPromoted(bool P);
+	bool getPromoted();
 	void setCD(int cd);
 	void setWaitingDays(int wd);
 	void setAssignmentDay(int ad);

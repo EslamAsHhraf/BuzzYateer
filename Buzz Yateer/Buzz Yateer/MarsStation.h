@@ -50,6 +50,7 @@ class MarsStation
 
 public:
 	MarsStation(string input, string output);
+
 	void setCheckUpData(int MCheckUp, int PCheckUp, int ECheckUp, int NMission2CheckUp);
 	void Add2Maintenence(Rover* R);
 	void RemoveFromMaintenence();
@@ -72,6 +73,7 @@ public:
 	void AddCancellation(int ID, int ED);
 	void Promote(int ID);
 	void AutoPromote();
+	int CountRovers(int& Er, int& Mr, int& Pr);
 	void failMission();
 	void roverMaintance(Rover* r);
 	void Simulate();
@@ -88,8 +90,9 @@ public:
 	Pair<int, string> PrintCompleted();
 	Pair<int, string> PrintCheukUp();
 	Pair<int, string> PrintMaintenece();
-	void PrintCompletedInfo(int& CD, int& ID, int& FD, int& ED, int& WD);
+	void PrintCompletedInfo(int& CD, int& ID, int& FD, int& ED, int& WD, int& em, int& pm, int& mm, double&Ap);
 	int getDay();
+	int getCompletedLength();
 	~MarsStation();
 
 };

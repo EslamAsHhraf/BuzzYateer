@@ -1,7 +1,8 @@
 #include "UI.h"
 #include"../Events/Event.h"
 #include"../Events/Formulation.h"
-UI::UI(MarsStation* Master):Master(Master)
+#include <iostream>
+UI::UI(MarsStation* Master) :Master(Master)
 {
 }
 
@@ -38,7 +39,7 @@ void UI::ReadInputFile(ifstream& InputFile)
 	//For Promotion
 	while (!InputFile.eof())
 	{
-		
+
 		while (NumberOfEvents--)
 		{
 			char Event;
@@ -68,7 +69,31 @@ void UI::ReadInputFile(ifstream& InputFile)
 
 void UI::PrintinOutputFile(ofstream& OutputFile)
 {
-	OutputFile << "END\n";
+	double Ap = 0;
+	double SumWait = 0, SumExec = 0;
+	int CD, ID, FD, WD, ED, Mm, Em, Pm, TotalMission, Er = 0, Mr = 0, Pr = 0, TotalRover;
+	Pm = Mm = Em = 0;
+	TotalMission = Master->getCompletedLength();
+	OutputFile << "CD" << " " << "ID" << " " << "FD" << " " << "WD" << " " << "ED" << " " << endl;
+	for (int i = 0; i < TotalMission; i++)
+	{
+		Master->PrintCompletedInfo(CD, ID, FD, ED, WD, Em, Pm, Mm, Ap);
+		SumWait += WD;
+		SumExec += ED;
+		OutputFile << CD << "  " << ID << "  " << FD << "  " << WD << "  " << ED << " " << endl;
+
+	}
+	TotalRover = Master->CountRovers(Er, Mr, Pr);
+	OutputFile << endl;
+	OutputFile << ".....................\n";
+	OutputFile << endl;
+	OutputFile << ".....................\n";
+	OutputFile << "Missions: " << TotalMission << "[" << "M: " << Mm << "," << "P: " << Pm << "," << "E: " << Em << "]" << endl;
+	OutputFile << "Rovers: " << TotalRover << "[" << "M: " << Mr << "," << "P: " << Pr << "," << "E: " << Er << "]" << endl;
+	OutputFile << "Avg Wait = " << SumWait / TotalMission << ", " << "Avg Exec = " << SumExec / TotalMission << "\n";
+	OutputFile << "Auto-promoted: " << (Ap / TotalMission) * 100;
+
+	OutputFile.close();
 }
 
 void UI::Interactive_Mode()
