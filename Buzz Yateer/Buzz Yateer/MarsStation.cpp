@@ -87,7 +87,7 @@ void MarsStation::OpenInputFile(string inputfile)
 
 void MarsStation::OpenOutputFile(string outputfile)
 {
-	InputFile.open(outputfile);
+	OutputFile.open(outputfile);
 }
 
 void MarsStation::GetInput()
@@ -304,6 +304,7 @@ void MarsStation::assigEM()
 			EM.dequeue(E);
 			EmergencyRover * R;
 			ER.dequeue(R);
+			E->setAssignmentDay(CountDays);
 			duration = ceil(CountDays + E->getMDUR() + E->getTargetLocation() / ((double)R->getSpeed()));
 			E->setExPeriod(duration);
 			if (E->getTargetLocation() > MaxDistance)
@@ -322,6 +323,7 @@ void MarsStation::assigEM()
 			EM.dequeue(E);
 			MountainousRover * R;
 			MR.dequeue(R);
+			E->setAssignmentDay(CountDays);
 			duration = ceil(CountDays + E->getMDUR() + (E->getTargetLocation() / ((double)R->getSpeed())));
 			E->setExPeriod(duration);
 			if (E->getTargetLocation() > MaxDistance)
@@ -340,6 +342,7 @@ void MarsStation::assigEM()
 			EM.dequeue(E);
 			PolarRover * R;
 			PR.dequeue(R);
+			E->setAssignmentDay(CountDays);
 			duration = ceil(CountDays + E->getMDUR() + (E->getTargetLocation() / ((double)R->getSpeed())));
 			E->setExPeriod(duration);
 			if (E->getTargetLocation() > MaxDistance)
@@ -371,6 +374,7 @@ void MarsStation::assigPM()
 			PolarRover * R;
 			PR.dequeue(R);
 			PM.dequeue(p);
+			p->setAssignmentDay(CountDays);
 			duration = ceil(CountDays + p->getMDUR() + (p->getTargetLocation() / ((double)R->getSpeed())));
 			p->setExPeriod(duration);
 			if (p->getTargetLocation() > MaxDistance)
@@ -403,6 +407,7 @@ void MarsStation::assigMM()
 			MM.remove(1);
 			MountainousRover * R;
 			MR.dequeue(R);
+			m->setAssignmentDay(CountDays);
 			duration = ceil(CountDays + m->getMDUR() + (m->getTargetLocation() / ((double)R->getSpeed())));
 			m->setExPeriod(duration);
 			if (m->getTargetLocation() > MaxDistance)
@@ -421,6 +426,7 @@ void MarsStation::assigMM()
 			MM.remove(1);
 			EmergencyRover * R;
 			ER.dequeue(R);
+			m->setAssignmentDay(CountDays);
 			duration = ceil(CountDays + m->getMDUR() + m->getTargetLocation() / ((double)R->getSpeed()));
 			m->setExPeriod(duration);
 			if (m->getTargetLocation() > MaxDistance)
@@ -450,14 +456,17 @@ void MarsStation::ExecutionSim()
 		if (dynamic_cast<EmergencyMission*>(Ex.first))
 		{
 			CM.enqueue(dynamic_cast<EmergencyMission*>(Ex.first));
+			Ex.first->setCD(CountDays);
 		}
 		else if (dynamic_cast<MountainousMission*>(Ex.first))
 		{
 			CM.enqueue(dynamic_cast<MountainousMission*>(Ex.first));
+			Ex.first->setCD(CountDays);
 		}
 		else if (dynamic_cast<PolarMission*>(Ex.first))
 		{
 			CM.enqueue(dynamic_cast<PolarMission*>(Ex.first));
+			Ex.first->setCD(CountDays);
 		}
 		// re-formulated Rovers
 		Add2Maintenence(Ex.second);
@@ -794,6 +803,19 @@ Pair<int, string> MarsStation::PrintMaintenece()
 		s3 = "";
 	}
 	return makepair<int, string>(num, s1 + " " + s2 + " " + s3);
+}
+
+void MarsStation::PrintCompletedInfo(int &CD, int &ID, int &FD, int &ED, int &WD)
+{
+	Mission* entry;
+	for (int i = 0; i < CM.GetLength(); i++)
+	{
+		CM.dequeue(entry);
+		ID = entry->getID();
+		FD = entry->getFormulationDay();
+		ED = entry->getExPeriod();
+
+	}
 }
 
 int MarsStation::getDay()

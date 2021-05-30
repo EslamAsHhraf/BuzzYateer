@@ -1,6 +1,6 @@
 #include "Mission.h"
 
-Mission::Mission() :formulationDay(0), duration(0), significance(0), targetLocation(0), ID(0), MDUR(0)
+Mission::Mission() :formulationDay(0), duration(0), significance(0), targetLocation(0), ID(0), MDUR(0), completionDay(0), assignmentDay(0)
 {
 }
 
@@ -38,6 +38,21 @@ void Mission::setID(int id)
 	ID = id;
 }
 
+void Mission::setCD(int cd)
+{
+	completionDay = cd;
+}
+
+void Mission::setWaitingDays(int wd)
+{
+	waitingDays = wd;
+}
+
+void Mission::setAssignmentDay(int ad)
+{
+	assignmentDay = ad;
+}
+
 int Mission::getFormulationDay() const
 {
 	return formulationDay;
@@ -61,6 +76,21 @@ int Mission::getTargetLocation() const
 int Mission::getID() const
 {
 	return ID;
+}
+
+int Mission::getCD() const
+{
+	return completionDay;
+}
+
+int Mission::getAssignmentDay()
+{
+	return assignmentDay;
+}
+
+int Mission::getWaitingDays()
+{
+	return getAssignmentDay() - getFormulationDay();
 }
 
 void Mission::setMDUR(int MDUR)

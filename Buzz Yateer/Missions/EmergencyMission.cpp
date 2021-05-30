@@ -4,7 +4,7 @@ EmergencyMission::EmergencyMission()
 {
 }
 
-EmergencyMission::EmergencyMission(int F ,int D ,int S ,int TL ,int id )
+EmergencyMission::EmergencyMission(int F, int D, int S, int TL, int id)
 	:Mission(F ,D ,S ,TL ,id)
 {
 	

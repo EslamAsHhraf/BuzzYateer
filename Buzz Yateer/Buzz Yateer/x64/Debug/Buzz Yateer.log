@@ -1,1 +1,15 @@
-﻿  Buzz Yateer.vcxproj -> D:\CMP\CMP2\DataStructure\project\ProjectFiles\BuzzYateer\Buzz Yateer\x64\Debug\Buzz Yateer.exe
+﻿  Cancellation.cpp
+  Formulation.cpp
+  Promotion.cpp
+  EmergencyMission.cpp
+  Mission.cpp
+  MountainousMission.cpp
+  PolarMission.cpp
+  MarsStation.cpp
+F:\Buzz Yateer\BuzzYateer\Buzz Yateer\Buzz Yateer\MarsStation.cpp(257,22): warning C4101: 'mm': unreferenced local variable
+F:\Buzz Yateer\BuzzYateer\Buzz Yateer\Buzz Yateer\MarsStation.cpp(816,26): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+  Source.cpp
+  UI.cpp
+  Generating Code...
+F:\Buzz Yateer\BuzzYateer\Buzz Yateer\DS\LinkedList.h(65): warning C4172: returning address of local variable or temporary
+  Buzz Yateer.vcxproj -> F:\Buzz Yateer\BuzzYateer\Buzz Yateer\x64\Debug\Buzz Yateer.exe

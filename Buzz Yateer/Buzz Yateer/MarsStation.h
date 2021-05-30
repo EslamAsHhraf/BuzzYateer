@@ -88,6 +88,7 @@ public:
 	Pair<int, string> PrintCompleted();
 	Pair<int, string> PrintCheukUp();
 	Pair<int, string> PrintMaintenece();
+	void PrintCompletedInfo(int& CD, int& ID, int& FD, int& ED, int& WD);
 	int getDay();
 	~MarsStation();
 

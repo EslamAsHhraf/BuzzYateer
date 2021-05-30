@@ -33,11 +33,12 @@ void UI::ReadInputFile(ifstream& InputFile)
 	Master->setMaxDistance(MaxDistance);
 	Master->setAutoPromotion(AutoP);
 	Master->setMaintenenceData(nOfCheckUp2Maintenence, nOfdays2LeaveMaintenence);
+	int NumberOfEvents = 0;
+	InputFile >> NumberOfEvents;
 	//For Promotion
 	while (!InputFile.eof())
 	{
-		int NumberOfEvents = 0;
-		InputFile >> NumberOfEvents;
+		
 		while (NumberOfEvents--)
 		{
 			char Event;
