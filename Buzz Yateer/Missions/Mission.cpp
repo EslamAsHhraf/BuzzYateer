@@ -1,10 +1,10 @@
 #include "Mission.h"
 
-Mission::Mission() :formulationDay(0), duration(0), significance(0), targetLocation(0), ID(0), MDUR(0), completionDay(0), assignmentDay(0)
+Mission::Mission() :formulationDay(0), duration(0), significance(0), targetLocation(0), ID(0), MDUR(0), completionDay(0), assignmentDay(0), XFailed(0)
 {
 }
 
-Mission::Mission(int F, int D, int S, int TL, int id)
+Mission::Mission(int F, int D, int S, int TL, int id) : XFailed(0)
 {
 	setPromoted(false);
 	setFormulationDay(F);
@@ -12,6 +12,16 @@ Mission::Mission(int F, int D, int S, int TL, int id)
 	setTargetLocation(TL);
 	setMDUR(D);
 	setID(id);
+}
+
+void Mission::setXFailed(bool XF)
+{
+	XFailed = XF;
+}
+
+bool Mission::getXFailed()
+{
+	return XFailed;
 }
 
 void Mission::setFormulationDay(int fDay)

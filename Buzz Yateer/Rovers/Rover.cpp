@@ -20,6 +20,7 @@ void Rover::resetnoOfMissions()
 void Rover::resetnoOfCheckUps()
 {
 	NoOfCheckUps = 0;
+	resetnoOfMissions();
 }
 
 void Rover::NoOfCheckUpsIncrement()

@@ -45,13 +45,12 @@ class MarsStation
 	int Enum;
 	int Pnum;
 	int EventCount;
-	int MaxDistance;
+	int MaxPeriod;
 	int nOfCheckUp2Maintenence;
 	int nOfdays2LeaveMaintenence;
-
+	string FailedMissions;
 public:
 	MarsStation(string input, string output);
-
 	void setCheckUpData(int MCheckUp, int PCheckUp, int ECheckUp, int NMission2CheckUp);
 	void Add2Maintenence(Rover* R);
 	void RemoveFromMaintenence();
@@ -78,7 +77,7 @@ public:
 	void failMission();
 	void roverMaintance(Rover* r);
 	void Simulate();
-	void setMaxDistance(int MaxDistance);
+	void setMaxPeriod(int MaxPeriod);
 	void DailyEvent();
 	void CheukupSim();
 	void assigEM();
@@ -96,6 +95,8 @@ public:
 	int getCompletedLength();
 	int Choose_Mode();
 	void Set_Mode(int x);
+	string FailedMissionsPrint();
+	void resetFailedMission();
 	~MarsStation();
 
 };

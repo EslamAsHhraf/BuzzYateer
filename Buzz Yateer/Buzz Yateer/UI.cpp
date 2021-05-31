@@ -29,9 +29,9 @@ void UI::ReadInputFile(ifstream& InputFile)
 		InputFile >> ES;
 		Master->AddEmergencyRover(ES);
 	}
-	int AutoP, MaxDistance, nOfCheckUp2Maintenence, nOfdays2LeaveMaintenence;
-	InputFile >> AutoP >> MaxDistance >> nOfCheckUp2Maintenence >> nOfdays2LeaveMaintenence;
-	Master->setMaxDistance(MaxDistance);
+	int AutoP, MaxPeriod, nOfCheckUp2Maintenence, nOfdays2LeaveMaintenence;
+	InputFile >> AutoP >> MaxPeriod >> nOfCheckUp2Maintenence >> nOfdays2LeaveMaintenence;
+	Master->setMaxPeriod(MaxPeriod);
 	Master->setAutoPromotion(AutoP);
 	Master->setMaintenenceData(nOfCheckUp2Maintenence, nOfdays2LeaveMaintenence);
 	int NumberOfEvents = 0;
@@ -111,18 +111,23 @@ void UI::Interactive_Mode()
 	cout << p.first << " Completed Missions: " << p.second << endl;
 	p = Master->PrintMaintenece();
 	cout << p.first << " In-Maintenece Rovers: " << p.second << endl;
+	if (Master->FailedMissionsPrint().size() != 0)
+	{
+		cout << "Mission Failed Today : " << Master->FailedMissionsPrint() << endl;
+		Master->resetFailedMission();
+	}
 	cout << "==========================================\n";
 }
 
 void UI::Mode_1()
 {
-		cin.get();
-		Interactive_Mode();
+	cin.get();
+	Interactive_Mode();
 }
 
 void UI::Mode_2()
 {
-	Sleep(1000);
+	//Sleep(2000);
 	Interactive_Mode();
 
 }

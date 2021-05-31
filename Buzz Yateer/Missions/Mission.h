@@ -9,9 +9,12 @@ private:
 	int MDUR;
 	int assignmentDay;
 	double ExPeriod;
+	bool XFailed;
 public:
 	Mission();
 	Mission(int F, int D, int S, int TL, int id);
+	void setXFailed(bool XF);
+	bool getXFailed();
 	void setFormulationDay(int fDay);
 	void setDuration(int D);
 	void setSignificance(int S);
