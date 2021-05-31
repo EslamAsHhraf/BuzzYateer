@@ -113,3 +113,23 @@ void UI::Interactive_Mode()
 	cout << p.first << " In-Maintenece Rovers: " << p.second << endl;
 	cout << "==========================================\n";
 }
+
+void UI::Mode_1()
+{
+		cin.get();
+		Interactive_Mode();
+}
+
+void UI::Mode_2()
+{
+	Sleep(1000);
+	Interactive_Mode();
+
+}
+
+void UI::Mode_3()
+{
+	cout << "Silent Mode" << endl;
+	cout << "Simulation Starts..." << endl;
+	cout << "Simulation ends, Output file created" << endl;
+}

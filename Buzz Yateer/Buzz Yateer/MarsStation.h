@@ -33,6 +33,7 @@ class MarsStation
 	priority_Queue<Rover*>CheukUp;
 	priority_Queue<Pair<Mission*, Rover*>>Execution;
 	priority_Queue<Rover*>Maintenence;
+	int Mode;
 	int MCheckUp;
 	int PCheckUp;
 	int ECheckUp;
@@ -93,6 +94,8 @@ public:
 	void PrintCompletedInfo(int& CD, int& ID, int& FD, int& ED, int& WD, int& em, int& pm, int& mm, double&Ap);
 	int getDay();
 	int getCompletedLength();
+	int Choose_Mode();
+	void Set_Mode(int x);
 	~MarsStation();
 
 };

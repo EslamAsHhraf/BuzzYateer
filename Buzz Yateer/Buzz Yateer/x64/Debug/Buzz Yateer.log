@@ -1,2 +1,5 @@
-﻿  UI.cpp
+﻿  MarsStation.cpp
+C:\Users\hp\Desktop\proj\BuzzYateer\Buzz Yateer\Buzz Yateer\MarsStation.cpp(288,22): warning C4101: 'mm': unreferenced local variable
+C:\Users\hp\Desktop\proj\BuzzYateer\Buzz Yateer\Buzz Yateer\MarsStation.cpp(862,25): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\hp\Desktop\proj\BuzzYateer\Buzz Yateer\DS\LinkedList.h(65): warning C4172: returning address of local variable or temporary
   Buzz Yateer.vcxproj -> C:\Users\hp\Desktop\proj\BuzzYateer\Buzz Yateer\x64\Debug\Buzz Yateer.exe
