@@ -138,3 +138,15 @@ void UI::Mode_3()
 	cout << "Simulation Starts..." << endl;
 	cout << "Simulation ends, Output file created" << endl;
 }
+
+void UI::decide(int& x)
+{
+	if (x == 1)
+		Mode_1();
+	if (x == 2)
+		Mode_2();
+	if (x == 3) {
+		Mode_3();
+		x = -1;
+	}
+}

@@ -225,19 +225,7 @@ void MarsStation::Simulate()
 		assigMM();//assign Mountainous Missions
 		failMission();// re-formulted Mission failed
 		AutoPromote();//Auto promotion
-		if (x == 1)
-		{
-			UI_PTR->Mode_1();
-		}
-		else if (x == 2)
-		{
-			UI_PTR->Mode_2();
-		}
-		else if (x == 3)
-		{
-			UI_PTR->Mode_3();
-			x = -1;
-		}
+		UI_PTR->decide(x);
 	}
 }
 MarsStation::~MarsStation()

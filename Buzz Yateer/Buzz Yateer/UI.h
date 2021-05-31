@@ -17,5 +17,7 @@ public:
 	void Mode_1();
 	void Mode_2();
 	void Mode_3();
+	void decide(int& x);
+
 };
 
