@@ -8,6 +8,9 @@ UI::UI(MarsStation* Master) :Master(Master)
 
 void UI::ReadInputFile(ifstream& InputFile)
 {
+	int Mode;
+	InputFile >> Mode;
+	Master->Set_Mode(Mode);
 	int NM, NP, NE, NOFM, MCD, PCD, ECD;
 	InputFile >> NM >> NP >> NE >> MCD >> PCD >> ECD >> NOFM;
 	Master->setCheckUpData(MCD, PCD, ECD, NOFM);
@@ -127,7 +130,7 @@ void UI::Mode_1()
 
 void UI::Mode_2()
 {
-	//Sleep(2000);
+	Sleep(1000);
 	Interactive_Mode();
 
 }

@@ -210,7 +210,7 @@ int MarsStation::CountRovers(int& Er, int& Mr, int& Pr)
 
 void MarsStation::Simulate()
 {
-	int x = Choose_Mode();
+	  Mode =Choose_Mode();
 	while (!events.isEmpty() || !Execution.isEmpty() || !EM.isEmpty() || !PM.isEmpty() || !MM.isEmpty())
 	{
 		CountDays++;// Read Events
@@ -225,7 +225,7 @@ void MarsStation::Simulate()
 		assigMM();//assign Mountainous Missions
 		failMission();// re-formulted Mission failed
 		AutoPromote();//Auto promotion
-		UI_PTR->decide(x);
+		UI_PTR->decide(Mode);
 	}
 }
 MarsStation::~MarsStation()
