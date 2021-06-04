@@ -9,3 +9,7 @@ PolarMission::PolarMission(int F, int D, int S, int TL, int id)
 {
 
 }
+
+PolarMission::~PolarMission()
+{
+}

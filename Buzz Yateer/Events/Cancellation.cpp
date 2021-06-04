@@ -23,3 +23,7 @@ void cancellation::Execute(MarsStation* Master)
 {
 	Master->CancelMission(ID);
 }
+
+cancellation::~cancellation()
+{
+}

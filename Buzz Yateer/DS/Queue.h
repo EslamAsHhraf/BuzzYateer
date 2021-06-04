@@ -66,7 +66,6 @@ public:
 		while (dequeue(temp));
 	}
 
-
 	Queue(const Queue<T>& LQ)
 	{
 		Node<T>* NodePtr = LQ.frontPtr;
@@ -79,8 +78,6 @@ public:
 		Node<T>* ptr = new Node<T>(NodePtr->getItem());
 		frontPtr = backPtr = ptr;
 		NodePtr = NodePtr->getNext();
-
-
 		while (NodePtr)
 		{
 			Node<T>* ptr = new Node<T>(NodePtr->getItem());

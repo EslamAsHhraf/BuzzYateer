@@ -20,3 +20,7 @@ int EmergencyMission::calcduration()
 {
 	return 1;
 }
+
+EmergencyMission::~EmergencyMission()
+{
+}

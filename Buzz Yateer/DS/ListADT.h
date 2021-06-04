@@ -8,7 +8,6 @@ public:
 
 	virtual bool isEmpty() const = 0;
 
-	virtual int getLength() const = 0;
 
 	virtual bool insert(int pos, const ItemType& newEntry) = 0;
 

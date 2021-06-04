@@ -11,3 +11,7 @@ int Event::getEventDay()
 {
 	return ED;
 }
+
+Event::~Event()
+{
+}

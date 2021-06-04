@@ -8,5 +8,6 @@ public:
 	Event();
 	virtual void Execute(MarsStation* Master) = 0;
 	int getEventDay();
+	virtual ~Event();
 };
 

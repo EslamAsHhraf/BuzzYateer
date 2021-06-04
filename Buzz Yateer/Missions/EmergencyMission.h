@@ -9,5 +9,6 @@ public:
 	int calcPriority();
 	//from assignment day
 	int calcduration();
+	~EmergencyMission();
 };
 

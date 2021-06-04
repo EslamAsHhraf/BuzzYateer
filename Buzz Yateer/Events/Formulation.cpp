@@ -51,3 +51,7 @@ void Formulation::Execute(MarsStation* Master)
 	}
 	delete M;
 }
+
+Formulation::~Formulation()
+{
+}

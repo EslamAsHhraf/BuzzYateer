@@ -9,4 +9,5 @@ public:
 	void setId(int id);
 	int  getID();
 	void Execute(MarsStation* Master);
+	~Promotion();
 };

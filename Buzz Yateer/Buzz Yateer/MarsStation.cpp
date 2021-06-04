@@ -126,8 +126,8 @@ void MarsStation::AddMountainousRover(double speed)
 
 bool MarsStation::CancelMission(int ID)
 {
-	int n = MM.getLength();
-	for (int i = 1; i <= n; i++)
+	int i = 1;
+	while(MM.getEntry(i))
 	{
 		if (MM.getEntry(i)->getID() == ID)
 		{
@@ -146,37 +146,39 @@ void MarsStation::AddCancellation(int ID, int ED)
 
 void MarsStation::Promote(int ID)
 {
-	int N = MM.getLength();
-	for (int i = 1; i <= N; i++)
+	int i = 1;
+	while (MM.getEntry(i))
 	{
 		if (MM.getEntry(i)->getID() == ID)
 		{
 			MountainousMission* temp = MM.getEntry(i);
-
 			EmergencyMission* EMEr = new EmergencyMission(temp->getFormulationDay(), temp->getMDUR(), temp->getSignificance(), temp->getTargetLocation(), temp->getID());
-			//EMEr->setPromoted(true);
 			EM.enqueue(EMEr, EMEr->calcPriority());
 			MM.remove(i);
 			break;
 		}
+		i++;
 	}
 }
 
 void MarsStation::AutoPromote()
 {
-	for (int j = 1; j <= MM.getLength(); j++)
+	int i = 1;
+	while (MM.getEntry(i))
 	{
-		if (MM.getEntry(j)->getFormulationDay() + AutoP == CountDays)
+		if (MM.getEntry(i)->getFormulationDay() + AutoP == CountDays)
 		{
-			MountainousMission* temp = MM.getEntry(j);
+			MountainousMission* temp = MM.getEntry(i);
 			EmergencyMission* EMEr = new EmergencyMission(temp->getFormulationDay(), temp->getMDUR(), temp->getSignificance(), temp->getTargetLocation(), temp->getID());
 			Ap++;
 			EM.enqueue(EMEr, EMEr->calcPriority());
-			MM.remove(j);
-			j--;
+			MM.remove(i);
+			i--;
 		}
+		i++;
 	}
 }
+
 
 int MarsStation::CountRovers(int& Er, int& Mr, int& Pr)
 {
@@ -267,10 +269,9 @@ MarsStation::~MarsStation()
 	{
 		delete em;
 	}
-	MountainousMission* mm;
-	for (int i = 1; i <= MM.getLength(); i++)
+	while (MM.getEntry(1))
 	{
-		delete MM.getEntry(i);
+		MM.remove(1);
 	}
 	Rover* rfm;
 	while (Maintenence.dequeue(rfm))
@@ -654,11 +655,13 @@ Pair<int, string> MarsStation::PrintWaitingMission()
 		}
 	}
 	string s3 = "{";
-	for (int i = 1; i <= MM.getLength(); i++)
+	int j = 1;
+	while(MM.getEntry(j))
 	{
 		num++;
-		s3 += (to_string(MM.getEntry(i)->getID()));
+		s3 += (to_string(MM.getEntry(j)->getID()));
 		s3.push_back(',');
+		j++;
 	}
 	if (s3.size() != 1)
 	{

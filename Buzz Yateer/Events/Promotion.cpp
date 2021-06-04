@@ -19,3 +19,7 @@ void Promotion::Execute(MarsStation* Master)
 {
 	Master->Promote(ID);
 }
+
+Promotion::~Promotion()
+{
+}
