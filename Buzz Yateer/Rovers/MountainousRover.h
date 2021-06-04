@@ -3,6 +3,6 @@
 class MountainousRover:public Rover
 {
 public:
-	MountainousRover(int s);
+	MountainousRover(double s);
 };
 

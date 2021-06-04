@@ -1,7 +1,7 @@
 #include "PolarRover.h"
 #include"Rover.h"
 
-PolarRover::PolarRover(int s):Rover(s)
+PolarRover::PolarRover(double s):Rover(s)
 {
 
 }

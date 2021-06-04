@@ -1,5 +1,5 @@
 #include "MountainousRover.h"
 
-MountainousRover::MountainousRover(int s) :Rover(s)
+MountainousRover::MountainousRover(double s) :Rover(s)
 {
 }

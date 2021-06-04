@@ -1,2 +1,4 @@
-﻿  UI.cpp
-  Buzz Yateer.vcxproj -> C:\Users\hp\Desktop\buzzzzzz\BuzzYateer\Buzz Yateer\x64\Debug\Buzz Yateer.exe
+﻿  MarsStation.cpp
+d:\project data structure\new\buzzyateer\buzz yateer\buzz yateer\marsstation.cpp(270): warning C4101: 'mm': unreferenced local variable
+d:\project data structure\new\buzzyateer\buzz yateer\ds\linkedlist.h(65): warning C4172: returning address of local variable or temporary
+  Buzz Yateer.vcxproj -> D:\project data structure\new\BuzzYateer\Buzz Yateer\x64\Debug\Buzz Yateer.exe

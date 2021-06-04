@@ -39,6 +39,7 @@ class MarsStation
 	int ECheckUp;
 	int NMission2CheckUp;
 	int AutoP;
+	double Ap;
 	UI* UI_PTR;
 	int CountDays;
 	int Mnum;
@@ -46,6 +47,7 @@ class MarsStation
 	int Pnum;
 	int EventCount;
 	int MaxPeriod;
+	double Num_MM;
 	int nOfCheckUp2Maintenence;
 	int nOfdays2LeaveMaintenence;
 	string FailedMissions;
@@ -61,14 +63,12 @@ public:
 	void setAutoPromotion(int AutoP);
 	void OpenInputFile(string inputfile);
 	void OpenOutputFile(string outputfile);
-	void GetInput();
-	void GetOutput();
 	void AddFormulationEvent(char MissionType, int ED, int ID, int TLOC, int MDUR, int SIG);
 	void AddPromotionEvent(int ED ,int ID);
 	void AddCanellationEvent(int ED, int ID);
-	void AddPolarRover(int speed);
-	void AddEmergencyRover(int speed);
-	void AddMountainousRover(int speed);
+	void AddPolarRover(double speed);
+	void AddEmergencyRover(double speed);
+	void AddMountainousRover(double speed);
 	bool CancelMission(int ID);
 	void AddCancellation(int ID, int ED);
 	void Promote(int ID);
@@ -98,6 +98,8 @@ public:
 	string FailedMissionsPrint();
 	void resetFailedMission();
 	~MarsStation();
+	void ReadInputFile();
+	void PrintinOutputFile();
 
 };
 

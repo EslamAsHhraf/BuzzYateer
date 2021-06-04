@@ -1,12 +1,11 @@
 #include"MarsStation.h"
 int main()
-{
-	
+{	
 	string Input = "Input.txt";
 	string Output = "Output.txt";
 	MarsStation MS(Input, Output);
-	MS.GetInput();
+	MS.ReadInputFile();
 	MS.Simulate();
-	MS.GetOutput();
+	MS.PrintinOutputFile();
 	return 0;
 }

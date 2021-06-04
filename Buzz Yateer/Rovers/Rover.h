@@ -1,7 +1,7 @@
 #pragma once
 class Rover {
 
-	int Speed;
+	double Speed;
 	int noOfMissions;
 	bool underMaintenance;
 	int NoOfCheckUps;
@@ -11,14 +11,14 @@ class Rover {
 	static int COUNT;
 	int MaintenenceDuration;
 public:
-	Rover(int speed, bool status = 1, bool underMaintenance = 0, int NoOfCheckUps = 0);
+	Rover(double speed, bool status = 1, bool underMaintenance = 0, int NoOfCheckUps = 0);
 	void operator ++();
 	void resetnoOfMissions();
 	void resetnoOfCheckUps();
 	void NoOfCheckUpsIncrement();
 	void setMaintenenceDuration(int MaintenenceDuration);
 	int getMaintenenceDuration();
-	int getSpeed();
+	double getSpeed();
 	int getnoOfMissions();
 	void setfree(bool s = 1);
 	bool getfree();

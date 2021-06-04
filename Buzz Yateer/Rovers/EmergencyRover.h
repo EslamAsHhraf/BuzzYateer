@@ -3,6 +3,6 @@
 class EmergencyRover:public Rover
 {
 public:
-	EmergencyRover(int speed);
+	EmergencyRover(double speed);
 };
 

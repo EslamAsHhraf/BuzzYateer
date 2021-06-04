@@ -1,7 +1,7 @@
 #include"Rover.h"
 #include<cmath>
 int Rover::COUNT = 0;
-Rover::Rover(int speed, bool status, bool underMaintenance, int NoOfCheckUps) :noOfMissions(0), Speed(speed), ID(++COUNT),
+Rover::Rover(double speed, bool status, bool underMaintenance, int NoOfCheckUps) :noOfMissions(0), Speed(speed), ID(++COUNT),
 MaintenenceDuration(0), underMaintenance(0), NoOfCheckUps(0)
 {
 	setfree(status);
@@ -38,7 +38,7 @@ int Rover::getMaintenenceDuration()
 	return MaintenenceDuration;
 }
 
-int Rover::getSpeed()
+double Rover::getSpeed()
 {
 	if (underMaintenance)
 		return ceil((double)Speed / 2);

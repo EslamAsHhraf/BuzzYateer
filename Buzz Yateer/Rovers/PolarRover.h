@@ -4,6 +4,6 @@ class PolarRover:public Rover
 {
 	
 public:
-	PolarRover(int s);
+	PolarRover(double s);
 };
 

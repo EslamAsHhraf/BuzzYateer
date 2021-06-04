@@ -1,5 +1,5 @@
 #include "EmergencyRover.h"
 
-EmergencyRover::EmergencyRover(int speed):Rover(speed)
+EmergencyRover::EmergencyRover(double speed):Rover(speed)
 {
 }

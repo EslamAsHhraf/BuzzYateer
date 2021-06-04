@@ -11,8 +11,6 @@ class UI
 	MarsStation* Master;
 public:
 	UI(MarsStation* Master);
-	void ReadInputFile(ifstream& InputFile);
-	void PrintinOutputFile(ofstream& OutputFile);
 	void Interactive_Mode();
 	void Mode_1();
 	void Mode_2();

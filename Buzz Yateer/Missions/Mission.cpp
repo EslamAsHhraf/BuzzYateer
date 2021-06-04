@@ -1,12 +1,11 @@
 #include "Mission.h"
 
-Mission::Mission() :formulationDay(0), duration(0), significance(0), targetLocation(0), ID(0), MDUR(0), completionDay(0), assignmentDay(0), XFailed(0)
+Mission::Mission() :formulationDay(0), significance(0), targetLocation(0), ID(0), MDUR(0), completionDay(0), assignmentDay(0), XFailed(0)
 {
 }
 
 Mission::Mission(int F, int D, int S, int TL, int id) : XFailed(0)
 {
-	setPromoted(false);
 	setFormulationDay(F);
 	setSignificance(S);
 	setTargetLocation(TL);
@@ -29,10 +28,7 @@ void Mission::setFormulationDay(int fDay)
 	formulationDay = fDay;
 }
 
-void Mission::setDuration(int D)
-{
-	duration = D;
-}
+
 
 void Mission::setSignificance(int S)
 {
@@ -49,15 +45,6 @@ void Mission::setID(int id)
 	ID = id;
 }
 
-void Mission::setPromoted(bool P)
-{
-	Promoted = P;
-}
-
-bool Mission::getPromoted()
-{
-	return Promoted;
-}
 
 void Mission::setCD(int cd)
 {
@@ -79,10 +66,6 @@ int Mission::getFormulationDay() const
 	return formulationDay;
 }
 
-int Mission::getDuration() const
-{
-	return duration;
-}
 
 int Mission::getSignificance() const
 {
@@ -124,12 +107,12 @@ int Mission::getMDUR()
 	return MDUR;
 }
 
-void Mission::setExPeriod(double period)
+void Mission::setExPeriod(int period)
 {
 	ExPeriod = period;
 }
 
-double Mission::getExPeriod()
+int Mission::getExPeriod()
 {
 	return ExPeriod;
 }
