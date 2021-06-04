@@ -2,6 +2,8 @@
 #include"../Events/Event.h"
 #include"../Events/Formulation.h"
 #include <iostream>
+#include <limits> 
+#undef max
 UI::UI(MarsStation* Master) :Master(Master)
 {
 }
@@ -31,7 +33,8 @@ void UI::Interactive_Mode()
 
 void UI::Mode_1()
 {
-	cin.get();
+	cin.sync();
+	cin.ignore(numeric_limits<streamsize>::max(), '\n');
 	Interactive_Mode();
 }
 
