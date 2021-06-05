@@ -12,10 +12,11 @@ class UI
 public:
 	UI(MarsStation* Master);
 	void Interactive_Mode();
+	void Start();
 	void Mode_1();
 	void Mode_2();
 	void Mode_3();
-	void decide(int& x);
+	void decide();
 
 };
 

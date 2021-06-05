@@ -41,10 +41,10 @@ void MarsStation::Add2Maintenence(Rover* R)
 	R->resetnoOfCheckUps();
 }
 
-void MarsStation::RemoveFromMaintenence()
+void MarsStation::RemoveFromMaintenence(bool Force)
 {
 	Rover* R;
-	while (Maintenence.peek(R) && R->getMaintenenceDuration() <= CountDays)
+	while (Maintenence.peek(R) && (R->getMaintenenceDuration() <= CountDays || Force))
 	{
 		Maintenence.dequeue(R);
 		R->setMaintenance(0);
@@ -202,10 +202,13 @@ int MarsStation::CountRovers(int& Er, int& Mr, int& Pr)
 
 void MarsStation::Simulate()
 {
-	  Mode =Choose_Mode();
 	while (!events.isEmpty() || !Execution.isEmpty() || !EM.isEmpty() || !PM.isEmpty() || !MM.isEmpty() || !CheukUp.isEmpty() || !Maintenence.isEmpty())
 	{
 		CountDays++;// Read Events
+		if (CountDays == 45)
+		{
+			int c = 0;
+		}
 		RemoveFromMaintenence();
 		DailyEvent();//making mission , cancel or promote 
 		//DailyEvent();//making mission , cancel or promote
@@ -217,7 +220,7 @@ void MarsStation::Simulate()
 		assigMM();//assign Mountainous Missions
 		failMission();// re-formulted Mission failed
 		AutoPromote();//Auto promotion
-		UI_PTR->decide(Mode);
+		UI_PTR->decide();
 	}
 }
 MarsStation::~MarsStation()
@@ -281,9 +284,7 @@ MarsStation::~MarsStation()
 }
 void MarsStation::ReadInputFile()
 {
-	int Mode;
-	InputFile >> Mode;
-	Set_Mode(Mode);
+	UI_PTR->Start();
 	int NM, NP, NE, NOFM, MCD, PCD, ECD;
 	InputFile >> NM >> NP >> NE >> MCD >> PCD >> ECD >> NOFM;
 	setCheckUpData(MCD, PCD, ECD, NOFM);
@@ -444,6 +445,10 @@ void MarsStation::assigEM()
 			ER.dequeue(R);
 			E->setAssignmentDay(CountDays);
 			duration =(int) ceil(CountDays + E->getMDUR() + E->getTargetLocation() / ((double)R->getSpeed()));
+			if (R->geMaintenance())
+			{
+				RemoveFromMaintenence(1);
+			}
 			E->setExPeriod(duration - CountDays);
 			E->setCD(duration);
 			Execution.enqueue(makepair((Mission*)(E), (Rover*)(R)), -duration);
@@ -456,6 +461,10 @@ void MarsStation::assigEM()
 			MR.dequeue(R);
 			E->setAssignmentDay(CountDays);
 			duration = (int)ceil(CountDays + E->getMDUR() + (E->getTargetLocation() / ((double)R->getSpeed())));
+			if (R->geMaintenance())
+			{
+				RemoveFromMaintenence(1);
+			}
 			E->setExPeriod(duration - CountDays);
 			E->setCD(duration);
 			Execution.enqueue(makepair((Mission*)(E), (Rover*)(R)), -duration);
@@ -468,6 +477,10 @@ void MarsStation::assigEM()
 			PR.dequeue(R);
 			E->setAssignmentDay(CountDays);
 			duration = (int)ceil(CountDays + E->getMDUR() + (E->getTargetLocation() / ((double)R->getSpeed())));
+			if (R->geMaintenance())
+			{
+				RemoveFromMaintenence(1);
+			}
 			E->setExPeriod(duration - CountDays);
 			E->setCD(duration);
 			Execution.enqueue(makepair((Mission*)(E), (Rover*)(R)), -duration);
@@ -493,6 +506,10 @@ void MarsStation::assigPM()
 			PM.dequeue(p);
 			p->setAssignmentDay(CountDays);
 			duration = (int)ceil(CountDays + p->getMDUR() + (p->getTargetLocation() / ((double)R->getSpeed())));
+			if (R->geMaintenance())
+			{
+				RemoveFromMaintenence(1);
+			}
 			p->setExPeriod(duration - CountDays);
 			p->setCD(duration);
 			Execution.enqueue(makepair((Mission*)(p), (Rover*)(R)), -duration);
@@ -521,6 +538,10 @@ void MarsStation::assigMM()
 			MR.dequeue(R);
 			m->setAssignmentDay(CountDays);
 			duration = (int)ceil(CountDays + m->getMDUR() + (m->getTargetLocation() / ((double)R->getSpeed())));
+			if (R->geMaintenance())
+			{
+				RemoveFromMaintenence(1);
+			}
 			m->setExPeriod(duration - CountDays);
 			m->setCD(duration);
 			Execution.enqueue(makepair((Mission*)(m), (Rover*)(R)), -duration);
@@ -533,6 +554,10 @@ void MarsStation::assigMM()
 			ER.dequeue(R);
 			m->setAssignmentDay(CountDays);
 			duration = (int)ceil(CountDays + m->getMDUR() + m->getTargetLocation() / ((double)R->getSpeed()));
+			if (R->geMaintenance())
+			{
+				RemoveFromMaintenence(1);
+			}
 			m->setExPeriod(duration - CountDays);
 			m->setCD(duration);
 			Execution.enqueue(makepair((Mission*)(m), (Rover*)(R)), -duration);

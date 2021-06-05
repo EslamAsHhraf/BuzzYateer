@@ -55,7 +55,7 @@ public:
 	MarsStation(string input, string output);
 	void setCheckUpData(int MCheckUp, int PCheckUp, int ECheckUp, int NMission2CheckUp);
 	void Add2Maintenence(Rover* R);
-	void RemoveFromMaintenence();
+	void RemoveFromMaintenence(bool Force = 0);
 	void setMaintenenceData(int nOfCheckUp2Maintenence, int nOfdays2LeaveMaintenence);
 	void Add2MM(MountainousMission* M);
 	void Add2PM(PolarMission* P);

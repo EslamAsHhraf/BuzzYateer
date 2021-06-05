@@ -31,6 +31,26 @@ void UI::Interactive_Mode()
 	cout << "==========================================\n";
 }
 
+void UI::Start()
+{
+	cout << "\t\t\t\t***********************************************************\n";
+	cout << "\t\t\t\t*                                                         *\n";
+	cout << "\t\t\t\t*                                                         *\n";
+	cout << "\t\t\t\t*             Welcome In Buzz Yateer Station              *\n";
+	cout << "\t\t\t\t*                                                         *\n";
+	cout << "\t\t\t\t*                                                         *\n";
+	cout << "\t\t\t\t***********************************************************\n";
+	cout << "\n-Please Choose Mode : \n";
+	cout << "\t1)Interactive Mode\n";
+	cout << "\t2)Step-By-Step Mode\n";
+	cout << "\t3)Silent Mode\n";
+	cout << "-Mode : ";
+	int Mode;
+	cin >> Mode;
+	Master->Set_Mode(Mode);
+	cout << "***********************************************************\n";
+}
+
 void UI::Mode_1()
 {
 	cin.sync();
@@ -52,8 +72,9 @@ void UI::Mode_3()
 	cout << "Simulation ends, Output file created" << endl;
 }
 
-void UI::decide(int& x)
+void UI::decide()
 {
+	int x = Master->Choose_Mode();
 	if (x == 1)
 		Mode_1();
 	else if (x == 2)

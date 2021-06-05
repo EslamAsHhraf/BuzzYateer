@@ -41,7 +41,10 @@ int Rover::getMaintenenceDuration()
 double Rover::getSpeed()
 {
 	if (underMaintenance)
-		return ceil((double)Speed / 2);
+	{
+		Speed = ceil(Speed / 2);
+		return Speed;
+	}
 	else
 		return Speed;
 }
