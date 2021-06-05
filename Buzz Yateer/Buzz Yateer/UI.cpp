@@ -82,6 +82,6 @@ void UI::decide()
 	else if (x == 3) 
 	{
 		Mode_3();
-		x = -1;
+		Master->Set_Mode(-1);
 	}
 }

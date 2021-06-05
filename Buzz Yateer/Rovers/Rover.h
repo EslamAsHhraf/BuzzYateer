@@ -25,9 +25,8 @@ public:
 	int getNoOfCheckUps();
 	void setMaintenance(bool x);
 	bool geMaintenance();
-	virtual ~Rover();
 	void setCheukDuration(int days);
 	int getCheukDuration();
 	int getID();
-
+	virtual ~Rover();
 };	

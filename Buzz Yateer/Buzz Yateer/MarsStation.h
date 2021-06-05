@@ -34,23 +34,28 @@ class MarsStation
 	priority_Queue<Pair<Mission*, Rover*>>Execution;
 	priority_Queue<Rover*>Maintenence;
 	int Mode;
-	int MCheckUp;
-	int PCheckUp;
-	int ECheckUp;
+	int MCheckUp;// num days needed for Mountainous rovers 
+	int PCheckUp;// num days needed for polar rovers
+	int ECheckUp;// num days needed for Emergency rovers
 	int NMission2CheckUp;
-	int AutoP;
-	double Ap;
+	int AutoP;// num days needed to make auto prmote  
+	double Ap;//num missions which  prmote
 	UI* UI_PTR;
-	int CountDays;
-	int Mnum;
-	int Enum;
-	int Pnum;
+	int CountDays;// count of days
+	int Mnum;//num of Mountainous missions 
+	int Enum;//num of emergency missions
+	int Pnum;//num of polar missions
 	int EventCount;
 	int MaxPeriod;
-	double Num_MM;
 	int nOfCheckUp2Maintenence;
 	int nOfdays2LeaveMaintenence;
 	string FailedMissions;
+	int NM;//num of Mountainous rovers 
+    int	NP; //num of polar rovers 
+	int NE;//num of emergency rovers
+	int NumMDE;//num of Mountainous mision can't done
+	int	NumPDE; //num of polar mission can't done
+	int NumEDE;//num of emergency mission can't done
 public:
 	MarsStation(string input, string output);
 	void setCheckUpData(int MCheckUp, int PCheckUp, int ECheckUp, int NMission2CheckUp);
@@ -71,19 +76,19 @@ public:
 	void AddMountainousRover(double speed);
 	bool CancelMission(int ID);
 	void AddCancellation(int ID, int ED);
-	void Promote(int ID);
-	void AutoPromote();
+	void Promote(int ID);// prmote Mountainous mission 
+	void AutoPromote();// auto prmote Mountainous missions
 	int CountRovers(int& Er, int& Mr, int& Pr);
 	void failMission();
 	void roverMaintance(Rover* r);
-	void Simulate();
+	void Simulate();// simulte all function needed every day
 	void setMaxPeriod(int MaxPeriod);
 	void DailyEvent();
-	void CheukupSim();
-	void assigEM();
-	void assigPM();
-	void assigMM();
-	void ExecutionSim();
+	void CheukupSim();//check if the Cheukup done 
+	void assigEM();// assign Emergency missions
+	void assigPM();// assign Polar missions
+	void assigMM();// assign Mountainous missions
+	void ExecutionSim();// check if the Execution done 
 	Pair<int, string> PrintWaitingMission();
 	Pair<int, string> PrintExecetion();
 	Pair<int, string>Printavailable();
@@ -97,9 +102,14 @@ public:
 	void Set_Mode(int x);
 	string FailedMissionsPrint();
 	void resetFailedMission();
-	~MarsStation();
 	void ReadInputFile();
 	void PrintinOutputFile();
-
+	bool CanDoEM();//if can do Emergency missions or not 
+	bool CanDoMM();//if can do Mountainous missions or not 
+	bool CanDoPM();//if can do Polar missions or not 
+	void IncreaseNumMDE();
+	void IncreaseNumPDE();
+	void IncreaseNumEDE();
+	~MarsStation();
 };
 

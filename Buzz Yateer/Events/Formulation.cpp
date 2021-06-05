@@ -37,17 +37,41 @@ void Formulation::setFormulatedMission(int ED, int ID, int TLOC, int MDUR, int S
 void Formulation::Execute(MarsStation* Master)
 {
 	Mission* M = FormulatedMission;
-	if (missionType == 'M') {
-		FormulatedMission = new MountainousMission(*(MountainousMission*)M);
-		Master->Add2MM(dynamic_cast<MountainousMission*>(FormulatedMission));
+	if (missionType == 'M')
+	{
+		if (Master->CanDoMM())
+		{
+			FormulatedMission = new MountainousMission(*(MountainousMission*)M);
+			Master->Add2MM(dynamic_cast<MountainousMission*>(FormulatedMission));
+		}
+		else
+		{
+			Master->IncreaseNumMDE();
+		}
 	}
-	else if (missionType == 'P') {
-		FormulatedMission = new PolarMission(*(PolarMission*)M);
-		Master->Add2PM(dynamic_cast<PolarMission*>(FormulatedMission));
+	else if (missionType == 'P')
+	{
+		if (Master->CanDoPM())
+		{
+			FormulatedMission = new PolarMission(*(PolarMission*)M);
+			Master->Add2PM(dynamic_cast<PolarMission*>(FormulatedMission));
+		}
+		else
+		{
+			Master->IncreaseNumPDE();
+		}
 	}
-	else if (missionType == 'E') {
-		FormulatedMission = new EmergencyMission(*(EmergencyMission*)(M));
-		Master->Add2EM(dynamic_cast<EmergencyMission*>(FormulatedMission));
+	else if (missionType == 'E')
+	{
+		if (Master->CanDoEM())
+		{
+			FormulatedMission = new EmergencyMission(*(EmergencyMission*)(M));
+			Master->Add2EM(dynamic_cast<EmergencyMission*>(FormulatedMission));
+		}
+		else
+		{
+			Master->IncreaseNumEDE();
+		}
 	}
 	delete M;
 }
