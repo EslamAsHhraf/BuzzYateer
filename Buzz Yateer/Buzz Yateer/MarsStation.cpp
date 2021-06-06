@@ -353,9 +353,9 @@ void MarsStation::PrintinOutputFile()
 	int CD, ID, FD, WD, ED, Mm, Em, Pm, TotalMission=0, Er = 0, Mr = 0, Pr = 0, TotalRover;
 	Pm = Mm = Em = 0;
 	TotalMission =0;
-	OutputFile << "CD" << " " << "ID" << " " << "FD" << " " << "WD" << " " << "ED" << " " << endl;
+	OutputFile << "CD" << "		" << "ID" << "		" << "FD" << "		" << "WD" << "		" << "ED" << " " << endl;
 	Mission* entry;
-
+					
 	while (CM.dequeue(entry))
 	{
 		TotalMission++;
@@ -375,7 +375,7 @@ void MarsStation::PrintinOutputFile()
 		WD = entry->getWaitingDays();
 		SumWait += WD;
 		SumExec += ED;
-		OutputFile << CD << "  " << ID << "  " << FD << "  " << WD << "  " << ED << " " << endl;
+		OutputFile << CD << "		" << ID << "		" << FD << "		" << WD << "		" << ED << "       " << endl;
 	}
 	TotalRover =CountRovers(Er, Mr, Pr);
 	OutputFile << endl;
@@ -385,8 +385,8 @@ void MarsStation::PrintinOutputFile()
 	OutputFile << "Missions: " << TotalMission << "[" << "M: " << Mm << "," << "P: " << Pm << "," << "E: " << Em << "]" << endl;
 	OutputFile << "Rovers: " << TotalRover << "[" << "M: " << Mr << "," << "P: " << Pr << "," << "E: " << Er << "]" << endl;
 	OutputFile << "Avg Wait = " << SumWait / TotalMission << ", " << "Avg Exec = " << SumExec / TotalMission << "\n";
-	OutputFile << "Auto-promoted: " << (Ap / ((double)Mnum)) * 100<<"\n";
-	OutputFile << "Missions can't dene: " << NumMDE+ NumPDE+ NumEDE << "[" << "M: " << NumMDE << "," << "P: " << NumPDE << "," << "E: " << NumEDE << "]" << endl;
+	OutputFile << "Auto-promoted: " << (Ap / (Mnum+Ap)) * 100<<"\n";
+	OutputFile << "Missions can't done: " << NumMDE+ NumPDE+ NumEDE << "[" << "M: " << NumMDE << "," << "P: " << NumPDE << "," << "E: " << NumEDE << "]" << endl;
 	OutputFile.close();
 }
 bool MarsStation::CanDoEM()
@@ -975,10 +975,6 @@ int MarsStation::getDay()
 {
 	return CountDays;
 }
-
-
-
-
 
 int MarsStation::getCompletedLength()
 {
