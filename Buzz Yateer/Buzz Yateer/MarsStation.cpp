@@ -385,7 +385,7 @@ void MarsStation::PrintinOutputFile()
 	OutputFile << "Missions: " << TotalMission << "[" << "M: " << Mm << "," << "P: " << Pm << "," << "E: " << Em << "]" << endl;
 	OutputFile << "Rovers: " << TotalRover << "[" << "M: " << Mr << "," << "P: " << Pr << "," << "E: " << Er << "]" << endl;
 	OutputFile << "Avg Wait = " << SumWait / TotalMission << ", " << "Avg Exec = " << SumExec / TotalMission << "\n";
-	OutputFile << "Auto-promoted: " << (Ap / (Mnum+Ap)) * 100<<"\n";
+	OutputFile << "Auto-promoted: " << (Ap / (Mnum+Ap)) * 100<<" %"<<"\n";
 	OutputFile << "Missions can't done: " << NumMDE+ NumPDE+ NumEDE << "[" << "M: " << NumMDE << "," << "P: " << NumPDE << "," << "E: " << NumEDE << "]" << endl;
 	OutputFile.close();
 }
@@ -412,6 +412,55 @@ void MarsStation::IncreaseNumPDE()
 void MarsStation::IncreaseNumEDE()
 {
 	NumEDE++;
+}
+void MarsStation::SetDataEX(Mission * m, Rover * R)
+{
+	m->setAssignmentDay(CountDays);
+	int duration = (int)ceil(CountDays + m->getMDUR() + (2 * m->getTargetLocation()) / (((double)R->getSpeed()) * 25));
+	if (R->geMaintenance())
+	{
+		RemoveFromMaintenence(1);
+	}
+	m->setExPeriod(duration - CountDays);
+	m->setCD(duration);
+	Execution.enqueue(makepair((Mission*)(m), (Rover*)(R)), -duration);
+	R->operator++();
+}
+bool MarsStation::AssigntoER(Mission* m)
+{
+	if (!ER.isEmpty())
+	{
+		EmergencyRover* R;
+		ER.dequeue(R);
+		SetDataEX(m, R);
+		return true;
+	}
+	else
+	return false;
+}
+bool MarsStation::AssigntoMR(Mission * m)
+{
+	if (!MR.isEmpty())
+	{
+		MountainousRover* R;
+		MR.dequeue(R);
+		SetDataEX(m, R);
+		return true;
+	}
+	else
+		return false;
+}
+bool MarsStation::AssigntoPR(Mission * m)
+{
+	if (!PR.isEmpty())
+	{
+		PolarRover* R;
+		PR.dequeue(R);
+		SetDataEX(m, R);
+		return true;
+	}
+	else
+		return false;
 }
 void MarsStation::setMaxPeriod(int MaxPeriod)
 {
@@ -453,54 +502,17 @@ void MarsStation::assigEM()
 	{
 		if (E->getXFailed() && ER.isEmpty())
 			return;
-		int duration;
-		if (!ER.isEmpty())
+		if (AssigntoER(E))
 		{
 			EM.dequeue(E);
-			EmergencyRover* R;
-			ER.dequeue(R);
-			E->setAssignmentDay(CountDays);
-			duration =(int) ceil(CountDays + E->getMDUR() + (2*E->getTargetLocation()) / (((double)R->getSpeed())*25));
-			if (R->geMaintenance())
-			{
-				RemoveFromMaintenence(1);
-			}
-			E->setExPeriod(duration - CountDays);
-			E->setCD(duration);
-			Execution.enqueue(makepair((Mission*)(E), (Rover*)(R)), -duration);
-			R->operator++();
 		}
-		else if (!MR.isEmpty())
+		else if (AssigntoMR(E))
 		{
 			EM.dequeue(E);
-			MountainousRover* R;
-			MR.dequeue(R);
-			E->setAssignmentDay(CountDays);
-			duration = (int)ceil(CountDays + E->getMDUR() + (2*E->getTargetLocation()) / (((double)R->getSpeed()) * 25));
-			if (R->geMaintenance())
-			{
-				RemoveFromMaintenence(1);
-			}
-			E->setExPeriod(duration - CountDays);
-			E->setCD(duration);
-			Execution.enqueue(makepair((Mission*)(E), (Rover*)(R)), -duration);
-			R->operator++();
 		}
-		else if (!PR.isEmpty())
+		else if (AssigntoPR(E))
 		{
 			EM.dequeue(E);
-			PolarRover* R;
-			PR.dequeue(R);
-			E->setAssignmentDay(CountDays);
-			duration = (int)ceil(CountDays + E->getMDUR() + ((2*E->getTargetLocation()) / (((double)R->getSpeed()) * 25)));
-			if (R->geMaintenance())
-			{
-				RemoveFromMaintenence(1);
-			}
-			E->setExPeriod(duration - CountDays);
-			E->setCD(duration);
-			Execution.enqueue(makepair((Mission*)(E), (Rover*)(R)), -duration);
-			R->operator++();
 		}
 		else
 		{
@@ -514,22 +526,9 @@ void MarsStation::assigPM()
 	PolarMission* p;
 	while (PM.peek(p) && p->getFormulationDay() <= CountDays)
 	{
-		int duration;
-		if (!PR.isEmpty())
+		if (AssigntoPR(p))
 		{
-			PolarRover* R;
-			PR.dequeue(R);
 			PM.dequeue(p);
-			p->setAssignmentDay(CountDays);
-			duration = (int)ceil(CountDays + p->getMDUR() + ((2*p->getTargetLocation()) / (((double)R->getSpeed()) * 25)));
-			if (R->geMaintenance())
-			{
-				RemoveFromMaintenence(1);
-			}
-			p->setExPeriod(duration - CountDays);
-			p->setCD(duration);
-			R->operator++();
-			Execution.enqueue(makepair((Mission*)(p), (Rover*)(R)), -duration);
 		}
 		else
 		{
@@ -543,41 +542,16 @@ void MarsStation::assigMM()
 	MountainousMission* m;
 	while (!MM.isEmpty() && MM.getEntry(1)->getFormulationDay() <= CountDays)
 	{
-		int duration;
 		m = MM.getEntry(1);
 		if (m->getXFailed() && MR.isEmpty())
 			return;
-		if (!MR.isEmpty())
+		if (AssigntoMR(m))
 		{
 			MM.remove(1);
-			MountainousRover* R;
-			MR.dequeue(R);
-			m->setAssignmentDay(CountDays);
-			duration = (int)ceil(CountDays + m->getMDUR() + ((2*m->getTargetLocation()) / (((double)R->getSpeed()) * 25)));
-			if (R->geMaintenance())
-			{
-				RemoveFromMaintenence(1);
-			}
-			m->setExPeriod(duration - CountDays);
-			m->setCD(duration);
-			Execution.enqueue(makepair((Mission*)(m), (Rover*)(R)), -duration);
-			R->operator++();
 		}
-		else if (!ER.isEmpty())
+		else if (AssigntoER(m))
 		{
 			MM.remove(1);
-			EmergencyRover* R;
-			ER.dequeue(R);
-			m->setAssignmentDay(CountDays);
-			duration = (int)ceil(CountDays + m->getMDUR() + (2*m->getTargetLocation()) / (((double)R->getSpeed()) * 25));
-			if (R->geMaintenance())
-			{
-				RemoveFromMaintenence(1);
-			}
-			m->setExPeriod(duration - CountDays);
-			m->setCD(duration);
-			Execution.enqueue(makepair((Mission*)(m), (Rover*)(R)), -duration);
-			R->operator++();
 		}
 		else
 		{

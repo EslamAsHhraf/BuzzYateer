@@ -110,6 +110,10 @@ public:
 	void IncreaseNumMDE();// increase num of  Mountainous mision can't done
 	void IncreaseNumPDE();//increse num of polar mission can't done
 	void IncreaseNumEDE();//increse num of emergency mission can't done
+	void SetDataEX(Mission* m, Rover* R);
+	bool AssigntoER(Mission* m);
+	bool AssigntoMR(Mission* m);
+	bool AssigntoPR(Mission* m);
 	~MarsStation();
 };
 

@@ -17,5 +17,5 @@ CD		ID		FD		WD		ED
 Missions: 11[M: 1,P: 4,E: 6]
 Rovers: 4[M: 1,P: 2,E: 1]
 Avg Wait = 6.54545, Avg Exec = 13.9091
-Auto-promoted: 80
+Auto-promoted: 80 %
 Missions can't done: 0[M: 0,P: 0,E: 0]
