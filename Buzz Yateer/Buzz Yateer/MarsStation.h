@@ -107,9 +107,9 @@ public:
 	bool CanDoEM();//if can do Emergency missions or not 
 	bool CanDoMM();//if can do Mountainous missions or not 
 	bool CanDoPM();//if can do Polar missions or not 
-	void IncreaseNumMDE();
-	void IncreaseNumPDE();
-	void IncreaseNumEDE();
+	void IncreaseNumMDE();// increase num of  Mountainous mision can't done
+	void IncreaseNumPDE();//increse num of polar mission can't done
+	void IncreaseNumEDE();//increse num of emergency mission can't done
 	~MarsStation();
 };
 

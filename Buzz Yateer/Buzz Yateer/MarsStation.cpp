@@ -134,6 +134,7 @@ bool MarsStation::CancelMission(int ID)
 			MM.remove(i);
 			return 1;
 		}
+		i++;
 	}
 	return 0;
 }
@@ -153,6 +154,7 @@ void MarsStation::Promote(int ID)
 		{
 			MountainousMission* temp = MM.getEntry(i);
 			EmergencyMission* EMEr = new EmergencyMission(temp->getFormulationDay(), temp->getMDUR(), temp->getSignificance(), temp->getTargetLocation(), temp->getID());
+			EMEr->setFormulationDay(CountDays);
 			EM.enqueue(EMEr, EMEr->calcPriority());
 			MM.remove(i);
 			Mnum--;
@@ -172,6 +174,7 @@ void MarsStation::AutoPromote()
 		{
 			MountainousMission* temp = MM.getEntry(i);
 			EmergencyMission* EMEr = new EmergencyMission(temp->getFormulationDay(), temp->getMDUR(), temp->getSignificance(), temp->getTargetLocation(), temp->getID());
+			EMEr->setFormulationDay(CountDays);
 			Ap++;
 			EM.enqueue(EMEr, EMEr->calcPriority());
 			MM.remove(i);
@@ -198,11 +201,12 @@ void MarsStation::Simulate()
 	while (!events.isEmpty() || !Execution.isEmpty() || !EM.isEmpty() || !PM.isEmpty() || !MM.isEmpty() || !CheukUp.isEmpty() || !Maintenence.isEmpty())
 	{
 		CountDays++;// Read Events
-		if (CountDays == 18)
+		if (CountDays == 8)
 		{
 			int xxxx = 1;
 		}
 		RemoveFromMaintenence();
+		AutoPromote();//Auto promotion
 		DailyEvent();//making mission , cancel or promote 
 		//DailyEvent();//making mission , cancel or promote
 		ExecutionSim();//simulate Execution
@@ -212,7 +216,6 @@ void MarsStation::Simulate()
 		assigPM();//assign Polar Missions
 		assigMM();//assign Mountainous Missions
 		failMission();// re-formulted Mission failed
-		AutoPromote();//Auto promotion
 		UI_PTR->decide();
 	}
 }
@@ -457,7 +460,7 @@ void MarsStation::assigEM()
 			EmergencyRover* R;
 			ER.dequeue(R);
 			E->setAssignmentDay(CountDays);
-			duration =(int) ceil(CountDays + E->getMDUR() + E->getTargetLocation() / ((double)R->getSpeed()));
+			duration =(int) ceil(CountDays + E->getMDUR() + (2*E->getTargetLocation()) / (((double)R->getSpeed())*25));
 			if (R->geMaintenance())
 			{
 				RemoveFromMaintenence(1);
@@ -473,7 +476,7 @@ void MarsStation::assigEM()
 			MountainousRover* R;
 			MR.dequeue(R);
 			E->setAssignmentDay(CountDays);
-			duration = (int)ceil(CountDays + E->getMDUR() + (E->getTargetLocation() / ((double)R->getSpeed())));
+			duration = (int)ceil(CountDays + E->getMDUR() + (2*E->getTargetLocation()) / (((double)R->getSpeed()) * 25));
 			if (R->geMaintenance())
 			{
 				RemoveFromMaintenence(1);
@@ -489,7 +492,7 @@ void MarsStation::assigEM()
 			PolarRover* R;
 			PR.dequeue(R);
 			E->setAssignmentDay(CountDays);
-			duration = (int)ceil(CountDays + E->getMDUR() + (E->getTargetLocation() / ((double)R->getSpeed())));
+			duration = (int)ceil(CountDays + E->getMDUR() + ((2*E->getTargetLocation()) / (((double)R->getSpeed()) * 25)));
 			if (R->geMaintenance())
 			{
 				RemoveFromMaintenence(1);
@@ -518,7 +521,7 @@ void MarsStation::assigPM()
 			PR.dequeue(R);
 			PM.dequeue(p);
 			p->setAssignmentDay(CountDays);
-			duration = (int)ceil(CountDays + p->getMDUR() + (p->getTargetLocation() / ((double)R->getSpeed())));
+			duration = (int)ceil(CountDays + p->getMDUR() + ((2*p->getTargetLocation()) / (((double)R->getSpeed()) * 25)));
 			if (R->geMaintenance())
 			{
 				RemoveFromMaintenence(1);
@@ -550,7 +553,7 @@ void MarsStation::assigMM()
 			MountainousRover* R;
 			MR.dequeue(R);
 			m->setAssignmentDay(CountDays);
-			duration = (int)ceil(CountDays + m->getMDUR() + (m->getTargetLocation() / ((double)R->getSpeed())));
+			duration = (int)ceil(CountDays + m->getMDUR() + ((2*m->getTargetLocation()) / (((double)R->getSpeed()) * 25)));
 			if (R->geMaintenance())
 			{
 				RemoveFromMaintenence(1);
@@ -566,7 +569,7 @@ void MarsStation::assigMM()
 			EmergencyRover* R;
 			ER.dequeue(R);
 			m->setAssignmentDay(CountDays);
-			duration = (int)ceil(CountDays + m->getMDUR() + m->getTargetLocation() / ((double)R->getSpeed()));
+			duration = (int)ceil(CountDays + m->getMDUR() + (2*m->getTargetLocation()) / (((double)R->getSpeed()) * 25));
 			if (R->geMaintenance())
 			{
 				RemoveFromMaintenence(1);
