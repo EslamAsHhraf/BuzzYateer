@@ -201,7 +201,7 @@ void MarsStation::Simulate()
 	while (!events.isEmpty() || !Execution.isEmpty() || !EM.isEmpty() || !PM.isEmpty() || !MM.isEmpty() || !CheukUp.isEmpty() || !Maintenence.isEmpty())
 	{
 		CountDays++;// Read Events
-		if (CountDays == 8)
+		if (CountDays == 28)
 		{
 			int xxxx = 1;
 		}
