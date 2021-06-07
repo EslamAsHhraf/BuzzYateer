@@ -43,6 +43,7 @@ void Formulation::Execute(MarsStation* Master)
 		{
 			FormulatedMission = new MountainousMission(*(MountainousMission*)M);
 			Master->Add2MM(dynamic_cast<MountainousMission*>(FormulatedMission));
+			Master->IncreaseMM();
 		}
 		else
 		{

@@ -1,7 +1,7 @@
 #include "MarsStation.h"
 
-MarsStation::MarsStation(string input, string output) :CountDays(0), Enum(0), Pnum(0), Mnum(0), InputFile(input), OutputFile(output)
-, nOfCheckUp2Maintenence(0), nOfdays2LeaveMaintenence(0), Ap(0), NumMDE(0), NumPDE(0), NumEDE(0)
+MarsStation::MarsStation(string input, string output) :CountDays(0), InputFile(input), OutputFile(output)
+, nOfCheckUp2Maintenence(0), nOfdays2LeaveMaintenence(0), Ap(0), NumMDE(0), NumPDE(0), NumEDE(0), NumMM(0)
 {
 	UI_PTR = new UI(this);
 }
@@ -116,24 +116,29 @@ void MarsStation::setMaintenenceData(int nOfCheckUp2Maintenence, int nOfdays2Lea
 void MarsStation::Add2MM(MountainousMission* M)
 {
 	MM.insert(MM.getLength() + 1, M);
-	Mnum++;
+	
 }
 
 void MarsStation::Add2PM(PolarMission* P)
 {
 	PM.enqueue(P);
-	Pnum++;
+	
 }
 
 void MarsStation::Add2EM(EmergencyMission* E)
 {
 	EM.enqueue(E, E->calcPriority());
-	Enum++;
+	
 }
 
 void MarsStation::setAutoPromotion(int AutoP)
 {
 	this->AutoP = AutoP;
+}
+
+void MarsStation::IncreaseMM()
+{
+	NumMM++;
 }
 
 void MarsStation::AddFormulationEvent(char MissionType, int ED, int ID, int TLOC, int MDUR, int SIG)
@@ -196,8 +201,6 @@ void MarsStation::Promote(int ID)
 			EmergencyMission* EMEr = new EmergencyMission(temp->getFormulationDay(), temp->getMDUR(), temp->getSignificance(), temp->getTargetLocation(), temp->getID());
 			EM.enqueue(EMEr, EMEr->calcPriority());
 			MM.remove(i);
-			Mnum--;
-			Enum++;
 			break;
 		}
 		i++;
@@ -217,8 +220,6 @@ void MarsStation::AutoPromote()
 			Ap++;
 			EM.enqueue(EMEr, EMEr->calcPriority());
 			MM.remove(i);
-			Mnum--;
-			Enum++;
 			i--;
 		}
 		i++;
@@ -362,7 +363,7 @@ void MarsStation::PrintinOutputFile()
 	double AvgWait = (TotalMission > 0) ? SumWait / TotalMission : 0;
 	double AvgExec = (TotalMission > 0) ? SumExec / TotalMission : 0;
 	OutputFile << "Avg Wait = " << AvgWait << ", " << "Avg Exec = " << AvgExec << "\n";
-	int AutoPrmote = (Mnum > 0) ? (Ap / (Mnum + Ap)) * 100 : 0;
+	double AutoPrmote = (NumMM > 0) ? (Ap / (NumMM)) * 100 : 0;
 	OutputFile << "Auto-promoted: " << AutoPrmote << " %" << "\n";
 	OutputFile << "Missions can't done: " << NumMDE+ NumPDE+ NumEDE << "[" << "M: " << NumMDE << "," << "P: " << NumPDE << "," << "E: " << NumEDE << "]" << endl;
 	OutputFile.close();

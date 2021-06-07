@@ -43,10 +43,8 @@ class MarsStation
 	int AutoP;// num days needed to make auto prmote  
 	double Ap;//num missions which  prmote
 	UI* UI_PTR;//presenter of UI Class
+	int NumMM;//num of Mountainous Missions
 	int CountDays;// count of days
-	int Mnum;//num of Mountainous missions 
-	int Enum;//num of emergency missions
-	int Pnum;//num of polar missions
 	int MaxPeriod;//min period make Mission fail
 	int nOfCheckUp2Maintenence;//num check up nedded to set in maintenence
 	int nOfdays2LeaveMaintenence; // num days nedded to leave maintenence
@@ -94,6 +92,7 @@ public:
 	void ExecutionSim();// check if the Execution done 
 	void AutoPromote();// auto prmote Mountainous missions
 	void setAutoPromotion(int AutoP); //Not Used
+	void IncreaseMM();
 	/*********************/
 
 	/*********Modes***********/
