@@ -23,16 +23,18 @@ class MarsStation
 	ifstream InputFile;
 	ofstream OutputFile;
 	Queue<Event*>events;
-	priority_Queue<PolarRover*>PR;
-	priority_Queue<EmergencyRover*>ER;
-	priority_Queue<MountainousRover*>MR;
-	Queue<PolarMission*>PM;
-	priority_Queue<EmergencyMission*>EM;
-	LinkedList<MountainousMission*>MM;
-	Queue<Mission*>CM;
-	priority_Queue<Rover*>CheukUp;
-	priority_Queue<Pair<Mission*, Rover*>>Execution;
-	priority_Queue<Rover*>Maintenence;
+	priority_Queue<PolarRover*>PR;//Polar Rovers
+	priority_Queue<EmergencyRover*>ER;//Emergency Rovers
+	priority_Queue<MountainousRover*>MR;//Mountainous Rovers
+	Queue<PolarMission*>PM;//Polar Mission
+	priority_Queue<EmergencyMission*>EM;//Emergency Mission
+	LinkedList<MountainousMission*>MM;//Mountainous Mission
+	Queue<Mission*>CM; //Completed Mission
+	priority_Queue<Rover*>CheukUp;//Rovers In Checkup
+	priority_Queue<Pair<Mission*, Rover*>>Execution;//Mission & Rovers in Excution
+	Queue<PolarRover*>PolarRoverMaintenence;
+	Queue<EmergencyRover*>EmergencyRoverMaintenence;
+	Queue<MountainousRover*>MountainousRoverMaintenence;
 	int Mode;
 	int MCheckUp;// num days needed for Mountainous rovers 
 	int PCheckUp;// num days needed for polar rovers
@@ -40,13 +42,13 @@ class MarsStation
 	int NMission2CheckUp;
 	int AutoP;// num days needed to make auto prmote  
 	double Ap;//num missions which  prmote
-	UI* UI_PTR;
+	UI* UI_PTR;//presenter of UI Class
 	int CountDays;// count of days
 	int Mnum;//num of Mountainous missions 
 	int Enum;//num of emergency missions
 	int Pnum;//num of polar missions
 	int EventCount;
-	int MaxPeriod;
+	int MaxPeriod;//min period make Mission fail
 	int nOfCheckUp2Maintenence;
 	int nOfdays2LeaveMaintenence;
 	string FailedMissions;
@@ -58,16 +60,17 @@ class MarsStation
 	int NumEDE;//num of emergency mission can't done
 public:
 	MarsStation(string input, string output);
-	void setCheckUpData(int MCheckUp, int PCheckUp, int ECheckUp, int NMission2CheckUp);
+
+	/*********************Maintainence************************/
 	void Add2Maintenence(Rover* R);
-	void RemoveFromMaintenence(bool Force = 0);
+	void RemoveFromMaintenence(Rover* R = nullptr);
+	void RemoveFromPMaintenence(bool Force = 0);
+	void RemoveFromEMaintenence(bool Force = 0);
+	void RemoveFromMMaintenence(bool Force = 0);
 	void setMaintenenceData(int nOfCheckUp2Maintenence, int nOfdays2LeaveMaintenence);
-	void Add2MM(MountainousMission* M);
-	void Add2PM(PolarMission* P);
-	void Add2EM(EmergencyMission* E);
-	void setAutoPromotion(int AutoP);
-	void OpenInputFile(string inputfile);
-	void OpenOutputFile(string outputfile);
+	/*********************************************************/
+
+	/************************Events***************************/
 	void AddFormulationEvent(char MissionType, int ED, int ID, int TLOC, int MDUR, int SIG);
 	void AddPromotionEvent(int ED ,int ID);
 	void AddCanellationEvent(int ED, int ID);
@@ -77,43 +80,78 @@ public:
 	bool CancelMission(int ID);
 	void AddCancellation(int ID, int ED);
 	void Promote(int ID);// prmote Mountainous mission 
-	void AutoPromote();// auto prmote Mountainous missions
-	int CountRovers(int& Er, int& Mr, int& Pr);
-	void failMission();
-	void roverMaintance(Rover* r);
+	/*********************************************************/
+
+	/***********************Simulation*************************/
 	void Simulate();// simulte all function needed every day
-	void setMaxPeriod(int MaxPeriod);
 	void DailyEvent();
+	void Add2MM(MountainousMission* M);
+	void Add2PM(PolarMission* P);
+	void Add2EM(EmergencyMission* E);
 	void CheukupSim();//check if the Cheukup done 
 	void assigEM();// assign Emergency missions
 	void assigPM();// assign Polar missions
 	void assigMM();// assign Mountainous missions
 	void ExecutionSim();// check if the Execution done 
-	Pair<int, string> PrintWaitingMission();
-	Pair<int, string> PrintExecetion();
-	Pair<int, string>Printavailable();
-	Pair<int, string> PrintCompleted();
-	Pair<int, string> PrintCheukUp();
-	Pair<int, string> PrintMaintenece();
-	void PrintCompletedInfo(int& CD, int& ID, int& FD, int& ED, int& WD, int& em, int& pm, int& mm, double&Ap);
-	int getDay();
-	int getCompletedLength();
+	void AutoPromote();// auto prmote Mountainous missions
+	/***********************************************************/
+
+	/************************Modes******************************/
 	int Choose_Mode();
 	void Set_Mode(int x);
+	/***********************************************************/
+
+	/***********************Mission Failed**********************/
 	string FailedMissionsPrint();
 	void resetFailedMission();
+	void setMaxPeriod(int MaxPeriod);
+	void failMission();
+	/***********************************************************/
+
+	/****************Read & Write From/In Files*****************/
 	void ReadInputFile();
 	void PrintinOutputFile();
+	/***********************************************************/
+
+	/***************Handling Corner Cases Of Rovers*************/
 	bool CanDoEM();//if can do Emergency missions or not 
 	bool CanDoMM();//if can do Mountainous missions or not 
 	bool CanDoPM();//if can do Polar missions or not 
 	void IncreaseNumMDE();// increase num of  Mountainous mision can't done
 	void IncreaseNumPDE();//increse num of polar mission can't done
 	void IncreaseNumEDE();//increse num of emergency mission can't done
+	/************************************************************/
+
+	/*********Set The Rovers & Mission Data Before EXE ********/
 	void SetDataEX(Mission* m, Rover* R);
+	/**********************************************************/
+
+	/********************Rovers in Excution********************/
 	bool AssigntoER(Mission* m);
 	bool AssigntoMR(Mission* m);
 	bool AssigntoPR(Mission* m);
+	/**********************************************************/
+
+	/***************Printing in Console************************/
+	Pair<int, string> PrintWaitingMission();
+	Pair<int, string> PrintExecetion();
+	Pair<int, string>Printavailable();
+	Pair<int, string> PrintCompleted();
+	Pair<int, string> PrintCheukUp();
+	Pair<int, string> PrintMaintenece();
+	/***********************************************************/
+
+	/***************************Destructor**********************/
 	~MarsStation();
+	/***********************************************************/
+
+	//strange
+	void roverMaintance(Rover* r);
+	void PrintCompletedInfo(int& CD, int& ID, int& FD, int& ED, int& WD, int& em, int& pm, int& mm, double&Ap);
+	int getDay();
+	int getCompletedLength();
+	void setAutoPromotion(int AutoP);
+	int CountRovers(int& Er, int& Mr, int& Pr);
+	void setCheckUpData(int MCheckUp, int PCheckUp, int ECheckUp, int NMission2CheckUp);
 };
 

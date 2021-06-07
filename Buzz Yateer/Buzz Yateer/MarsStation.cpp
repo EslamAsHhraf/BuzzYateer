@@ -1,13 +1,10 @@
 #include "MarsStation.h"
-#include <string>
+
 MarsStation::MarsStation(string input, string output) :CountDays(0), Enum(0), Pnum(0), Mnum(0), EventCount(0), InputFile(input), OutputFile(output)
 , nOfCheckUp2Maintenence(0), nOfdays2LeaveMaintenence(0), Ap(0), NumMDE(0), NumPDE(0), NumEDE(0)
 {
 	UI_PTR = new UI(this);
-	//OpenInputFile(input);
-	//OpenOutputFile(output);
 }
-
 
 void MarsStation::setCheckUpData(int MCheckUp, int PCheckUp, int ECheckUp, int NMission2CheckUp)
 {
@@ -26,35 +23,94 @@ void MarsStation::Add2Maintenence(Rover* R)
 	if (dynamic_cast<EmergencyRover*>(R))
 	{
 		ER.enqueue(dynamic_cast<EmergencyRover*>(R), INT_MIN + CountDays + nOfdays2LeaveMaintenence);
+		EmergencyRoverMaintenence.enqueue(dynamic_cast<EmergencyRover*>(R));
 	}
 	else if (dynamic_cast<MountainousRover*>(R))
 	{
 		MR.enqueue(dynamic_cast<MountainousRover*>(R), INT_MIN + CountDays + nOfdays2LeaveMaintenence);
+		MountainousRoverMaintenence.enqueue(dynamic_cast<MountainousRover*>(R));
 	}
 	else
 	{
 		PR.enqueue(dynamic_cast<PolarRover*>(R), INT_MIN + CountDays + nOfdays2LeaveMaintenence);
+		PolarRoverMaintenence.enqueue(dynamic_cast<PolarRover*>(R));
 	}
-	Maintenence.enqueue(R, CountDays + nOfdays2LeaveMaintenence);
 	R->setMaintenance(1);
 	R->setMaintenenceDuration(CountDays + nOfdays2LeaveMaintenence);
 	R->resetnoOfCheckUps();
 }
 
-void MarsStation::RemoveFromMaintenence(bool Force)
+void MarsStation::RemoveFromMaintenence(Rover* R)
 {
-	Rover* R;
-	while (Maintenence.peek(R) && (R->getMaintenenceDuration() <= CountDays || Force))
+	if (!R)
 	{
-		Maintenence.dequeue(R);
-		R->setMaintenance(0);
+		RemoveFromPMaintenence();
+		RemoveFromEMaintenence();
+		RemoveFromMMaintenence();
+	}
+	else
+	{
+		if (dynamic_cast<PolarRover*>(R))
+		{
+			RemoveFromPMaintenence(1);
+		}
+		else if (dynamic_cast<EmergencyRover*>(R))
+		{
+			RemoveFromEMaintenence();
+		}
+		else
+		{
+			RemoveFromMMaintenence();
+		}
+	}
+}
+
+void MarsStation::RemoveFromPMaintenence(bool Force)
+{
+	PolarRover* R1;
+	while (PolarRoverMaintenence.peek(R1) && (R1->getMaintenenceDuration() <= CountDays || Force))
+	{
+		PolarRoverMaintenence.dequeue(R1);
+		R1->setMaintenance(0);
+		Force = 0;
+	}
+}
+
+void MarsStation::RemoveFromEMaintenence(bool Force)
+{
+	EmergencyRover* R2;
+	while (EmergencyRoverMaintenence.peek(R2) && (R2->getMaintenenceDuration() <= CountDays || Force))
+	{
+		EmergencyRoverMaintenence.dequeue(R2);
+		R2->setMaintenance(0);
+		Force = 0;
+	}
+}
+
+void MarsStation::RemoveFromMMaintenence(bool Force)
+{
+	MountainousRover* R3;
+	while (MountainousRoverMaintenence.peek(R3) && (R3->getMaintenenceDuration() <= CountDays || Force))
+	{
+		MountainousRoverMaintenence.dequeue(R3);
+		R3->setMaintenance(0);
+		Force = 0;
 	}
 }
 
 void MarsStation::setMaintenenceData(int nOfCheckUp2Maintenence, int nOfdays2LeaveMaintenence)
 {
-	this->nOfCheckUp2Maintenence = nOfCheckUp2Maintenence;
-	this->nOfdays2LeaveMaintenence = nOfdays2LeaveMaintenence;
+	if (nOfCheckUp2Maintenence && nOfdays2LeaveMaintenence)
+	{
+		this->nOfCheckUp2Maintenence = nOfCheckUp2Maintenence;
+		this->nOfdays2LeaveMaintenence = nOfdays2LeaveMaintenence;
+	}
+	else
+	{
+		this->nOfCheckUp2Maintenence = INT_MAX;
+		this->nOfdays2LeaveMaintenence = INT_MAX;
+	}
+	
 }
 
 void MarsStation::Add2MM(MountainousMission* M)
@@ -78,16 +134,6 @@ void MarsStation::Add2EM(EmergencyMission* E)
 void MarsStation::setAutoPromotion(int AutoP)
 {
 	this->AutoP = AutoP;
-}
-
-void MarsStation::OpenInputFile(string inputfile)
-{
-	InputFile.open(inputfile);
-}
-
-void MarsStation::OpenOutputFile(string outputfile)
-{
-	OutputFile.open(outputfile);
 }
 
 void MarsStation::AddFormulationEvent(char MissionType, int ED, int ID, int TLOC, int MDUR, int SIG)
@@ -186,7 +232,6 @@ void MarsStation::AutoPromote()
 	}
 }
 
-
 int MarsStation::CountRovers(int& Er, int& Mr, int& Pr)
 {
 	Er = (NE > 0) ? NE : 0;
@@ -195,20 +240,15 @@ int MarsStation::CountRovers(int& Er, int& Mr, int& Pr)
 	return Er + Mr + Pr;
 }
 
-
 void MarsStation::Simulate()
 {
-	while (!events.isEmpty() || !Execution.isEmpty() || !EM.isEmpty() || !PM.isEmpty() || !MM.isEmpty() || !CheukUp.isEmpty() || !Maintenence.isEmpty())
+	while (!events.isEmpty() || !Execution.isEmpty() || !EM.isEmpty() || !PM.isEmpty() || !MM.isEmpty() || !CheukUp.isEmpty() ||
+		!PolarRoverMaintenence.isEmpty() || !EmergencyRoverMaintenence.isEmpty() || !MountainousRoverMaintenence.isEmpty())
 	{
 		CountDays++;// Read Events
-		if (CountDays == 28)
-		{
-			int xxxx = 1;
-		}
 		RemoveFromMaintenence();
 		AutoPromote();//Auto promotion
 		DailyEvent();//making mission , cancel or promote 
-		//DailyEvent();//making mission , cancel or promote
 		ExecutionSim();//simulate Execution
 		CheukupSim();//Cheukup Simulate
 		/////// assign missions to rovers
@@ -219,72 +259,14 @@ void MarsStation::Simulate()
 		UI_PTR->decide();
 	}
 }
-MarsStation::~MarsStation()
-{
-	delete UI_PTR;
-	Event* E;
-	while (events.dequeue(E))
-	{
-		delete E;
-	}
-	PolarRover* P;
-	while (PR.dequeue(P))
-	{
-		delete P;
-	}
-	MountainousRover* M;
-	while (MR.dequeue(M))
-	{
-		delete M;
-	}
-	EmergencyRover* Er;
-	while (ER.dequeue(Er))
-	{
-		delete Er;
-	}
-	Mission* cm;
-	while (CM.dequeue(cm))
-	{
-		delete cm;
-	}
-	Rover* r;
-	while (CheukUp.dequeue(r))
-	{
-		delete r;
-	}
-	Pair<Mission*, Rover*>p;
-	while (Execution.dequeue(p))
-	{
-		delete p.first;
-		delete p.second;
-	}
-	PolarMission* pm;
-	while (PM.dequeue(pm))
-	{
-		delete pm;
-	}
-	EmergencyMission* em;
-	while (EM.dequeue(em))
-	{
-		delete em;
-	}
-	while (MM.getEntry(1))
-	{
-		MM.remove(1);
-	}
-	Rover* rfm;
-	while (Maintenence.dequeue(rfm))
-	{
-		delete rfm;
-	}
-}
+
 void MarsStation::ReadInputFile()
 {
 	UI_PTR->Start();
     int NOFM, MCD, PCD, ECD;
 	InputFile >> NM >> NP >> NE >> MCD >> PCD >> ECD >> NOFM;
 	setCheckUpData(MCD, PCD, ECD, NOFM);
-    for(int i=0;i< NM;i++)
+	for (int i = 0; i < NM; i++)
 	{
 		double MS;
 		InputFile >> MS;
@@ -347,6 +329,7 @@ void MarsStation::ReadInputFile()
 		}
 	}
 }
+
 void MarsStation::PrintinOutputFile()
 {
 	double SumWait = 0, SumExec = 0;
@@ -389,43 +372,51 @@ void MarsStation::PrintinOutputFile()
 	OutputFile << "Missions can't done: " << NumMDE+ NumPDE+ NumEDE << "[" << "M: " << NumMDE << "," << "P: " << NumPDE << "," << "E: " << NumEDE << "]" << endl;
 	OutputFile.close();
 }
+
 bool MarsStation::CanDoEM()
 {
 	return (NM>0)|| (NP>0)|| (NE>0);
 }
+
 bool MarsStation::CanDoMM()
 {
 	return (NM > 0) || (NE > 0);
 }
+
 bool MarsStation::CanDoPM()
 {
 	return  (NP > 0) ;
 }
+
 void MarsStation::IncreaseNumMDE()
 {
 	NumMDE++;
 }
+
 void MarsStation::IncreaseNumPDE()
 {
 	NumPDE++;
 }
+
 void MarsStation::IncreaseNumEDE()
 {
 	NumEDE++;
 }
+
 void MarsStation::SetDataEX(Mission * m, Rover * R)
 {
 	m->setAssignmentDay(CountDays);
 	int duration = (int)ceil(CountDays + m->getMDUR() + (2 * m->getTargetLocation()) / (((double)R->getSpeed()) * 25));
 	if (R->geMaintenance())
 	{
-		RemoveFromMaintenence(1);
+		RemoveFromMaintenence(R);
 	}
 	m->setExPeriod(duration - CountDays);
 	m->setCD(duration);
 	Execution.enqueue(makepair((Mission*)(m), (Rover*)(R)), -duration);
 	R->operator++();
 }
+
 bool MarsStation::AssigntoER(Mission* m)
 {
 	if (!ER.isEmpty())
@@ -438,6 +429,7 @@ bool MarsStation::AssigntoER(Mission* m)
 	else
 	return false;
 }
+
 bool MarsStation::AssigntoMR(Mission * m)
 {
 	if (!MR.isEmpty())
@@ -450,6 +442,7 @@ bool MarsStation::AssigntoMR(Mission * m)
 	else
 		return false;
 }
+
 bool MarsStation::AssigntoPR(Mission * m)
 {
 	if (!PR.isEmpty())
@@ -462,9 +455,13 @@ bool MarsStation::AssigntoPR(Mission * m)
 	else
 		return false;
 }
+
 void MarsStation::setMaxPeriod(int MaxPeriod)
 {
-	this->MaxPeriod = MaxPeriod;
+	if (MaxPeriod)
+		this->MaxPeriod = MaxPeriod;
+	else
+		this->MaxPeriod = INT_MAX;
 }
 
 void MarsStation::DailyEvent()
@@ -690,7 +687,6 @@ Pair<int, string> MarsStation::PrintWaitingMission()
 	return Pair<int, string>();
 }
 
-
 Pair<int, string> MarsStation::PrintExecetion()
 {
 	priority_Queue<Pair<Mission*, Rover*>> Executiont = Execution;
@@ -876,31 +872,33 @@ Pair<int, string> MarsStation::PrintCheukUp()
 
 Pair<int, string> MarsStation::PrintMaintenece()
 {
-	priority_Queue<Rover*>Maintenencet = Maintenence;
+	Queue<PolarRover*>PolarMaintenence = PolarRoverMaintenence;
+	Queue<EmergencyRover*>EmergencyMaintenence = EmergencyRoverMaintenence;
+	Queue<MountainousRover*>MountainousMaintenence = MountainousRoverMaintenence;
 	int num = 0;
-	Rover* R;
+	PolarRover* R1;
+	EmergencyRover* R2;
+	MountainousRover* R3;
 	string s1 = "[";
 	string s2 = "(";
 	string s3 = "{";
-	while (Maintenencet.dequeue(R))
+	while (PolarMaintenence.dequeue(R1))
 	{
 		num++;
-		if (dynamic_cast<EmergencyRover*>(R))
-		{
-			s1 += to_string(R->getID());
-			s1.push_back(',');
-
-		}
-		else if (dynamic_cast<PolarRover*>(R))
-		{
-			s2 += to_string(R->getID());
-			s2.push_back(',');
-		}
-		else if (dynamic_cast<MountainousRover*>(R))
-		{
-			s3 += to_string(R->getID());
-			s3.push_back(',');
-		}
+		s2 += to_string(R1->getID());
+		s2.push_back(',');
+	}
+	while (EmergencyMaintenence.dequeue(R2))
+	{
+		num++;
+		s1 += to_string(R2->getID());
+		s1.push_back(',');
+	}
+	while (MountainousMaintenence.dequeue(R3))
+	{
+		num++;
+		s3 += to_string(R3->getID());
+		s3.push_back(',');
 	}
 	s1[s1.size() - 1] = ']';
 	s2[s2.size() - 1] = ')';
@@ -922,7 +920,6 @@ Pair<int, string> MarsStation::PrintMaintenece()
 
 void MarsStation::PrintCompletedInfo(int& CD, int& ID, int& FD, int& ED, int& WD, int& em, int& pm, int& mm, double& Ap)
 {
-	//pm = mm = em = 0;
 	Mission* entry;
 
 	CM.dequeue(entry);
@@ -1029,6 +1026,8 @@ void MarsStation::failMission()
 	}
 
 }
+
+/***********************************************/
 void MarsStation::roverMaintance(Rover* r)
 {
 
@@ -1037,4 +1036,71 @@ void MarsStation::roverMaintance(Rover* r)
 		r->setMaintenance(1);
 	}
 
+}
+/*************************************************/
+MarsStation::~MarsStation()
+{
+	delete UI_PTR;
+	Event* E;
+	while (events.dequeue(E))
+	{
+		delete E;
+	}
+	PolarRover* P;
+	while (PR.dequeue(P))
+	{
+		delete P;
+	}
+	MountainousRover* M;
+	while (MR.dequeue(M))
+	{
+		delete M;
+	}
+	EmergencyRover* Er;
+	while (ER.dequeue(Er))
+	{
+		delete Er;
+	}
+	Mission* cm;
+	while (CM.dequeue(cm))
+	{
+		delete cm;
+	}
+	Rover* r;
+	while (CheukUp.dequeue(r))
+	{
+		delete r;
+	}
+	Pair<Mission*, Rover*>p;
+	while (Execution.dequeue(p))
+	{
+		delete p.first;
+		delete p.second;
+	}
+	PolarMission* pm;
+	while (PM.dequeue(pm))
+	{
+		delete pm;
+	}
+	EmergencyMission* em;
+	while (EM.dequeue(em))
+	{
+		delete em;
+	}
+	while (MM.getEntry(1))
+	{
+		MM.remove(1);
+	}
+	while (PolarRoverMaintenence.dequeue(P))
+	{
+		delete P;
+	}
+	while (EmergencyRoverMaintenence.dequeue(Er))
+	{
+		delete Er;
+	}
+	while (MountainousRoverMaintenence.dequeue(M))
+	{
+		delete M;
+	}
 }
