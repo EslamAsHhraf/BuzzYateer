@@ -12,6 +12,6 @@ public:
 	Mission*& getFormulatedMission();
 	char getmissiontype();
 	void setFormulatedMission(int ED = 0, int ID = 0, int TLOC = 0, int MDUR = 0, int SIG = 0);
-	void Execute(MarsStation* Master);
+	void Execute(MarsStation* Master);//excute event
 	~Formulation();
 };

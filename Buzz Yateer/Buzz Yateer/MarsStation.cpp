@@ -1,6 +1,6 @@
 #include "MarsStation.h"
 
-MarsStation::MarsStation(string input, string output) :CountDays(0), Enum(0), Pnum(0), Mnum(0), EventCount(0), InputFile(input), OutputFile(output)
+MarsStation::MarsStation(string input, string output) :CountDays(0), Enum(0), Pnum(0), Mnum(0), InputFile(input), OutputFile(output)
 , nOfCheckUp2Maintenence(0), nOfdays2LeaveMaintenence(0), Ap(0), NumMDE(0), NumPDE(0), NumEDE(0)
 {
 	UI_PTR = new UI(this);
@@ -251,7 +251,6 @@ void MarsStation::Simulate()
 		DailyEvent();//making mission , cancel or promote 
 		ExecutionSim();//simulate Execution
 		CheukupSim();//Cheukup Simulate
-		/////// assign missions to rovers
 		assigEM();//assign Emergncy Missions
 		assigPM();//assign Polar Missions
 		assigMM();//assign Mountainous Missions
@@ -336,7 +335,7 @@ void MarsStation::PrintinOutputFile()
 	int CD, ID, FD, WD, ED, Mm, Em, Pm, TotalMission=0, Er = 0, Mr = 0, Pr = 0, TotalRover;
 	Pm = Mm = Em = 0;
 	TotalMission =0;
-	OutputFile << "CD" << "		" << "ID" << "		" << "FD" << "		" << "WD" << "		" << "ED" << " " << endl;
+	OutputFile << "CD" << "\t" << "ID" << "\t" << "FD" <<  "\t" << "WD" << "\t" << "ED" << " " << endl;
 	Mission* entry;
 					
 	while (CM.dequeue(entry))
@@ -358,7 +357,7 @@ void MarsStation::PrintinOutputFile()
 		WD = entry->getWaitingDays();
 		SumWait += WD;
 		SumExec += ED;
-		OutputFile << CD << "		" << ID << "		" << FD << "		" << WD << "		" << ED << "       " << endl;
+		OutputFile << CD <<  "\t" << ID <<  "\t" << FD <<  "\t" << WD <<  "\t" << ED <<  "\t" << endl;
 	}
 	TotalRover =CountRovers(Er, Mr, Pr);
 	OutputFile << endl;
@@ -368,7 +367,8 @@ void MarsStation::PrintinOutputFile()
 	OutputFile << "Missions: " << TotalMission << "[" << "M: " << Mm << "," << "P: " << Pm << "," << "E: " << Em << "]" << endl;
 	OutputFile << "Rovers: " << TotalRover << "[" << "M: " << Mr << "," << "P: " << Pr << "," << "E: " << Er << "]" << endl;
 	OutputFile << "Avg Wait = " << SumWait / TotalMission << ", " << "Avg Exec = " << SumExec / TotalMission << "\n";
-	OutputFile << "Auto-promoted: " << (Ap / (Mnum+Ap)) * 100<<" %"<<"\n";
+	int AutoPrmote = (Mnum > 0) ? (Ap / (Mnum + Ap)) * 100 : 0;
+	OutputFile << "Auto-promoted: " << AutoPrmote << " %" << "\n";
 	OutputFile << "Missions can't done: " << NumMDE+ NumPDE+ NumEDE << "[" << "M: " << NumMDE << "," << "P: " << NumPDE << "," << "E: " << NumEDE << "]" << endl;
 	OutputFile.close();
 }

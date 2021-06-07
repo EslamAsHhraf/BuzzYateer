@@ -22,7 +22,7 @@ class MarsStation
 {
 	ifstream InputFile;
 	ofstream OutputFile;
-	Queue<Event*>events;
+	Queue<Event*>events;// events
 	priority_Queue<PolarRover*>PR;//Polar Rovers
 	priority_Queue<EmergencyRover*>ER;//Emergency Rovers
 	priority_Queue<MountainousRover*>MR;//Mountainous Rovers
@@ -39,7 +39,7 @@ class MarsStation
 	int MCheckUp;// num days needed for Mountainous rovers 
 	int PCheckUp;// num days needed for polar rovers
 	int ECheckUp;// num days needed for Emergency rovers
-	int NMission2CheckUp;
+	int NMission2CheckUp;////num mission  nedded to set in CheckUp
 	int AutoP;// num days needed to make auto prmote  
 	double Ap;//num missions which  prmote
 	UI* UI_PTR;//presenter of UI Class
@@ -47,10 +47,9 @@ class MarsStation
 	int Mnum;//num of Mountainous missions 
 	int Enum;//num of emergency missions
 	int Pnum;//num of polar missions
-	int EventCount;
 	int MaxPeriod;//min period make Mission fail
-	int nOfCheckUp2Maintenence;
-	int nOfdays2LeaveMaintenence;
+	int nOfCheckUp2Maintenence;//num check up nedded to set in maintenence
+	int nOfdays2LeaveMaintenence; // num days nedded to leave maintenence
 	string FailedMissions;
 	int NM;//num of Mountainous rovers 
     int	NP; //num of polar rovers 
@@ -84,7 +83,7 @@ public:
 
 	/***********************Simulation*************************/
 	void Simulate();// simulte all function needed every day
-	void DailyEvent();
+	void DailyEvent();// Excute the events 
 	void Add2MM(MountainousMission* M);
 	void Add2PM(PolarMission* P);
 	void Add2EM(EmergencyMission* E);
@@ -127,9 +126,9 @@ public:
 	/**********************************************************/
 
 	/********************Rovers in Excution********************/
-	bool AssigntoER(Mission* m);
-	bool AssigntoMR(Mission* m);
-	bool AssigntoPR(Mission* m);
+	bool AssigntoER(Mission* m);// asssign missions to emergency rover
+	bool AssigntoMR(Mission* m);// asssign missions to Mountainous rover
+	bool AssigntoPR(Mission* m);// asssign missions to polar rover
 	/**********************************************************/
 
 	/***************Printing in Console************************/

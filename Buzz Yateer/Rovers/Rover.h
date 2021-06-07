@@ -12,10 +12,10 @@ class Rover {
 	int MaintenenceDuration;
 public:
 	Rover(double speed, bool status = 1, bool underMaintenance = 0, int NoOfCheckUps = 0);
-	void operator ++();
-	void resetnoOfMissions();
-	void resetnoOfCheckUps();
-	void NoOfCheckUpsIncrement();
+	void operator ++();//increase num mission is done by rover
+	void resetnoOfMissions();// num mission is done by rover = 0 
+	void resetnoOfCheckUps();//num CheckUp of rover = 0
+	void NoOfCheckUpsIncrement();//increase num CheckUp of rover
 	void setMaintenenceDuration(int MaintenenceDuration);
 	int getMaintenenceDuration();
 	double getSpeed();
@@ -25,7 +25,7 @@ public:
 	int getNoOfCheckUps();
 	void setMaintenance(bool x);
 	bool geMaintenance();
-	void setCheukDuration(int days);
+	void setCheukDuration(int days);// set days are nedded in check up
 	int getCheukDuration();
 	int getID();
 	virtual ~Rover();

@@ -6,7 +6,7 @@ class EmergencyMission:public Mission
 public: 
 	EmergencyMission();
 	EmergencyMission(int F, int D, int S, int TL, int id);
-	int calcPriority();
+	int calcPriority();//calculate priorty
 	~EmergencyMission();
 };
 

@@ -14,16 +14,16 @@ public:
 	Mission(int F, int D, int S, int TL, int id);
 	void setXFailed(bool XF);
 	bool getXFailed();
-	void setFormulationDay(int fDay);
-	void setSignificance(int S);
-	void setTargetLocation(int TL);
+	void setFormulationDay(int fDay);// set FormulationDay
+	void setSignificance(int S);// set Significance
+	void setTargetLocation(int TL);//set TargetLocation
 	void setID(int id);
 	void setCD(int cd);
-	void setWaitingDays(int wd);
-	void setAssignmentDay(int ad);
-	int getFormulationDay() const;
-	int getSignificance() const;
-	int getTargetLocation() const;
+	void setWaitingDays(int wd);//set WaitingDays
+	void setAssignmentDay(int ad); //set AssignmentDay
+	int getFormulationDay() const;//get FormulationDay
+	int getSignificance() const;//get Significance
+	int getTargetLocation() const;//get TargetLocation
 	int getID() const;
 	int getCD() const;
 	int getAssignmentDay();

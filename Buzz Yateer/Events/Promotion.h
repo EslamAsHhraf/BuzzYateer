@@ -8,6 +8,6 @@ public:
 	Promotion(int ED ,int id);
 	void setId(int id);
 	int  getID();
-	void Execute(MarsStation* Master);
+	void Execute(MarsStation* Master);//excute event
 	~Promotion();
 };
