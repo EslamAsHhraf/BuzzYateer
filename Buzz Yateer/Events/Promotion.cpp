@@ -2,7 +2,6 @@
 Promotion::Promotion(int ED, int id) :Event(ED)
 {
 	setId(id);
-	//Execute();
 }
 
 void Promotion::setId(int id)

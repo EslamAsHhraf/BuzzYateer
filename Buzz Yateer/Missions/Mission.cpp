@@ -119,5 +119,5 @@ int Mission::getExPeriod()
 
 Mission::~Mission()
 {
-	//Empty
+	
 }

@@ -52,7 +52,7 @@ class MarsStation
 	int NM;//num of Mountainous rovers 
 	int	NP; //num of polar rovers 
 	int NE;//num of emergency rovers
-	int NumMDE;//num of Mountainous mision can't done
+	int NumMDE;//num of Mountainous mission can't done
 	int	NumPDE; //num of polar mission can't done
 	int NumEDE;//num of emergency mission can't done
 public:

@@ -56,11 +56,11 @@ void MarsStation::RemoveFromMaintenence(Rover* R)
 		}
 		else if (dynamic_cast<EmergencyRover*>(R))
 		{
-			RemoveFromEMaintenence();
+			RemoveFromEMaintenence(1);
 		}
 		else
 		{
-			RemoveFromMMaintenence();
+			RemoveFromMMaintenence(1);
 		}
 	}
 }
@@ -968,7 +968,7 @@ void MarsStation::failMission()
 	string s1 = "[";
 	string s2 = "{";
 	Pair<Mission*, Rover*> Ex;
-	while (Execution.peek(Ex) && Ex.first->getCD() - Ex.first->getAssignmentDay() > MaxPeriod && CountDays == MaxPeriod + Ex.first->getAssignmentDay())
+	while (Execution.peek(Ex) && Ex.first->getCD() - Ex.first->getAssignmentDay() > MaxPeriod && CountDays >= MaxPeriod + Ex.first->getAssignmentDay())
 	{
 		if (dynamic_cast<PolarMission*>(Ex.first) || (dynamic_cast<MountainousMission*>(Ex.first) && dynamic_cast<MountainousRover*>(Ex.second))
 			|| (dynamic_cast<EmergencyMission*>(Ex.first) && dynamic_cast<EmergencyRover*>(Ex.second)))
@@ -1005,15 +1005,15 @@ void MarsStation::failMission()
 			s1 += to_string(Ex.first->getID());
 			s1.push_back(',');
 		}
-		s1[s1.size() - 1] = ']';
-		s2[s2.size() - 1] = '}';
-		if (s1.size() <= 2)
-			s1 = "";
-		if (s2.size() <= 2)
-			s2 = "";
-		FailedMissions = s1 + s2;
+	
 	}
-
+	s1[s1.size() - 1] = ']';
+	s2[s2.size() - 1] = '}';
+	if (s1.size() <= 2)
+		s1 = "";
+	if (s2.size() <= 2)
+		s2 = "";
+	FailedMissions = s1 + s2;
 }
 
 /***********************************************/
