@@ -4,7 +4,6 @@ int Rover::COUNT = 0;
 Rover::Rover(double speed, bool status, bool underMaintenance, int NoOfCheckUps) :noOfMissions(0), Speed(speed), ID(++COUNT),
 MaintenenceDuration(0), underMaintenance(0), NoOfCheckUps(0)
 {
-	setfree(status);
 }
 
 void Rover::operator++()
@@ -72,17 +71,6 @@ int Rover::getID()
 {
 	return ID;
 }
-
-void Rover::setfree(bool s)
-{
-	status = s;
-}
-
-bool Rover::getfree()
-{
-	return status;
-}
-
 
 int Rover::getNoOfCheckUps()
 {

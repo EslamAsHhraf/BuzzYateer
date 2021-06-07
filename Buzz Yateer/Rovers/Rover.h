@@ -5,7 +5,6 @@ class Rover {
 	int noOfMissions;
 	bool underMaintenance;
 	int NoOfCheckUps;
-	bool status;
 	int CheukDuration;
 	int ID;
 	static int COUNT;
@@ -16,17 +15,15 @@ public:
 	void resetnoOfMissions();// num mission is done by rover = 0 
 	void resetnoOfCheckUps();//num CheckUp of rover = 0
 	void NoOfCheckUpsIncrement();//increase num CheckUp of rover
-	void setMaintenenceDuration(int MaintenenceDuration);
-	int getMaintenenceDuration();
-	double getSpeed();
-	int getnoOfMissions();
-	void setfree(bool s = 1);
-	bool getfree();
-	int getNoOfCheckUps();
+	void setMaintenenceDuration(int MaintenenceDuration); //set Maintenence Duration of Rovers
+	int getMaintenenceDuration();//get Maintenence Duration of Rovers
+	double getSpeed(); //get speed
+	int getnoOfMissions(); //get Number of Missions The Rover Executed
+	int getNoOfCheckUps(); //get Number of Checkups the rovers underwent
 	void setMaintenance(bool x);
-	bool geMaintenance();
-	void setCheukDuration(int days);// set days are nedded in check up
-	int getCheukDuration();
-	int getID();
+	bool geMaintenance(); //Check if used
+	void setCheukDuration(int days);//set days nedded in check up
+	int getCheukDuration(); //get days nedded in check up
+	int getID(); //get Rover ID
 	virtual ~Rover();
-};	
+};

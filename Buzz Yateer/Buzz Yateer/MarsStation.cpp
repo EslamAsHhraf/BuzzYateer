@@ -149,12 +149,6 @@ void MarsStation::AddPromotionEvent(int ED, int ID)
 	events.enqueue(P);
 }
 
-void MarsStation::AddCanellationEvent(int ED, int ID)
-{
-	cancellation* C = new cancellation(ED, ID);
-	events.enqueue(C);
-}
-
 void MarsStation::AddPolarRover(double speed)
 {
 	PR.enqueue(new PolarRover(speed), speed);
@@ -185,7 +179,7 @@ bool MarsStation::CancelMission(int ID)
 	return 0;
 }
 
-void MarsStation::AddCancellation(int ID, int ED)
+void MarsStation::AddCanellationEvent(int ID, int ED)
 {
 	cancellation* c = new cancellation(ID, ED);
 	events.enqueue(c);
@@ -200,7 +194,6 @@ void MarsStation::Promote(int ID)
 		{
 			MountainousMission* temp = MM.getEntry(i);
 			EmergencyMission* EMEr = new EmergencyMission(temp->getFormulationDay(), temp->getMDUR(), temp->getSignificance(), temp->getTargetLocation(), temp->getID());
-			EMEr->setFormulationDay(CountDays);
 			EM.enqueue(EMEr, EMEr->calcPriority());
 			MM.remove(i);
 			Mnum--;
@@ -219,8 +212,8 @@ void MarsStation::AutoPromote()
 		if (MM.getEntry(i)->getFormulationDay() + AutoP == CountDays)
 		{
 			MountainousMission* temp = MM.getEntry(i);
-			EmergencyMission* EMEr = new EmergencyMission(temp->getFormulationDay(), temp->getMDUR(), temp->getSignificance(), temp->getTargetLocation(), temp->getID());
-			EMEr->setFormulationDay(CountDays);
+			EmergencyMission* EMEr = new EmergencyMission(temp->getFormulationDay(), temp->getMDUR()
+				, temp->getSignificance(), temp->getTargetLocation(), temp->getID());
 			Ap++;
 			EM.enqueue(EMEr, EMEr->calcPriority());
 			MM.remove(i);
@@ -317,7 +310,7 @@ void MarsStation::ReadInputFile()
 			{
 				int ED, ID;
 				InputFile >> ED >> ID;
-				AddCancellation(ID, ED);
+				AddCanellationEvent(ID, ED);
 			}
 			else if ((Event == 'P'))
 			{
@@ -366,7 +359,9 @@ void MarsStation::PrintinOutputFile()
 	OutputFile << ".....................\n";
 	OutputFile << "Missions: " << TotalMission << "[" << "M: " << Mm << "," << "P: " << Pm << "," << "E: " << Em << "]" << endl;
 	OutputFile << "Rovers: " << TotalRover << "[" << "M: " << Mr << "," << "P: " << Pr << "," << "E: " << Er << "]" << endl;
-	OutputFile << "Avg Wait = " << SumWait / TotalMission << ", " << "Avg Exec = " << SumExec / TotalMission << "\n";
+	double AvgWait = (TotalMission > 0) ? SumWait / TotalMission : 0;
+	double AvgExec = (TotalMission > 0) ? SumExec / TotalMission : 0;
+	OutputFile << "Avg Wait = " << AvgWait << ", " << "Avg Exec = " << AvgExec << "\n";
 	int AutoPrmote = (Mnum > 0) ? (Ap / (Mnum + Ap)) * 100 : 0;
 	OutputFile << "Auto-promoted: " << AutoPrmote << " %" << "\n";
 	OutputFile << "Missions can't done: " << NumMDE+ NumPDE+ NumEDE << "[" << "M: " << NumMDE << "," << "P: " << NumPDE << "," << "E: " << NumEDE << "]" << endl;
@@ -414,7 +409,7 @@ void MarsStation::SetDataEX(Mission * m, Rover * R)
 	m->setExPeriod(duration - CountDays);
 	m->setCD(duration);
 	Execution.enqueue(makepair((Mission*)(m), (Rover*)(R)), -duration);
-	R->operator++();
+	++(*R);
 }
 
 bool MarsStation::AssigntoER(Mission* m)
@@ -918,7 +913,12 @@ Pair<int, string> MarsStation::PrintMaintenece()
 	return makepair<int, string>(num, s1 + " " + s2 + " " + s3);
 }
 
-void MarsStation::PrintCompletedInfo(int& CD, int& ID, int& FD, int& ED, int& WD, int& em, int& pm, int& mm, double& Ap)
+int MarsStation::getDay()
+{
+	return CountDays;
+}
+
+void MarsStation::PrintCompletedInfo(int& CD, int& ID, int& FD, int& ED, int& WD, int& em, int& pm, int& mm)
 {
 	Mission* entry;
 
@@ -940,18 +940,6 @@ void MarsStation::PrintCompletedInfo(int& CD, int& ID, int& FD, int& ED, int& WD
 	ED = entry->getExPeriod();
 	WD = entry->getWaitingDays();
 
-}
-
-int MarsStation::getDay()
-{
-	return CountDays;
-}
-
-int MarsStation::getCompletedLength()
-{
-
-	//return CM.GetLength();
-	return CM.GetLength();
 }
 
 int MarsStation::Choose_Mode()
@@ -1028,15 +1016,7 @@ void MarsStation::failMission()
 }
 
 /***********************************************/
-void MarsStation::roverMaintance(Rover* r)
-{
 
-	if (r->getnoOfMissions() >= 2 * NMission2CheckUp + 1) {
-		r->setfree(0);
-		r->setMaintenance(1);
-	}
-
-}
 /*************************************************/
 MarsStation::~MarsStation()
 {

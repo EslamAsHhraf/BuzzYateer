@@ -5,13 +5,11 @@ template <typename T>
 class Queue :public QueueADT<T>
 {
 private:
-	int count ;
 	Node<T>* backPtr;
 	Node<T>* frontPtr;
 public:
 	Queue()
 	{
-		count = 0;
 		backPtr = nullptr;
 		frontPtr = nullptr;
 	}
@@ -21,7 +19,6 @@ public:
 	}
 	bool enqueue(const T& newEntry)
 	{
-		count++;
 		Node<T>* newNodePtr = new Node<T>(newEntry);
 
 		if (isEmpty())
@@ -37,17 +34,13 @@ public:
 	{
 		if (isEmpty())
 			return false;
-
 		Node<T>* nodeToDeletePtr = frontPtr;
 		frntEntry = frontPtr->getItem();
 		frontPtr = frontPtr->getNext();
 
 		if (nodeToDeletePtr == backPtr)
 			backPtr = nullptr;
-
-
 		delete nodeToDeletePtr;
-
 		return true;
 
 	}
@@ -85,9 +78,5 @@ public:
 			backPtr = ptr;
 			NodePtr = NodePtr->getNext();
 		}
-	}
-	int GetLength() const
-	{
-		return count;
 	}
 };
