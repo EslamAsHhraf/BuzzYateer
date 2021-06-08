@@ -55,6 +55,7 @@ class MarsStation
 	int NumMDE;//num of Mountainous mission can't done
 	int	NumPDE; //num of polar mission can't done
 	int NumEDE;//num of emergency mission can't done
+	Queue<Pair<int,char>>FailedIDs_Types;
 public:
 
 	MarsStation(string input, string output);

@@ -240,6 +240,10 @@ void MarsStation::Simulate()
 		!PolarRoverMaintenence.isEmpty() || !EmergencyRoverMaintenence.isEmpty() || !MountainousRoverMaintenence.isEmpty())
 	{
 		CountDays++;// Read Events
+		if (CountDays == 42)
+		{
+			int x = 0;
+		}
 		RemoveFromMaintenence();
 		AutoPromote();//Auto promotion
 		DailyEvent();//making mission , cancel or promote 
@@ -622,6 +626,44 @@ void MarsStation::ExecutionSim()
 					PR.enqueue(p, p->getSpeed());
 			}
 		}
+		Pair<Mission*, Rover*> Ex;
+		while (Execution.peek(Ex) && Ex.first->getCD() - Ex.first->getAssignmentDay() > MaxPeriod && CountDays >= MaxPeriod + Ex.first->getAssignmentDay())
+		{
+			if (dynamic_cast<PolarMission*>(Ex.first) || (dynamic_cast<MountainousMission*>(Ex.first) && dynamic_cast<MountainousRover*>(Ex.second))
+				|| (dynamic_cast<EmergencyMission*>(Ex.first) && dynamic_cast<EmergencyRover*>(Ex.second)))
+			{
+				return;
+			}
+			Execution.dequeue(Ex);
+			Add2Maintenence(Ex.second);
+			if (!Ex.second->geMaintenance())
+			{
+				if (dynamic_cast<MountainousRover*>(Ex.second)) {
+					Ex.second->setCheukDuration(CountDays + MCheckUp);
+					CheukUp.enqueue(Ex.second, -(CountDays + MCheckUp));
+				}
+				else if (dynamic_cast<PolarRover*>(Ex.second)) {
+					Ex.second->setCheukDuration(CountDays + PCheckUp);
+					CheukUp.enqueue(Ex.second, -(CountDays + PCheckUp));
+				}
+				else if (dynamic_cast<EmergencyRover*>(Ex.second)) {
+					Ex.second->setCheukDuration(CountDays + ECheckUp);
+					CheukUp.enqueue(Ex.second, -(CountDays + ECheckUp));
+				}
+				Ex.second->resetnoOfMissions();
+			}
+			Ex.first->setFormulationDay(CountDays);
+			Ex.first->setXFailed(1);
+			if (dynamic_cast<MountainousMission*>(Ex.first)) {
+				MM.insert(MM.getLength() + 1, (dynamic_cast<MountainousMission*>(Ex.first)));
+				FailedIDs_Types.enqueue(makepair(Ex.first->getID(), 'M'));
+			}
+			else if (dynamic_cast<EmergencyMission*>(Ex.first)) {
+				EM.enqueue((dynamic_cast<EmergencyMission*>(Ex.first)), 0);
+				FailedIDs_Types.enqueue(makepair(Ex.first->getID(), 'E'));
+			}
+
+		}
 	}
 }
 
@@ -967,6 +1009,20 @@ void MarsStation::failMission()
 {
 	string s1 = "[";
 	string s2 = "{";
+	Pair<int, char>p;
+	while (FailedIDs_Types.dequeue(p))
+	{
+		if (p.second == 'M')
+		{
+			s2 += to_string(p.first);
+			s2.push_back(',');
+		}
+		else
+		{
+			s1 += to_string(p.first);
+			s1.push_back(',');
+		}
+	}
 	Pair<Mission*, Rover*> Ex;
 	while (Execution.peek(Ex) && Ex.first->getCD() - Ex.first->getAssignmentDay() > MaxPeriod && CountDays >= MaxPeriod + Ex.first->getAssignmentDay())
 	{
