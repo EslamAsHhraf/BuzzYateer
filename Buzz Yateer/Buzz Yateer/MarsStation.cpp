@@ -240,10 +240,6 @@ void MarsStation::Simulate()
 		!PolarRoverMaintenence.isEmpty() || !EmergencyRoverMaintenence.isEmpty() || !MountainousRoverMaintenence.isEmpty())
 	{
 		CountDays++;// Read Events
-		if (CountDays == 42)
-		{
-			int x = 0;
-		}
 		RemoveFromMaintenence();
 		AutoPromote();//Auto promotion
 		DailyEvent();//making mission , cancel or promote 
