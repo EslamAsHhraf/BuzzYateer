@@ -239,7 +239,7 @@ void MarsStation::Simulate()
 	while (!events.isEmpty() || !Execution.isEmpty() || !EM.isEmpty() || !PM.isEmpty() || !MM.isEmpty() || !CheukUp.isEmpty() ||
 		!PolarRoverMaintenence.isEmpty() || !EmergencyRoverMaintenence.isEmpty() || !MountainousRoverMaintenence.isEmpty())
 	{
-		CountDays++;// Read Events
+		CountDays++;
 		RemoveFromMaintenence();
 		AutoPromote();//Auto promotion
 		DailyEvent();//making mission , cancel or promote 
@@ -556,7 +556,7 @@ void MarsStation::assigMM()
 void MarsStation::ExecutionSim()
 {
 	Pair<Mission*, Rover*> Ex;
-	while (Execution.peek(Ex) && Ex.first->getCD() <= CountDays)
+	while (Execution.peek(Ex) && Ex.first->getCD() == CountDays)
 	{
 		Execution.dequeue(Ex);
 		// re-formulated Missions 
