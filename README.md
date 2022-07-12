@@ -11,14 +11,16 @@
     <br> 
 </p>
 
-## <img align= center width=50px height=50px src="https://thumbs.gfycat.com/HeftyDescriptiveChimneyswift-size_restricted.gif"> Table of Contents
+## <img align= center width=50px height=50px src="https://user-images.githubusercontent.com/71986226/178468913-84c3151c-e8d1-4420-a9e9-b2434e9c2f75.gif"> Table of Contents
 
 - <a href ="#about"> 📙 overview</a>
 - <a href ="#Started"> 💻 Get Started</a>
 - <a href ="#Work"> ⚙️   How project Work</a>
+- <a href ="#Work"> 🧱   Chosen Data Structure</a>
 - <a href ="#Screenshots"> 📷 Demo Screenshots</a>
-- <a href ="#video"> 📷 Demo Screenshots</a>
+- <a href ="#Video">  📽 GIF Demo</a>
 - <a href ="#Contributors"> ✨ Contributors</a>
+- <a href ="#License"> 🔒 License</a> 
 <hr style="background-color: #4b4c60"></hr>
 
 ## <img align="center"  width =70px  height =70px src="https://media0.giphy.com/media/3OXc5iM4VybLzKAoBR/giphy.gif?cid=ecf05e478qsaq6znpjyqsmzzkbay2vl1giu97cqmksizmblk&rid=giphy.gif&ct=s"> overview <a id = "about"></a>
@@ -86,7 +88,7 @@ Read <a href="https://github.com/AdhamAliAbdelAal/BuzzYateer/blob/master/Project
 <hr style="background-color: #4b4c60"></hr>
 
 
-## <img align= center width=70px height=70px src="https://media0.giphy.com/media/J1Qp3RPpEiSZo1ItZj/giphy.gif?cid=ecf05e47i5e15grpq7hongtspjdgx00wpvlqduzzggnghqbq&rid=giphy.gif&ct=s"> Chosen Data Structure <a id = "Started"></a>
+## <img align= center width=70px height=70px src="https://user-images.githubusercontent.com/71986226/178469374-15498392-26a1-4ba0-99d7-9ce899c131f0.gif"> Chosen Data Structure <a id = "Started"></a>
 <table>
   <thead >
          <th style="text-align: center;"> </th>
@@ -205,7 +207,7 @@ and delete from front.</td>
   </table>
 <hr style="background-color: #4b4c60"></hr>
 
-## <img align= center width=70px height=70px src="https://static.wixstatic.com/media/43f48c_ba81199cd5de4ea8aa049c90d66bb216~mv2.gif"> Demo Screenshots <a id ="Video"></a>
+## <img align= center width=70px height=70px src="https://user-images.githubusercontent.com/71986226/178469533-b83a81eb-c3fa-4d05-83b6-c0dbe4bd8e4b.gif"> Demo Screenshots <a id ="Screenshots"></a>
 
  <img  align= center src="https://user-images.githubusercontent.com/71986226/178465115-586eac4c-ff3d-4737-8d65-9b41b4f93e17.png">
  
@@ -214,8 +216,9 @@ and delete from front.</td>
   <img  align= center src="https://user-images.githubusercontent.com/71986226/178464999-217021bd-f4bd-4f2f-9e22-d7ee53d77cd8.png">
 <hr style="background-color: #4b4c60"></hr>
 
-## <img  align= center width= 70px height =70px src="https://img.genial.ly/5f91608064ad990c6ee12237/bd7195a3-a8bb-494b-8a6d-af48dd4deb4b.gif?genial&1643587200063"> GIf Demo <a id ="Video"></a>
+## <img  align= center width= 70px height =70px src="https://user-images.githubusercontent.com/71986226/178469742-c15f5e51-ba32-4dec-89a0-98b3edb2e941.gif"> GIf Demo <a id ="Video"></a>
 
+<img  align= center src="https://user-images.githubusercontent.com/71986226/178468453-8ab84cac-b7a1-4f02-b140-25ce88f05662.gif">
 
 <hr style="background-color: #4b4c60"></hr>
 
@@ -235,4 +238,4 @@ and delete from front.</td>
 
 ## License <a id ="License"></a>
 
-> This software is licensed under MIT License, See [License](https://github.com/AdhamAliAbdelAal/MP-Processor-Game/blob/master/LICENSE) for more information ©AdhamAliAbdelAal.
+> This software is licensed under MIT License, See [License](https://github.com/AdhamAliAbdelAal/BuzzYateer/blob/master/LICENSE) for more information ©AdhamAliAbdelAal.
