@@ -4,7 +4,7 @@
 # <img align="center" width=70px height=70px src="https://media1.giphy.com/media/SvRxmoLTkkDkrt5G8N/giphy.gif?cid=790b761179c01e9772b517ed24244b935fae2a2d73b5dd24&rid=giphy.gif&ct=s"> Buzz Yateer (وقيادة الكوكب)
 
 
-   <img  src="https://media4.giphy.com/media/7zP57Itb5v0GM1CJIq/giphy.gif?cid=ecf05e47tqf6k8aua2vrxwdw6f2t0ageuyqbjvvnx9wa4k8w&rid=giphy.gif&ct=g" alt="logo">
+   <img width=700px  src="https://media4.giphy.com/media/7zP57Itb5v0GM1CJIq/giphy.gif?cid=ecf05e47tqf6k8aua2vrxwdw6f2t0ageuyqbjvvnx9wa4k8w&rid=giphy.gif&ct=g" alt="logo">
 </div>
 
 <p align="center"> 
