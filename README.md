@@ -4,7 +4,7 @@
 # <img align="center" width=70px height=70px src="https://media1.giphy.com/media/SvRxmoLTkkDkrt5G8N/giphy.gif?cid=790b761179c01e9772b517ed24244b935fae2a2d73b5dd24&rid=giphy.gif&ct=s"> Buzz Yateer (وقيادة الكوكب)
 
 
-   <img  src="https://i.pinimg.com/originals/97/42/11/974211f04879e1cc45f8beeac40a0d5e.gif" alt="logo">
+   <img  src="https://media4.giphy.com/media/7zP57Itb5v0GM1CJIq/giphy.gif?cid=ecf05e47tqf6k8aua2vrxwdw6f2t0ageuyqbjvvnx9wa4k8w&rid=giphy.gif&ct=g" alt="logo">
 </div>
 
 <p align="center"> 
@@ -64,7 +64,7 @@ Read <a href="https://github.com/AdhamAliAbdelAal/BuzzYateer/blob/master/Project
 </ol>
 <hr style="background-color: #4b4c60">
 
-## <img align= center width=70px height=70px src="https://media3.giphy.com/media/BnHmTSiDBsMr1Kaji7/giphy.gif?cid=ecf05e47vlop8zc7443qhtltuxiq8j926ujkvnx1k71kt9oy&rid=giphy.gif&ct=g"> How project Work <a id ="Work"></a>
+## <img align= center width=80px height=80px src="https://media3.giphy.com/media/BnHmTSiDBsMr1Kaji7/giphy.gif?cid=ecf05e47vlop8zc7443qhtltuxiq8j926ujkvnx1k71kt9oy&rid=giphy.gif&ct=g"> How project Work <a id ="Work"></a>
 <ol>
 <li>Put input in the <a href="https://github.com/AdhamAliAbdelAal/BuzzYateer/blob/master/Buzz%20Yateer/Buzz%20Yateer/Input.txt">Input.txt</a></li>
 <li>Run the main file.</li>
