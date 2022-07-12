@@ -4,7 +4,7 @@
 # <img align="center" width=70px height=70px src="https://media1.giphy.com/media/SvRxmoLTkkDkrt5G8N/giphy.gif?cid=790b761179c01e9772b517ed24244b935fae2a2d73b5dd24&rid=giphy.gif&ct=s"> Buzz Yateer (وقيادة الكوكب)
 
 
-   <img width=100%  src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/eceab34c-345e-4395-8e7a-05b0d9f05a6b/de6e5qa-edad05cf-e7ff-4d98-bbaa-f02963c2c712.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2VjZWFiMzRjLTM0NWUtNDM5NS04ZTdhLTA1YjBkOWYwNWE2YlwvZGU2ZTVxYS1lZGFkMDVjZi1lN2ZmLTRkOTgtYmJhYS1mMDI5NjNjMmM3MTIuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.cql0K-8OjiCYhHv43Ghz-ookJN3tu2PPAP2VhYV_uhw" alt="logo">
+   <img  src="https://i.pinimg.com/originals/97/42/11/974211f04879e1cc45f8beeac40a0d5e.gif" alt="logo">
 </div>
 
 <p align="center"> 
@@ -70,17 +70,18 @@ Read <a href="https://github.com/AdhamAliAbdelAal/BuzzYateer/blob/master/Project
 <li>Run the main file.</li>
 <li>You should choose the mode of output.
 
-<ol>
-  <li> <p>1 => Interactive Mode</p>
+<ul>
+  <li> <p>1) Interactive Mode</p>
    Interactive Mode Allows user to monitor the missions and rovers. The program should print an output like that shown below. In this mode, the program prints the current day then pauses for an input from the user (“Enter” key for example) to display the output of the next day
    </li>
-  <li> <p> 2 => Step-By-Step Mode</p>
+  <li> <p> 2) Step-By-Step Mode</p>
   Step-By-Step Mode is identical to the interactive mode except that after each day, the program waits for one second (not for user input) then resumes automatically.
   </li>
-  <li> <p>3=> Silent Mode</p>
+  <li> <p>4) Silent Mode</p>
   the program produces only an output file (See the “File Formats” section
    </li>
-</ol>
+   <br>
+</ul>
 </li>
 <li>No matter what mode of operation your program is running in, <a href="https://github.com/AdhamAliAbdelAal/BuzzYateer/blob/master/Buzz%20Yateer/Buzz%20Yateer/Output.txt">Output.txt</a> file should be produced. </li>
 </ol>
