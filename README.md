@@ -222,7 +222,7 @@ and delete from front.</td>
 
 <hr style="background-color: #4b4c60"></hr>
 
-## <img  align="center" width= 70px height =70px src="https://media4.giphy.com/media/iWmH3uMKRNO2QQVyLk/giphy.gif?cid=ecf05e479h6502aw1xdd8d1q9bj936dt7jg0r1d1kw62s3l1&rid=giphy.gif&ct=s"> Contributors <a id ="Contributors"></a>
+## <img  align="center" width= 80px height =70px src="https://media4.giphy.com/media/iWmH3uMKRNO2QQVyLk/giphy.gif?cid=ecf05e479h6502aw1xdd8d1q9bj936dt7jg0r1d1kw62s3l1&rid=giphy.gif&ct=s"> Contributors <a id ="Contributors"></a>
 
 <table align="center" >
   <tr>
