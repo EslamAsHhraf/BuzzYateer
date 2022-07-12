@@ -4,7 +4,7 @@
 # <img align="center" width=70px height=70px src="https://media1.giphy.com/media/SvRxmoLTkkDkrt5G8N/giphy.gif?cid=790b761179c01e9772b517ed24244b935fae2a2d73b5dd24&rid=giphy.gif&ct=s"> Buzz Yateer (وقيادة الكوكب)
 
 
-   <img   src="https://thumbs.gfycat.com/MindlessInsistentGreatdane-size_restricted.gif" alt="logo">
+   <img   src="https://user-images.githubusercontent.com/71986226/178483471-00d2bfb6-7f5f-4180-9db9-61e02a61e6e3.gif" alt="logo">
 
   ### To infinity and beyond!🚀
 
