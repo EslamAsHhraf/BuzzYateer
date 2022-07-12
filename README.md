@@ -4,7 +4,7 @@
 # <img align="center" width=70px height=70px src="https://media1.giphy.com/media/SvRxmoLTkkDkrt5G8N/giphy.gif?cid=790b761179c01e9772b517ed24244b935fae2a2d73b5dd24&rid=giphy.gif&ct=s"> Buzz Yateer (وقيادة الكوكب)
 
 
-   <img width=550px  src="https://www.thefactsite.com/wp-content/uploads/2020/11/facts-about-buzz-lightyear-share.jpg" alt="logo">
+   <img width=500px  src="https://thumbs.gfycat.com/MindlessInsistentGreatdane-size_restricted.gif" alt="logo">
 
   ### To infinity and beyond!🚀
 
