@@ -1,7 +1,7 @@
 
 <div align="center">
 
-# <img align="center" width=70px height=70px src="https://media1.giphy.com/media/SvRxmoLTkkDkrt5G8N/giphy.gif?cid=790b761179c01e9772b517ed24244b935fae2a2d73b5dd24&rid=giphy.gif&ct=s"> Buzz Yateer (وقيادة الكوكب)
+# 🛰️ Buzz Yateer (وقيادة الكوكب)
 
 
    <img   src="https://user-images.githubusercontent.com/71986226/178483471-00d2bfb6-7f5f-4180-9db9-61e02a61e6e3.gif" alt="logo">
@@ -15,7 +15,7 @@
     <br> 
 </p>
 
-## <img align= center width=50px height=50px src="https://user-images.githubusercontent.com/71986226/178468913-84c3151c-e8d1-4420-a9e9-b2434e9c2f75.gif"> Table of Contents
+## 📝 Table of Contents
 
 - <a href ="#about"> 📙 overview</a>
 - <a href ="#Started"> 💻 Get Started</a>
@@ -26,8 +26,9 @@
 - <a href ="#Contributors"> ✨ Contributors</a>
 - <a href ="#License"> 🔒 License</a> 
 <hr style="background-color: #4b4c60"></hr>
+<a id = "about"></a>
 
-## <img align="center"  width =70px  height =70px src="https://media0.giphy.com/media/3OXc5iM4VybLzKAoBR/giphy.gif?cid=ecf05e478qsaq6znpjyqsmzzkbay2vl1giu97cqmksizmblk&rid=giphy.gif&ct=s"> overview <a id = "about"></a>
+## 📙 overview 
 
 <ul>
 <li>
@@ -45,8 +46,9 @@ The base station basically assigns missions to the different rovers.
 </ul>
 
 <hr style="background-color: #4b4c60"></hr>
-
-## <img align= center width=70px height=70px src="https://user-images.githubusercontent.com/71986226/178401569-979cab38-b95c-4c22-a497-4d368e2ef415.gif"> Get Started <a id = "Started"></a>
+ <a id = "Started"></a>
+ 
+## 🚀 Get Started
 
 <ol>
 <li>Clone the repository
@@ -67,8 +69,9 @@ Read <a href="https://github.com/AdhamAliAbdelAal/BuzzYateer/blob/master/Project
 </li>
 </ol>
 <hr style="background-color: #4b4c60">
-
-## <img align= center width=80px height=80px src="https://media3.giphy.com/media/BnHmTSiDBsMr1Kaji7/giphy.gif?cid=ecf05e47vlop8zc7443qhtltuxiq8j926ujkvnx1k71kt9oy&rid=giphy.gif&ct=g"> How project Work <a id ="Work"></a>
+ <a id ="Work"></a>
+ 
+## ⚒️ How project Work
 <ol>
 <li>Put input in the <a href="https://github.com/AdhamAliAbdelAal/BuzzYateer/blob/master/Buzz%20Yateer/Buzz%20Yateer/Input.txt">Input.txt</a></li>
 <li>Run the main file.</li>
@@ -91,9 +94,9 @@ Read <a href="https://github.com/AdhamAliAbdelAal/BuzzYateer/blob/master/Project
 </ol>
 
 <hr style="background-color: #4b4c60"></hr>
+ <a id = "Started"></a>
 
-
-## <img align= center width=70px height=70px src="https://user-images.githubusercontent.com/71986226/178469374-15498392-26a1-4ba0-99d7-9ce899c131f0.gif"> Chosen Data Structure <a id = "Started"></a>
+## 🏗️ Chosen Data Structure
 <table>
   <thead >
          <th style="text-align: center;"> </th>
@@ -211,8 +214,9 @@ and delete from front.</td>
   </tr>
   </table>
 <hr style="background-color: #4b4c60"></hr>
-
-## <img align= center width=70px height=70px src="https://user-images.githubusercontent.com/71986226/178469533-b83a81eb-c3fa-4d05-83b6-c0dbe4bd8e4b.gif"> Demo Screenshots <a id ="Screenshots"></a>
+ <a id ="Screenshots"></a>
+ 
+## 📸 Demo Screenshots
 
  <img  align= center src="https://user-images.githubusercontent.com/71986226/178465115-586eac4c-ff3d-4737-8d65-9b41b4f93e17.png">
  
@@ -226,8 +230,9 @@ and delete from front.</td>
 <img  align= center src="https://user-images.githubusercontent.com/71986226/178468453-8ab84cac-b7a1-4f02-b140-25ce88f05662.gif">
 
 <hr style="background-color: #4b4c60"></hr>
+<a id ="Contributors"></a>
 
-## <img  align="center" width= 80px height =70px src="https://media4.giphy.com/media/iWmH3uMKRNO2QQVyLk/giphy.gif?cid=ecf05e479h6502aw1xdd8d1q9bj936dt7jg0r1d1kw62s3l1&rid=giphy.gif&ct=s"> Contributors <a id ="Contributors"></a>
+## 👑 Contributors 
 
 <table align="center" >
   <tr>
