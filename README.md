@@ -246,6 +246,6 @@ and delete from front.</td>
   </tr>
 </table>
 
-## License <a id ="License"></a>
+## 🔐 License <a id ="License"></a>
 
 > This software is licensed under MIT License, See [License](https://github.com/AdhamAliAbdelAal/BuzzYateer/blob/master/LICENSE) for more information ©AdhamAliAbdelAal.
